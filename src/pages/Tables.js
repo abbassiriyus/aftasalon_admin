@@ -174,7 +174,7 @@ const Tables = () => {
     formdata.append("description",document.querySelector(".tavsifi").value)
     formdata.append("time_create",document.querySelector(".vaqt").value)
     formdata.append("time_update",document.querySelector(".vaqt1").value)
-    formdata.append("is_active",document.querySelector(".faol").value)
+    formdata.append("is_active",document.querySelector(".faol").checked)
     formdata.append("name",document.querySelector(".ism").value)
     formdata.append("initial_price",document.querySelector(".bosh").value)
     formdata.append("price",document.querySelector(".narx").value)

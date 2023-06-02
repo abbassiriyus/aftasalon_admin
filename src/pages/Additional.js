@@ -10,8 +10,13 @@ export default function Additional() {
   const [fueldata, setfueldata] = useState()
   const [fueldata1, setfueldata1] = useState()
   const [fueldata2, setfueldata2] = useState()
+  const [fueldata3, setfueldata3] = useState()
+  const [fueldata4, setfueldata4] = useState()
   const [id, setId] = useState(0)
   const [key, setkey] = useState(0)
+  const [key1, setkey1] = useState(0)
+  const [key2, setkey2] = useState(0)
+  const [key3, setkey3] = useState(0)
 
 
   // 1 - page
@@ -58,7 +63,11 @@ export default function Additional() {
   function deletee(id) {
     axios.delete(`${url}/api/fuel_sort/${id}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("O'chirildi")
-      window.location.reload()
+      axios.get(`${url}/api/fuel_sort/`).then(res => {
+        setfueldata(res.data)
+      }).catch(err => {
+        console.log(err);
+      })
     }).catch(err => {
       alert("ochirilmadi")
       console.log(err);
@@ -72,6 +81,11 @@ export default function Additional() {
     axios.post(`${url}/api/fuel_sort/ `, formdata1, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
       document.querySelector(".postoyna10").style = "position: fixed;top: -100%;    transition: 1s;"
+      axios.get(`${url}/api/fuel_sort/`).then(res => {
+        setfueldata(res.data)
+      }).catch(err => {
+        console.log(err);
+      })
     }).catch(err => {
       alert("ishlamadi")
     })
@@ -84,6 +98,11 @@ export default function Additional() {
     axios.put(`${url}/api/fuel_sort/${id}/`, formdata2, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
       document.querySelector(".postoyna11").style = "position: fixed;top: -100%;    transition: 1s;"
+      axios.get(`${url}/api/fuel_sort/`).then(res => {
+        setfueldata(res.data)
+      }).catch(err => {
+        console.log(err);
+      })
     }).catch(err => {
       alert("ishlamadi")
     })
@@ -167,7 +186,11 @@ export default function Additional() {
     axios.post(`${url}/api/gear_box/`, formdata3, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
       document.querySelector(".putoyanfuel").style = "position: fixed;top: -100%;    transition: 1s;"
-      window.location.reload()
+      axios.get(`${url}/api/gear_box/`).then(res => {
+        setfueldata1(res.data)
+      }).catch(err => {
+        console.log(err, "salom");
+      })
     }).catch(err => {
       alert("ishlamadi")
     })
@@ -179,7 +202,11 @@ export default function Additional() {
     axios.put(`${url}/api/gear_box/${id}/`, formdata4, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
       document.querySelector(".putoyanfuel1").style = "position: fixed;top: -100%;    transition: 1s;"
-      window.location.reload()
+      axios.get(`${url}/api/gear_box/`).then(res => {
+        setfueldata1(res.data)
+      }).catch(err => {
+        console.log(err, "salom");
+      })
     }).catch(err => {
       alert("ishlamadi")
     })
@@ -213,9 +240,9 @@ export default function Additional() {
 
     {
       title: 'Edit',
-      render: () => {
+      render: (fueldata2) => {
         return <div>
-          <Button style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+          <Button onClick={()=>putgarantoyna(fueldata2)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
         </div>
       }
     },
@@ -240,6 +267,7 @@ export default function Additional() {
 
   function postgarantoyna() {
     document.querySelector(".postgarantoyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+
   }
 
   function postgarantoyna1() {
@@ -253,7 +281,29 @@ export default function Additional() {
 
     axios.post(`${url}/api/garant/`,formdata5,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
-      window.location.reload()
+      document.querySelector(".postgarantoyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+      axios.get(`${url}/api/garant/`).then(res => {
+        setfueldata2(res.data)
+      }).catch(err => {
+        console.log(err);
+      })
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+  function getPut3(id){
+    var formdata6=new FormData()
+    formdata6.append("name",document.querySelector(".gearinput5").value)
+    formdata6.append("time",document.querySelector(".gearinput4").value)
+
+    axios.put(`${url}/api/garant/${id}/`,formdata6,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      document.querySelector(".putgarantoyna").style = "position: fixed;bottom: -100%;    transition: 1s;"
+      axios.get(`${url}/api/garant/`).then(res => {
+        setfueldata2(res.data)
+      }).catch(err => {
+        console.log(err);
+      })
     }).catch(err=>{
       alert("ishlamadi")
     })
@@ -262,7 +312,11 @@ export default function Additional() {
   function deletegarant(id){
   axios.delete(`${url}/api/garant/${id}/`,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
     alert("ishladi")
-    window.location.reload()
+    axios.get(`${url}/api/garant/`).then(res => {
+      setfueldata2(res.data)
+    }).catch(err => {
+      console.log(err);
+    })
   }).catch(err=>{
     alert(err=>{
       alert("ishlamadi")
@@ -270,13 +324,221 @@ export default function Additional() {
   })
   }
 
+  function putgarantoyna(id) {
+    document.querySelector(".putgarantoyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+    setkey1(id)
+  }
+
+  function putgarantoyna1() {
+    document.querySelector(".putgarantoyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+  }
+
+
+  // 4 -page
+
+  const columns3 = [
+    {
+      title: 'Id',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+
+    {
+      title: 'Edit',
+      render: (fueldata3) => {
+        return <div>
+          <Button onClick={()=>putmodeloyna(fueldata3)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+        </div>
+      }
+    },
+    {
+      title: 'Delet',
+      witdh: "5%",
+      render: (key) => {
+        return <div>
+          <Button onClick={()=>getdeletemodel(key.id)}  type="danger">O'chirish</Button>
+        </div>
+      },
+    }
+  ];
+
+  useEffect(()=>{
+    axios.get(`${url}/api/models/`).then(res=>{
+      setfueldata3(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
+
+
+  function postmodeloyna() {
+    document.querySelector(".postmodeloyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+
+  }
+
+  function postmodeloyna1() {
+    document.querySelector(".postmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+  }
+  function putmodeloyna(id) {
+    document.querySelector(".putmodeloyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+    setkey2(id)
+  }
+
+  function putmodeloyna1() {
+    document.querySelector(".putmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+  }
+
+
+  function getPostmodel(){
+    var model = new FormData()
+    model.append("name",document.querySelector(".modelinput").value)
+
+    axios.post(`${url}/api/models/`,model, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      document.querySelector(".postmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+      axios.get(`${url}/api/models/`).then(res=>{
+        setfueldata3(res.data)
+      }).catch(err=>{
+      console.log(err,"ishlamadi");
+      })
+    }).catch(err1=>{
+      alert("ishlamadi")
+    })
+  }
+
+  function getPutmodel(id){
+    var model = new FormData()
+    model.append("name",document.querySelector(".modelinput1").value)
+
+    axios.put(`${url}/api/models/${id}/`,model, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      document.querySelector(".putmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+      axios.get(`${url}/api/models/`).then(res=>{
+        setfueldata3(res.data)
+      }).catch(err=>{
+      console.log(err,"ishlamadi");
+      })
+    }).catch(err1=>{
+      alert("ishlamadi")
+    })
+  }
+
+  function getdeletemodel(id){
+    axios.delete(`${url}/api/models/${id}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      axios.get(`${url}/api/models/`).then(res=>{
+        setfueldata3(res.data)
+      }).catch(err=>{
+      console.log(err,"ishlamadi");
+      })
+    }).catch(err1=>{
+      alert("ishlamadi")
+    })
+  }
+
+  // 5 -pages
+
+  const columns4 = [
+    {
+      title: 'Id',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+
+    {
+      title: 'Edit',
+      render: (fueldata4) => {
+        return <div>
+          <Button onClick={()=>putseriesoyna(fueldata4)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+        </div>
+      }
+    },
+    {
+      title: 'Delet',
+      witdh: "5%",
+      render: () => {
+        return <div>
+          <Button  type="danger">O'chirish</Button>
+        </div>
+      },
+    }
+  ];
+
+  useEffect(()=>{
+    axios.get(`${url}/api/series/`).then(res=>{
+      setfueldata4(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
+
+  function postseriesoyna() {
+    document.querySelector(".postserisoyna").style = "position: absolute;display:block;"
+
+  }
+
+  function postseriesoyna1() {
+    document.querySelector(".postserisoyna").style = "position: absolute;display:none;"
+  }
+
+
+  function putseriesoyna(id) {
+    document.querySelector(".putserisoyna1").style = "position: absolute;display:block;"
+    setkey3(id)
+
+  }
+
+  function putseriesoyna1() {
+    document.querySelector(".putserisoyna1").style = "position: absolute;display:none;"
+  }
+
+  function getpostseries(){
+    var series =new FormData()
+    series.append("name",document.querySelector(".seriyapost").value)
+
+    axios.post(`${url}/api/series/`,series, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      document.querySelector(".postserisoyna").style = "position: absolute;display:none;"
+      axios.get(`${url}/api/series/`).then(res=>{
+        setfueldata4(res.data)
+      }).catch(err=>{
+        console.log(err);
+      })
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+  function getputseries(id){
+    var series1 =new FormData()
+    series1.append("name",document.querySelector(".seriyaput").value)
+
+    axios.put(`${url}/api/series/${id}`,series1, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      document.querySelector(".putserisoyna1").style = "position: absolute;display:none;"
+      axios.get(`${url}/api/series/`).then(res=>{
+        setfueldata4(res.data)
+      }).catch(err=>{
+        console.log(err);
+      })
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+  
+
   return (
     <div>
       <div className="katta10">
         <div className="house">
-          <button onClick={() => postoyna10()} className='post10'>Post</button>
+          <button onClick={() => postoyna10()} className='post10'>Qo'shish</button>
           <h1>Yoqilg'i turini kiriting</h1>
-          <Table className='table' columns={columns} dataSource={fueldata} />
+          <Table className='table'  pagination={{ pageSize: 4 }} columns={columns} dataSource={fueldata} />
 
 
           <div className="postoyna10">
@@ -284,7 +546,7 @@ export default function Additional() {
               <AiOutlineClose className='close' onClick={() => postoynaclose10()} />
               <div className="div10"> <p>Yoqilg'i turini kiriting</p>
                 <input className='fuelname11' type="text" />
-                <button onClick={() => getPost1()} className='post11'>Post</button></div>
+                <button onClick={() => getPost1()} className='post11'>Qo'shish</button></div>
             </div>
           </div>
           <div className="postoyna11">
@@ -292,7 +554,7 @@ export default function Additional() {
               <AiOutlineClose className='close' onClick={() => postoynaclose11()} />
               <div className="div10"> <p>Yoqilg'i turini o'zgartiring</p>
                 <input className='fuelname10' placeholder={id.name} type="text" />
-                <button onClick={() => getPut1(id.id)} className='post11'>Put</button></div>
+                <button onClick={() => getPut1(id.id)} className='post11'>O'zgartirish</button></div>
             </div>
           </div>
         </div>
@@ -301,9 +563,9 @@ export default function Additional() {
         {/* 2-page */}
 
         <div className="house1">
-          <button onClick={() => putoyanfuel()} className='post11'>Post</button>
+          <button onClick={() => putoyanfuel()} className='post11'>Qo'shish</button>
           <h1>Mashina turuni kiriting</h1>
-          <Table className='table' columns={columns1} dataSource={fueldata1} />
+          <Table className='table'  pagination={{ pageSize: 4 }} columns={columns1} dataSource={fueldata1} />
 
 
 
@@ -314,7 +576,7 @@ export default function Additional() {
               <AiOutlineClose className='close' onClick={() => putoyanfuel1()} />
               <div className="div10"><p>Mashinani turin kiriting</p>
                 <input className='gearinput' type="text" />
-                <button onClick={() => getPost2()} className='putbutton'>Post</button></div>
+                <button onClick={() => getPost2()} className='putbutton'>Qo'shish</button></div>
             </div>
           </div>
           <div className="putoyanfuel1">
@@ -322,7 +584,7 @@ export default function Additional() {
               <AiOutlineClose className='close' onClick={() => putoyanfuel3()} />
               <div className="div10"><p>Mashinani turin kiriting</p>
                 <input className='gearinput1' placeholder={key.name} type="text" />
-                <button onClick={() => getPut2(key.id)} className='putbutton'>Edit</button></div>
+                <button onClick={() => getPut2(key.id)} className='putbutton'>O'zgartirish</button></div>
             </div>
           </div>
         </div>
@@ -332,10 +594,10 @@ export default function Additional() {
 
       <div className="katta11">
         <div className="house2">
-          <button onClick={()=>postgarantoyna()} className='post11'>Post</button>
+          <button onClick={()=>postgarantoyna()} className='post11'>Qo'shish</button>
           <h1>Garantni kiriting</h1>
-          <Table className='table' columns={columns2} dataSource={fueldata2} />
-        </div>
+          <Table className='table'  pagination={{ pageSize: 4 }} columns={columns2} dataSource={fueldata2} />
+        
 
 
 
@@ -347,12 +609,86 @@ export default function Additional() {
               <p>Soati</p>
               <input className='gearinput3' type="text" />
               </div>
-              <div className="putbutton11div"><button onClick={()=>getPost3()} className='putbutton11'>Post</button></div>
+              <div className="putbutton11div"><button onClick={()=>getPost3()} className='putbutton11'>Qo'shish</button></div>
+          </div>
+        </div>
+        <div className="putgarantoyna">
+          <div className="created">
+            <AiOutlineClose onClick={()=>putgarantoyna1()} className='close' />
+            <div className="div10"><p>Garant kiriting</p>
+              <input className='gearinput5' placeholder={key1.name} type="text" />
+              <p>Soati</p>
+              <input className='gearinput4' placeholder={key1.time} type="number" />
+              </div>
+              <div className="putbutton11div"><button className='putbutton11' onClick={()=>getPut3(key1.id)}  >O'zgartirish</button></div>
+          </div>
+        </div></div>
+
+        {/* 4-page */}
+
+        <div className="house3">
+          <button className='post11' onClick={()=>postmodeloyna()} >Qo'shish</button>
+          <h1>Modelni qo'shing</h1>
+          <Table className='table' pagination={{ pageSize: 4 }} columns={columns3} dataSource={fueldata3} />
+        </div>
+
+        <div className="postmodeloyna">
+          <div className="created">
+          <AiOutlineClose onClick={()=>postmodeloyna1()} className='close' />
+          <div className="div10">
+            <p>Modelni kiriting</p>
+            <input type="text" className='modelinput' />
+            <div className="putbutton11div">
+              <button onClick={()=>getPostmodel()} className='putbutton11'>Qo'shish</button>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div className="putmodeloyna">
+          <div className="created">
+          <AiOutlineClose onClick={()=>putmodeloyna1()} className='close' />
+          <div className="div10">
+            <p>Modelni kiriting</p>
+            <input type="text" placeholder={key2.name} className='modelinput1' />
+            <div className="putbutton11div">
+              <button onClick={()=>getPutmodel(key2.id)} className='putbutton11'>O'zgartirish</button>
+            </div>
+          </div> 
           </div>
         </div>
 
 
       </div>
+
+      {/* 5-page */}
+       <div className="katta12">
+        <div className="house4">
+        <button className='post11' onClick={()=>postseriesoyna()} >Qo'shish</button>
+          <h1>Seriyani kiriting</h1>
+          <Table className='table' pagination={{ pageSize: 4 }} columns={columns4} dataSource={fueldata4} />
+       
+          <div className="postserisoyna">
+          <div className="created">
+            <AiOutlineClose onClick={()=>postseriesoyna1()} className='close' />
+            <div className="div10"><p>Seriyani kiriting</p>
+              <input className='seriyapost' type="text" />
+              </div>
+              <div className="putbutton11div"><button className='putbutton11' onClick={()=>getpostseries()} >Qo'shish</button></div>
+          </div>
+        </div>
+        <div className="putserisoyna1">
+          <div className="created">
+            <AiOutlineClose onClick={()=>putseriesoyna1()} className='close' />
+            <div className="div10"><p>Seriyani kiriting</p>
+              <input className='seriyaput' placeholder={key3.name} type="text" />
+              </div>
+              <div className="putbutton11div"><button onClick={()=>getputseries(key3.id)} className='putbutton11'   >O'zgartirish</button></div>
+          </div>
+        </div>
+
+        </div>
+       </div>
+
 
     </div>
   )

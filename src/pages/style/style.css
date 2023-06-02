@@ -32,7 +32,7 @@
     margin-left: 3.5%;
 }
 textarea{
-    width: 88.5%;
+    width: 86.5%;
     border: 1px solid grey;
     padding: 15px;
 }
@@ -159,12 +159,13 @@ margin-bottom: 20px;
 }
 .textsmal{
     width: 92.5%;
-    margin-left: 105px;
+    margin-left: 127px;
     margin-top: 2%; 
 }
 .textcheck5{
-    margin-left:98.7%;
+    margin-left:97.5%;
 }
+
 
 .postbutton{
 width: 100px;
