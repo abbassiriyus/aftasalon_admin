@@ -1,0 +1,151 @@
+.table{
+    width: 600px;
+    height: 100px;
+}
+.post10{
+    border-radius: 5px;
+    width: 100px;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    background-color: white;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.post10:hover{
+    border-radius: 5px;
+    color: white;
+    border: 2px solid white;
+    background-color: #1890ff;
+}
+.post11{
+    border-radius: 5px;
+    width: 100px;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    background-color: white;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.post11:hover{
+    height: 42px;
+    border-radius: 5px;
+    color: white;
+    border: 2px solid white;
+    background-color: #1890ff;
+}
+
+.house h1{
+    font-size: 20px;
+    font-family: sans-serif;
+}
+.house1 h1{
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+
+
+.postoyna10{
+    width: 33.5%;
+    position: fixed;
+    top: -100%;
+    height: 170px;
+    background-color: white;
+    left: 370px;
+}
+.postoyna11{
+    width: 33.5%;
+    position: fixed;
+    top: -100%;
+    height: 170px;
+    background-color: white;
+    left: 370px;
+}
+.created input{
+    width: 60%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #1890ff;  
+}
+.created .close{
+    margin-left: 95%;
+}
+.div10{
+    align-items: center;
+    text-align: center;
+}
+.katta10{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.putbutton{
+    border-radius: 5px;
+    width: 100px;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    background-color: white;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.putbutton:hover{
+    border-radius: 5px;
+    color: white;
+    border: 2px solid white;
+    background-color: #1890ff;
+}
+.putoyanfuel{
+    width: 33.5%;
+    position: fixed;
+    top: -100%;
+    height: 170px;
+    background-color: white;
+    right: 100px;
+}
+.putoyanfuel1{
+    width: 33.5%;
+    position: fixed;
+    top: -100%;
+    height: 170px;
+    background-color: white;
+    right: 100px;
+}
+
+.katta11{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 250px;
+}
+
+.postgarantoyna{
+    width: 33.5%;
+    position: fixed;
+    bottom: -100%;
+    height: 270px;
+    background-color: white;
+    left: 370px;
+}
+.putbutton11{
+    margin-top: 20px;
+    border-radius: 5px;
+    width: 100px;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    background-color: white;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.putbutton11:hover{
+    border-radius: 5px;
+    color: white;
+    border: 2px solid white;
+    background-color: #1890ff;
+}
+.putbutton11div{
+    display: flex;
+    justify-content: center;
+}

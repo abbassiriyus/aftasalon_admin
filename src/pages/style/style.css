@@ -1,0 +1,194 @@
+.text h1{
+    font-size: 17px;
+    width:150px;
+}
+.text{
+    width: 25%;
+    display: block;
+    margin-top: 10px;
+    
+}
+.text input{
+    width: 350px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.alltext{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textsmall{
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+.textsmall h1{
+    font-size: 17px;
+    width:120px;
+    margin-left: 3.5%;
+}
+textarea{
+    width: 88.5%;
+    border: 1px solid grey;
+    padding: 15px;
+}
+
+.alltext1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.alltext2{
+    width: 100%;
+    display: block;
+    align-items: center;
+    justify-content: space-around;
+}
+.nomi1{
+    margin-left: 6.1%;
+    width: 87.7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nomi{
+    font-size: 30px;
+    font-family: 'Courier New';
+}
+.qoshish{
+    margin-bottom: 10px;
+}
+
+@media (max-width:1700px) {
+    .text input{
+        width: 100%;
+        height: 40px;
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
+    .text{
+        width: 100%;
+        display: block;
+        margin-top: 10px;
+        
+    }
+    .textsmall h1{
+    margin-left: -10% !important;
+    }
+    textarea{
+        margin-left: -70px !important;
+        width: 98.5%;
+        height: 300px;
+    }
+    .df1{
+    width:91%  !important;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 35px  !important;
+}
+.postbutton{
+width: 100px;
+margin-left:81.8% !important;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+
+
+}
+
+.yoq{
+    width: 100%;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+}
+
+.image{
+    width: 100%;
+}
+.postoyna{
+    width: 60%;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+
+}
+.postoyna1{
+    width: 60%;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+
+}
+.text5 input{
+    height: 30px;
+    width: 100%;
+    border: 1px solid rgb(221, 218, 218);
+}
+.text6 input{
+    height: 30px;
+    width: 200px;
+    border: 1px solid rgb(221, 218, 218);
+}
+.alltext{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.df1{
+    width: 82%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 9% ;
+}
+.textsmal{
+    width: 92.5%;
+    margin-left: 105px;
+    margin-top: 2%; 
+}
+.textcheck5{
+    margin-left:98.7%;
+}
+
+.postbutton{
+width: 100px;
+margin-left: 82.5%;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+.postbutton1{
+width: 100px;
+margin-left: 82.5%;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+.close{
+    font-size: 25px;
+    margin-top: 5px;
+    margin-left: 95%;
+}
+.select{
+    width: 100%;
+    height: 31px;
+    border: 1px solid rgb(221, 218, 218);
+    background-color: white;
+}
+.table1{
+  width: 100%;  
+}
