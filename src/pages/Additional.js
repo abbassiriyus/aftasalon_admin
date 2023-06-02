@@ -12,6 +12,7 @@ export default function Additional() {
   const [fueldata2, setfueldata2] = useState()
   const [fueldata3, setfueldata3] = useState()
   const [fueldata4, setfueldata4] = useState()
+  const [fueldata5, setfueldata5] = useState()
   const [id, setId] = useState(0)
   const [key, setkey] = useState(0)
   const [key1, setkey1] = useState(0)
@@ -80,7 +81,7 @@ export default function Additional() {
 
     axios.post(`${url}/api/fuel_sort/ `, formdata1, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
-      document.querySelector(".postoyna10").style = "position: fixed;top: -100%;    transition: 1s;"
+      document.querySelector(".postoyna10").style = "position: absolute;display:none;    transition: 1s;"
       axios.get(`${url}/api/fuel_sort/`).then(res => {
         setfueldata(res.data)
       }).catch(err => {
@@ -97,7 +98,7 @@ export default function Additional() {
 
     axios.put(`${url}/api/fuel_sort/${id}/`, formdata2, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
-      document.querySelector(".postoyna11").style = "position: fixed;top: -100%;    transition: 1s;"
+      document.querySelector(".postoyna11").style = "position: absolute;display:none;    transition: 1s;"
       axios.get(`${url}/api/fuel_sort/`).then(res => {
         setfueldata(res.data)
       }).catch(err => {
@@ -110,17 +111,17 @@ export default function Additional() {
 
   function postoyna11(id) {
     setId(id)
-    document.querySelector(".postoyna11").style = "position: fixed;top: 10%;    transition: 1s;"
+    document.querySelector(".postoyna11").style = "position: absolute;display:block;    transition: 1s;"
   }
   function postoynaclose11() {
-    document.querySelector(".postoyna11").style = "position: fixed;top: -100%;    transition: 1s;"
+    document.querySelector(".postoyna11").style = "position: absolute;display:none;   transition: 1s;"
   }
 
   function postoyna10() {
-    document.querySelector(".postoyna10").style = "position: fixed;top: 10%;    transition: 1s;"
+    document.querySelector(".postoyna10").style = "position: absolute;display:block;    transition: 1s;"
   }
   function postoynaclose10() {
-    document.querySelector(".postoyna10").style = "position: fixed;top: -100%;    transition: 1s;"
+    document.querySelector(".postoyna10").style = "position: absolute;display:none;    transition: 1s;"
   }
 
 
@@ -164,19 +165,19 @@ export default function Additional() {
   }, [])
 
   function putoyanfuel() {
-    document.querySelector(".putoyanfuel").style = "position: fixed;top: 10%;    transition: 1s;"
+    document.querySelector(".putoyanfuel").style = "position: absolute;display:block;   transition: 1s;"
   }
 
   function putoyanfuel1() {
-    document.querySelector(".putoyanfuel").style = "position: fixed;top: -100%;    transition: 1s;"
+    document.querySelector(".putoyanfuel").style = "position: absolute;display:none;    transition: 1s;"
   }
   function putoyanfuel2(id) {
-    document.querySelector(".putoyanfuel1").style = "position: fixed;top: 10%;    transition: 1s;"
+    document.querySelector(".putoyanfuel1").style = "position: absolute;display:block;  transition: 1s;"
     setkey(id)
   }
 
   function putoyanfuel3() {
-    document.querySelector(".putoyanfuel1").style = "position: fixed;top: -100%;    transition: 1s;"
+    document.querySelector(".putoyanfuel1").style = "position: absolute;display:none;    transition: 1s;"
   }
 
   function getPost2() {
@@ -185,7 +186,7 @@ export default function Additional() {
 
     axios.post(`${url}/api/gear_box/`, formdata3, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
-      document.querySelector(".putoyanfuel").style = "position: fixed;top: -100%;    transition: 1s;"
+      document.querySelector(".putoyanfuel").style = "position: absolute;display:none;    transition: 1s;"
       axios.get(`${url}/api/gear_box/`).then(res => {
         setfueldata1(res.data)
       }).catch(err => {
@@ -201,7 +202,7 @@ export default function Additional() {
 
     axios.put(`${url}/api/gear_box/${id}/`, formdata4, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
-      document.querySelector(".putoyanfuel1").style = "position: fixed;top: -100%;    transition: 1s;"
+      document.querySelector(".putoyanfuel1").style = "position: fixed;display:none;   transition: 1s;"
       axios.get(`${url}/api/gear_box/`).then(res => {
         setfueldata1(res.data)
       }).catch(err => {
@@ -266,12 +267,12 @@ export default function Additional() {
   }, [])
 
   function postgarantoyna() {
-    document.querySelector(".postgarantoyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+    document.querySelector(".postgarantoyna").style = "position: absolute;display:block;   transition: 1s;"
 
   }
 
   function postgarantoyna1() {
-    document.querySelector(".postgarantoyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+    document.querySelector(".postgarantoyna").style = "position: absolute;display:none;    transition: 1s;"
   }
 
   function getPost3(){
@@ -281,7 +282,7 @@ export default function Additional() {
 
     axios.post(`${url}/api/garant/`,formdata5,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
-      document.querySelector(".postgarantoyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+      document.querySelector(".postgarantoyna").style = "position: absolute;display:none;   transition: 1s;"
       axios.get(`${url}/api/garant/`).then(res => {
         setfueldata2(res.data)
       }).catch(err => {
@@ -298,7 +299,7 @@ export default function Additional() {
 
     axios.put(`${url}/api/garant/${id}/`,formdata6,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
-      document.querySelector(".putgarantoyna").style = "position: fixed;bottom: -100%;    transition: 1s;"
+      document.querySelector(".putgarantoyna").style = "position: absolute;display:none;    transition: 1s;"
       axios.get(`${url}/api/garant/`).then(res => {
         setfueldata2(res.data)
       }).catch(err => {
@@ -325,12 +326,12 @@ export default function Additional() {
   }
 
   function putgarantoyna(id) {
-    document.querySelector(".putgarantoyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+    document.querySelector(".putgarantoyna").style = "position: absolute;display:block;  transition: 1s;"
     setkey1(id)
   }
 
   function putgarantoyna1() {
-    document.querySelector(".putgarantoyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+    document.querySelector(".putgarantoyna").style = "position: absolute;display:none;    transition: 1s;"
   }
 
 
@@ -375,20 +376,20 @@ export default function Additional() {
 
 
   function postmodeloyna() {
-    document.querySelector(".postmodeloyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+    document.querySelector(".postmodeloyna").style = "position: absolute;display:block;    transition: 1s;"
 
   }
 
   function postmodeloyna1() {
-    document.querySelector(".postmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+    document.querySelector(".postmodeloyna").style = "position: absolute;display:none;   transition: 1s;"
   }
   function putmodeloyna(id) {
-    document.querySelector(".putmodeloyna").style = "position: fixed;bottom: 20%;    transition: 1s;"
+    document.querySelector(".putmodeloyna").style = "position: absolute;display:block;  transition: 1s;"
     setkey2(id)
   }
 
   function putmodeloyna1() {
-    document.querySelector(".putmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+    document.querySelector(".putmodeloyna").style = "position: absolute; display:none;  transition: 1s;"
   }
 
 
@@ -398,7 +399,7 @@ export default function Additional() {
 
     axios.post(`${url}/api/models/`,model, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
-      document.querySelector(".postmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+      document.querySelector(".postmodeloyna").style = "position: absolute;display:none;   transition: 1s;"
       axios.get(`${url}/api/models/`).then(res=>{
         setfueldata3(res.data)
       }).catch(err=>{
@@ -415,7 +416,7 @@ export default function Additional() {
 
     axios.put(`${url}/api/models/${id}/`,model, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
-      document.querySelector(".putmodeloyna").style = "position: fixed;bottoms: -100%;    transition: 1s;"
+      document.querySelector(".putmodeloyna").style = "position: absolute;display:none;   transition: 1s;"
       axios.get(`${url}/api/models/`).then(res=>{
         setfueldata3(res.data)
       }).catch(err=>{
@@ -462,9 +463,9 @@ export default function Additional() {
     {
       title: 'Delet',
       witdh: "5%",
-      render: () => {
+      render: (key) => {
         return <div>
-          <Button  type="danger">O'chirish</Button>
+          <Button onClick={()=>getDeleteseries(key.id)} type="danger">O'chirish</Button>
         </div>
       },
     }
@@ -518,7 +519,7 @@ export default function Additional() {
     var series1 =new FormData()
     series1.append("name",document.querySelector(".seriyaput").value)
 
-    axios.put(`${url}/api/series/${id}`,series1, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+    axios.put(`${url}/api/series/${id}/`,series1, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
       document.querySelector(".putserisoyna1").style = "position: absolute;display:none;"
       axios.get(`${url}/api/series/`).then(res=>{
@@ -530,6 +531,66 @@ export default function Additional() {
       alert("ishlamadi")
     })
   }
+
+  function getDeleteseries(id){
+    axios.delete(`${url}/api/series/${id}/`,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+      alert("ishladi")
+      axios.get(`${url}/api/series/`).then(res=>{
+        setfueldata4(res.data)
+      }).catch(err=>{
+        console.log(err);
+      })
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+
+  // 6-page
+
+  const columns5 = [
+    {
+      title: 'Id',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Series',
+      dataIndex: (item1)=>item1.series?(item1.series.name):("-"),
+    },
+    {
+      title: 'Model',
+      render: (item)=>item.series?(item.series.model.name):("X")
+    },
+
+    {
+      title: 'Edit',
+      render: () => {
+        return <div>
+          <Button  style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+        </div>
+      }
+    },
+    {
+      title: 'Delet',
+      witdh: "5%",
+      render: () => {
+        return <div>
+          <Button  type="danger">O'chirish</Button>
+        </div>
+      },
+    }
+  ];
+
+  useEffect(()=>{
+    axios.get(`${url}/api/position/`).then(res=>{
+      setfueldata5(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
   
 
   return (
@@ -607,7 +668,7 @@ export default function Additional() {
             <div className="div10"><p>Garant kiriting</p>
               <input className='gearinput2' type="text" />
               <p>Soati</p>
-              <input className='gearinput3' type="text" />
+              <input className='gearinput3' type="number" />
               </div>
               <div className="putbutton11div"><button onClick={()=>getPost3()} className='putbutton11'>Qo'shish</button></div>
           </div>
@@ -630,7 +691,7 @@ export default function Additional() {
           <button className='post11' onClick={()=>postmodeloyna()} >Qo'shish</button>
           <h1>Modelni qo'shing</h1>
           <Table className='table' pagination={{ pageSize: 4 }} columns={columns3} dataSource={fueldata3} />
-        </div>
+        
 
         <div className="postmodeloyna">
           <div className="created">
@@ -656,7 +717,7 @@ export default function Additional() {
           </div> 
           </div>
         </div>
-
+</div>
 
       </div>
 
@@ -687,6 +748,35 @@ export default function Additional() {
         </div>
 
         </div>
+
+        {/* 6-page */}
+
+        <div className="house5">
+        <button className='post11' >Qo'shish</button>
+          <h1>Pozitsiyani kiriting</h1>
+          <Table className='table' style={{width:'800px',}} pagination={{ pageSize: 4 }} columns={columns5} dataSource={fueldata5} />
+       
+          <div className="postpozitsiyaoyna">
+          <div className="created">
+            <AiOutlineClose  className='close' />
+            <div className="div10"><p>Seriyani kiriting</p>
+              <input className='seriyapost' type="text" />
+              </div>
+              <div className="putbutton11div"><button className='putbutton11'  >Qo'shish</button></div>
+          </div>
+        </div>
+        <div className="putpozitsiyaoyna">
+          <div className="created">
+            <AiOutlineClose  className='close' />
+            <div className="div10"><p>Seriyani kiriting</p>
+              <input className='seriyaput' placeholder={key3.name} type="text" />
+              </div>
+              <div className="putbutton11div"><button  className='putbutton11'  >O'zgartirish</button></div>
+          </div>
+        </div>
+
+        </div>
+
        </div>
 
 
