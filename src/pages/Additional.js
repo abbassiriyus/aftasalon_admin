@@ -10,14 +10,15 @@ export default function Additional() {
   const [fueldata, setfueldata] = useState()
   const [fueldata1, setfueldata1] = useState()
   const [fueldata2, setfueldata2] = useState()
-  const [fueldata3, setfueldata3] = useState()
-  const [fueldata4, setfueldata4] = useState()
+  const [fueldata3, setfueldata3] = useState([])
+  const [fueldata4, setfueldata4] = useState([])
   const [fueldata5, setfueldata5] = useState()
   const [id, setId] = useState(0)
   const [key, setkey] = useState(0)
   const [key1, setkey1] = useState(0)
   const [key2, setkey2] = useState(0)
   const [key3, setkey3] = useState(0)
+  const [key4, setkey4] = useState(0)
 
 
   // 1 - page
@@ -558,27 +559,27 @@ export default function Additional() {
     },
     {
       title: 'Series',
-      dataIndex: (item1)=>item1.series?(item1.series.name):("-"),
+      render: (item)=>item.series?(item.series.name):("-"),
     },
     {
       title: 'Model',
-      render: (item)=>item.series?(item.series.model.name):("X")
+      render: (item)=>item.series?(item.series.model.name):("-")
     },
 
     {
       title: 'Edit',
-      render: () => {
+      render: (fueldata5) => {
         return <div>
-          <Button  style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+          <Button onClick={()=>putpozitsiyaoyna(fueldata5)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
         </div>
       }
     },
     {
       title: 'Delet',
       witdh: "5%",
-      render: () => {
+      render: (key) => {
         return <div>
-          <Button  type="danger">O'chirish</Button>
+          <Button onClick={()=>getdeletepozition(key.id)} type="danger">O'chirish</Button>
         </div>
       },
     }
@@ -587,10 +588,72 @@ export default function Additional() {
   useEffect(()=>{
     axios.get(`${url}/api/position/`).then(res=>{
       setfueldata5(res.data)
+
     }).catch(err=>{
       console.log(err);
     })
   },[])
+
+
+  function postpozitsiyaoyna() {
+    document.querySelector(".postpozitsiyaoyna").style = "position: absolute;display:block;"
+
+  }
+
+  function postpozitsiyaoyna1() {
+    document.querySelector(".postpozitsiyaoyna").style = "position: absolute;display:none;"
+  }
+
+  function putpozitsiyaoyna(id) {
+    document.querySelector(".putpozitsiyaoyna").style = "position: absolute;display:block;"
+    setkey4(id)
+  }
+
+  function putpozitsiyaoyna1() {
+    document.querySelector(".putpozitsiyaoyna").style = "position: absolute;display:none;"
+  }
+
+  function postpozition(){
+    var pozition= new FormData()
+    pozition.append("name",document.querySelector(".postpozition").value)
+
+    axios.post(`${url}/api/position/`,pozition,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+      alert("ishladi")
+      document.querySelector(".postpozitsiyaoyna").style = "position: absolute;display:none;"
+      axios.get(`${url}/api/position/`).then(res=>{
+        setfueldata5(res.data)
+      })
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+
+  function putpozition(id){
+    var putpozition =new FormData()
+    putpozition.append("name",document.querySelector(".putozition").value)
+    putpozition.append("series.name",document.querySelector(".putozition1").value)
+    putpozition.append("series.model.name",document.querySelector(".putozition1").value)
+    axios.put(`${url}/api/position/${id}/`,putpozition,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+      alert("ishladi")
+      document.querySelector(".putpozitsiyaoyna").style = "position: absolute;display:none;"
+      axios.get(`${url}/api/position/`).then(res=>{
+        setfueldata5(res.data)
+      })
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+
+  function getdeletepozition(id){
+    axios.delete(`${url}/api/position/${id}/`, { headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+      alert("ishladi")
+      axios.get(`${url}/api/position/`).then(res=>{
+        setfueldata5(res.data)
+      })
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
   
 
   return (
@@ -751,27 +814,40 @@ export default function Additional() {
 
         {/* 6-page */}
 
-        <div className="house5">
-        <button className='post11' >Qo'shish</button>
+        <div className="house5">  
+        <button className='post11' onClick={()=>postpozitsiyaoyna()} >Qo'shish</button>
           <h1>Pozitsiyani kiriting</h1>
           <Table className='table' style={{width:'800px',}} pagination={{ pageSize: 4 }} columns={columns5} dataSource={fueldata5} />
        
           <div className="postpozitsiyaoyna">
           <div className="created">
-            <AiOutlineClose  className='close' />
-            <div className="div10"><p>Seriyani kiriting</p>
-              <input className='seriyapost' type="text" />
+            <AiOutlineClose onClick={()=>postpozitsiyaoyna1()}  className='close' />
+            <div className="div10"><p>Pozitsiyani kiriting</p>
+              <input className='postpozition' type="text" />
               </div>
-              <div className="putbutton11div"><button className='putbutton11'  >Qo'shish</button></div>
+              <div className="putbutton11div"><button onClick={()=>postpozition()} className='putbutton11'  >Qo'shish</button></div>
           </div>
         </div>
         <div className="putpozitsiyaoyna">
           <div className="created">
-            <AiOutlineClose  className='close' />
-            <div className="div10"><p>Seriyani kiriting</p>
-              <input className='seriyaput' placeholder={key3.name} type="text" />
+            <AiOutlineClose onClick={()=>putpozitsiyaoyna1()} className='close' />
+            <div className="div10"><p>Pozitsiyani almashtiring</p>
+              <input className='putozition' placeholder={key4.name} type="text" />
+              <p>Seriyani almashtiring</p>
+               <select>
+                  {fueldata4.map(item=>{
+                 return   <option className='putozition1'>{item.name}</option>
+                  })}  
+               </select>
+               <p>Modelni almashtiring</p>
+              <select>
+                <p>Modelni o'gartiring</p>
+                {fueldata3.map(item=>{
+                  return <option className='putozition2' >{item.name}</option>
+                })}
+              </select>
               </div>
-              <div className="putbutton11div"><button  className='putbutton11'  >O'zgartirish</button></div>
+              <div className="putbutton11div"><button onClick={()=>putpozition(key4.id)} className='putbutton11' >O'zgartirish</button></div>
           </div>
         </div>
 
