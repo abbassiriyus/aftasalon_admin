@@ -20,6 +20,7 @@ export default function Additional() {
   const [key2, setkey2] = useState(0)
   const [key3, setkey3] = useState(0)
   const [key4, setkey4] = useState(0)
+  const [key5, setkey5] = useState(0)
 
 
   // 1 - page
@@ -656,7 +657,7 @@ export default function Additional() {
     })
   }
 
-  // 6 -page
+  // 7 -page
 
   const columns6 = [
     {
@@ -689,18 +690,18 @@ export default function Additional() {
     },
     {
       title: 'Edit',
-      render: () => {
+      render: (fueldata6) => {
         return <div>
-          <Button  style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+          <Button onClick={()=>putfillialoyna(fueldata6)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
         </div>
       }
     },
     {
       title: 'Delet',
       witdh: "5%",
-      render: () => {
+      render: (key) => {
         return <div>
-          <Button  type="danger">O'chirish</Button>
+          <Button onClick={()=>deletefilial(key.id)} type="danger">O'chirish</Button>
         </div>
       },
     }
@@ -713,6 +714,72 @@ export default function Additional() {
     console.log(err);
   })
   },[])
+
+  function postfillialoyna(){
+    document.querySelector(".postfillialoyna").style="position:fixed;right:0;    transition: 1s;"
+  }
+  function postfillialoyna1(){
+    document.querySelector(".postfillialoyna").style="position:fixed;right:-100%;    transition: 1s;"
+  }
+
+  function postfillial(){
+    var Fillial=new FormData()
+    Fillial.append("name",document.querySelector(".nom").value)
+    Fillial.append("country",document.querySelector(".mamlakat").value)
+    Fillial.append("region",document.querySelector(".mintaqa").value)
+    Fillial.append("city",document.querySelector(".shahar").value)
+    Fillial.append("district",document.querySelector(".tuman").value)
+    Fillial.append("street",document.querySelector(".kocha").value)
+
+    axios.post(`${url}/api/branch/`,Fillial,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+      alert('ishladi')
+      document.querySelector(".postfillialoyna").style="position:fixed;right:-100%;    transition: 1s;"
+      axios.get(`${url}/api/branch/`).then(res=>{
+        setfueldata6(res.data)
+      })
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+
+  function putfillialoyna(id){
+    document.querySelector(".putfillialoyna").style="position:fixed;right:0;    transition: 1s;"
+    setkey5(id)
+  }
+  function putfillialoyna1(){
+    document.querySelector(".putfillialoyna").style="position:fixed;right:-100%;    transition: 1s;"
+  }
+
+  function putfillial(id){
+    var Fillial1=new FormData()
+    Fillial1.append("name",document.querySelector(".nom1").value)
+    Fillial1.append("country",document.querySelector(".mamlakat1").value)
+    Fillial1.append("region",document.querySelector(".mintaqa1").value)
+    Fillial1.append("city",document.querySelector(".shahar1").value)
+    Fillial1.append("district",document.querySelector(".tuman1").value)
+    Fillial1.append("street",document.querySelector(".kocha1").value)
+
+    axios.put(`${url}/api/branch/${id}/`,Fillial1,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+      alert('ishladi')
+      document.querySelector(".putfillialoyna").style="position:fixed;right:-100%;    transition: 1s;"
+      axios.get(`${url}/api/branch/`).then(res=>{
+        setfueldata6(res.data)
+      })
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+
+  function deletefilial(id){
+    axios.delete(`${url}/api/branch/${id}/`,{ headers: { 'Authorization' : 'Bearer ' +sessionStorage.getItem("token")}}).then(res=>{
+      alert("ishladi")
+      axios.get(`${url}/api/branch/`).then(res=>{
+        setfueldata6(res.data)
+      })
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
   
 
   return (
@@ -918,32 +985,99 @@ export default function Additional() {
        {/* 6-page */}
 
        <div className="house6">
-        <button className='post11'  >Qo'shish</button>
+        <button className='post11' onClick={()=>postfillialoyna()} >Qo'shish</button>
           <h1>Fillial</h1>
-          <Table className='table' style={{ width:'100%' }} pagination={{ pageSize: 4 }} columns={columns6} dataSource={fueldata6} />
+          <Table className='table' style={{ width:'100%' }} pagination={{ pageSize: 5 }} columns={columns6} dataSource={fueldata6} />
        
-          <div className="postfillialoyna">
-          <div className="created">
-            <AiOutlineClose  className='close' />
-            <div className="div10"><p>Seriyani kiriting</p>
-              <input className='seriyapost' type="text" />
+
+
+        </div>
+        <div className="postfillialoyna">
+            <AiOutlineClose onClick={()=>postfillialoyna1()} className='close1' />
+
+            <div className="div20">
+              <div className='label'>
+                <label>
+                  <p>Nomi</p>
+                  <input className='nom' type="text" />
+                </label>
               </div>
-              <div className="putbutton11div"><button className='putbutton11'  >Qo'shish</button></div>
-          </div>
+              <div className='label'>
+                <label>
+                  <p>Mamlakat</p>
+                  <input className='mamlakat' type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Mintaqa</p>
+                  <input className='mintaqa' type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Shahar</p>
+                  <input className='shahar' type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Tuman</p>
+                  <input className='tuman' type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Ko'cha</p>
+                  <input className='kocha' type="text" />
+                </label>
+              </div>
+            </div>
+            <button style={{ marginLeft:'81.5%',marginTop:'2%' }} className='putbutton' onClick={()=>postfillial()} >Qo'shish</button>
         </div>
         <div className="putfillialoyna">
-          <div className="created">
-            <AiOutlineClose  className='close' />
-            <div className="div10"><p>Seriyani kiriting</p>
-              <input className='seriyaput' placeholder={key3.name} type="text" />
+            <AiOutlineClose onClick={()=>putfillialoyna1()} className='close1' />
+
+            <div className="div20">
+              <div className='label'>
+                <label>
+                  <p>Nomi</p>
+                  <input className='nom1' placeholder={key5.name} type="text" />
+                </label>
               </div>
-              <div className="putbutton11div"><button  className='putbutton11'  >O'zgartirish</button></div>
-          </div>
+              <div className='label'>
+                <label>
+                  <p>Mamlakat</p>
+                  <input className='mamlakat1' placeholder={key5.country} type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Mintaqa</p>
+                  <input className='mintaqa1' placeholder={key5.region} type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Shahar</p>
+                  <input className='shahar1'placeholder={key5.city} type="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Tuman</p>
+                  <input className='tuman1' placeholder={key5.district}ype="text" />
+                </label>
+              </div>
+              <div className='label'>
+                <label>
+                  <p>Ko'cha</p>
+                  <input className='kocha1'placeholder={key5.street} type="text" />
+                </label>
+              </div>
+            </div>
+            <button style={{ marginLeft:'81.5%',marginTop:'2%' }} className='putbutton' onClick={()=>putfillial(key5.id)} >O'zgartirish</button>
         </div>
-
-        </div>
-
-
     </div>
   )
 }
