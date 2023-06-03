@@ -280,3 +280,24 @@ select{
     border: 1px solid #1890ff;
     border-radius: 5px ;
 }
+
+.house6{
+    margin-top: 28%;
+    position: relative;
+}
+.postfillialoyna{
+        width:100% ;
+    position: absolute;
+    bottom:0px;
+    height: 200px;
+    background-color: white;
+    display: none;
+}
+.putfillialoyna{
+            width:100% ;
+    position: absolute;
+    bottom:0px;
+    height: 200px;
+    background-color: white;
+    display: none;
+}

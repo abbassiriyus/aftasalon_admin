@@ -13,6 +13,7 @@ export default function Additional() {
   const [fueldata3, setfueldata3] = useState([])
   const [fueldata4, setfueldata4] = useState([])
   const [fueldata5, setfueldata5] = useState()
+  const [fueldata6, setfueldata6] = useState()
   const [id, setId] = useState(0)
   const [key, setkey] = useState(0)
   const [key1, setkey1] = useState(0)
@@ -654,6 +655,64 @@ export default function Additional() {
       console.log(err);
     })
   }
+
+  // 6 -page
+
+  const columns6 = [
+    {
+      title: 'Id',
+      dataIndex:'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Country',
+      dataIndex:'country',
+    },
+    {
+      title: 'Region',
+      dataIndex:'region',
+    },
+    {
+      title: 'City',
+      dataIndex:'city',
+    },
+    {
+      title: 'District',
+      dataIndex:'district',
+    },
+    {
+      title: 'Street',
+      dataIndex:'street',
+    },
+    {
+      title: 'Edit',
+      render: () => {
+        return <div>
+          <Button  style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+        </div>
+      }
+    },
+    {
+      title: 'Delet',
+      witdh: "5%",
+      render: () => {
+        return <div>
+          <Button  type="danger">O'chirish</Button>
+        </div>
+      },
+    }
+  ];
+
+  useEffect(()=>{
+  axios.get(`${url}/api/branch/`).then(res=>{
+    setfueldata6(res.data)
+  }).catch(err=>{
+    console.log(err);
+  })
+  },[])
   
 
   return (
@@ -853,7 +912,36 @@ export default function Additional() {
 
         </div>
 
+
        </div>
+
+       {/* 6-page */}
+
+       <div className="house6">
+        <button className='post11'  >Qo'shish</button>
+          <h1>Fillial</h1>
+          <Table className='table' style={{ width:'100%' }} pagination={{ pageSize: 4 }} columns={columns6} dataSource={fueldata6} />
+       
+          <div className="postfillialoyna">
+          <div className="created">
+            <AiOutlineClose  className='close' />
+            <div className="div10"><p>Seriyani kiriting</p>
+              <input className='seriyapost' type="text" />
+              </div>
+              <div className="putbutton11div"><button className='putbutton11'  >Qo'shish</button></div>
+          </div>
+        </div>
+        <div className="putfillialoyna">
+          <div className="created">
+            <AiOutlineClose  className='close' />
+            <div className="div10"><p>Seriyani kiriting</p>
+              <input className='seriyaput' placeholder={key3.name} type="text" />
+              </div>
+              <div className="putbutton11div"><button  className='putbutton11'  >O'zgartirish</button></div>
+          </div>
+        </div>
+
+        </div>
 
 
     </div>
