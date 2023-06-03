@@ -602,70 +602,166 @@
 
 // export default Tables;
 import { Button, Table } from 'antd';
-import { useState } from 'react';
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-  },
-];
-const data = [];
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
-const App = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const start = () => {
-    setLoading(true);
-    // ajax request after empty completing
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import url from '../components/host';
+import './style/Billing.css'
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import { Tabs } from 'antd';
+
+
+export default function Billing() {
+  const [data, setData] = useState([])
+  const [data2, setData2] = useState([])
+
+  //  { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }
+  useEffect(() => {
+    axios.get(`${url}/auth/user/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+      var tt = []
+      console.log(res.data);
+      var dd = []
+      res.data.map(item => {
+        if (item.is_staff == true) {
+          tt.push(item)
+        } else {
+          dd.push(item)
+        }
+      })
+      setData(tt)
+      setData2(dd)
+      console.log(tt);
+    })
+  }, [])
+
+
+  // function putData() {
+  //   var data2 = new FormData()
+  //   data2.append('username', docu)
+  // }
+
+
+  const columns = [
+    {
+
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'username',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+    },
+    {
+      title: 'Delete',
+      render: (data) => (
+        <Button onClick={() => deleteData(data.id)} type="danger" className='delte'>Delete</Button>
+      ),
+    },
+  ];
+
+
+
+   const columns2 = [
+     {
+       title: 'ID',
+       dataIndex: 'id',
+     },
+     {
+       title: 'Name',
+       dataIndex: 'username',
+     },
+     {
+       title: 'Phone',
+       dataIndex: 'phone',
+     },
+     {
+       title: 'Delete',
+       render: (data2) => (
+         <Button onClick={() => deleteData(data2.id)} type="danger" className='delte'>Delete</Button>
+       ),
+     },
+   ];
+
+  function ModalPost() {
+    document.querySelector('.ModalPost').style = 'top: 200px'
+  }
+
+
+  function ModalPostClose() {
+    document.querySelector('.ModalPost').style = 'top: -100%'
+  }
+
+  function PostUser() {
+    var dataPost = new FormData()
+    dataPost.append('username', document.querySelector('.username').value)
+    dataPost.append('phone', document.querySelector('.phone').value)
+    dataPost.append('password', document.querySelector('.password').value)
+    dataPost.append('is_staff', true)
+    axios.post(`${url}/auth/register/`, dataPost, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+      alert('Post user')
+      window.location.reload()
+    }).catch(err => {
+      alert(err)
+    })
+  }
+
+
+
+  // <Button onClick={() => postoyna11(fueldata)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
+
+
+  const onChange = (key) => {
+    console.log(key);
   };
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
-  return (
+  const items = [
+    {
+      key: '1',
+      label: `Admins`,
+      children:
+        <Table columns={columns} pagination={{ pageSize: 10 }} dataSource={data} />
+      ,
+    },
+    {
+      key: '2',
+      label: `Users`,
+      children:
+      <Table columns={columns2} pagination={{ pageSize: 10 }} dataSource={data2} />
+      ,
+    }
+  ];
+
+  function deleteData(key) {
+    axios.delete(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token")}}).then (res => {
+      alert('Delete user')
+      window.location.reload()
+    })
+  }
+return (
     <div>
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        >
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-        </span>
+      <div className='ModalPost'>
+        <AiOutlineClose className='iconClose' onClick={() => ModalPostClose()} />
+        <h3>Ism</h3>
+        <input type='text' className='username' />
+        <h3>Nomer</h3>
+        <input type='number' className='phone' />
+        <h3>Parol</h3>
+        <input type='password' className='password' />
+        <button className='Btn2' onClick={() => PostUser()}>Admin Qo'shish</button>
       </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+      <button className='Btn1' style={{ transition: '.4s' }} onClick={() => ModalPost()} >Admin Qo'shish</button>
+      {/* {
+        data.map(item => {
+          if (item.is_staff) {
+            return <h1>truee</h1>
+          } else {
+            return <h1>falsee</h1>
+          }
+        })
+      } */}
+      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
     </div>
-  );
-};
-export default App;
+  )
+}
