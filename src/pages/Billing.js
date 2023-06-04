@@ -736,7 +736,9 @@ export default function Billing() {
   function deleteData(key) {
     axios.delete(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token")}}).then (res => {
       alert('Delete user')
-      window.location.reload()
+      // window.location.reload()
+    }).catch(err => {
+      alert(err)
     })
   }
 return (
