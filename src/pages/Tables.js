@@ -76,6 +76,7 @@ const Tables = () => {
     setdata(item)
     setPage(2)
     console.log(item);
+    
 
   }
 
@@ -217,6 +218,7 @@ const Tables = () => {
     })
   }
 
+
   function getPut(key) {
     var putData = new FormData()
     putData.append("position",document.querySelector("#poz1").value)
@@ -320,27 +322,37 @@ const Tables = () => {
                   </div>
                   <div className="text">
                     <h1>Garant</h1>
-                    <input type="text"  />
-                    <h1>Garant Soat</h1>
-                    <input type="text"  />
+                    <select className='slect'>
+                      {data4.map(item=>(
+                        <option>{item.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="text">
+                    <h1>Vaqtni yangilangan</h1>
+                    <input type="text" value={data.time_update} />
                   </div>
                 </div>
                 <div className="text2">
                   <div className="text">
                     <h1>Filial</h1>
-                    <input type="text"  />
+                    <select className='slect'>
+                    {data5.map(item=>(
+                      <option>{item.name}</option>
+                    ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Yili</h1>
-                    <input type="text"  />
+                    <input type="number"  />
                   </div>
                   <div className="text">
                     <h1>Masofa</h1>
-                    <input type="text"  />
+                    <input type="number"  />
                   </div>
                   <div className="text">
                     <h1>Dvigatel</h1>
-                    <input type="text"  />
+                    <input type="number"  />
                   </div>
                   <div className="text">
                     <h1>Rang</h1>
@@ -348,11 +360,11 @@ const Tables = () => {
                   </div>
                   <div className="text">
                     <h1>Ko'rishlar</h1>
-                    <input type="text" value={data.views} />
+                    <input type="number" value={data.views} />
                   </div>
                   <div className="text">
                     <h1>Vaqt_yaratilgan</h1>
-                    <input type="text" value={data.time_create} />
+                    <input type="text"  value={data.time_create} />
                   </div>
                 </div>
                 <div className="text3">
@@ -362,27 +374,23 @@ const Tables = () => {
                   </div>
                   <div className="text">
                     <h1>Boshlang'ich_narx</h1>
-                    <input type="text" value={data.initial_price} />
+                    <input type="number" value={data.initial_price} />
                   </div>
                   <div className="text">
                     <h1>Narx</h1>
-                    <input type="text" value={data.price} />
+                    <input type="number" value={data.price} />
                   </div>
                   <div className="text">
-                    <h1>Sotuv</h1>
-                    <input type="text" value={data.sale} />
+                    <h1>Chegirma</h1>
+                    <input type="number" value={data.sale} />
                   </div>
                   <div className="text">
                     <h1>Depozit</h1>
-                    <input type="text" value={data.depozit} />
+                    <input type="number" value={data.depozit} />
                   </div>
                   <div className="text">
                     <h1>Yoqilg'i iste'moli</h1>
-                    <input type="text" value={data.fuel_consumption} />
-                  </div>
-                  <div className="text">
-                    <h1>Vaqtni yangilangan</h1>
-                    <input type="text" value={data.time_update} />
+                    <input type="number" value={data.fuel_consumption} />
                   </div>
                   {/* <div className="textcheck">
                 <h1>Faol</h1>
