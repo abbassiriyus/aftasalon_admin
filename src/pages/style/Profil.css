@@ -1,0 +1,35 @@
+.putAdmin{
+    width: 40%;
+    min-height: 200px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 200px;
+    z-index: 99;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.putAdmin p{
+    height: 10px;
+}
+
+.putAdmin input{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    outline: none;
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+.putAdmin input:focus{
+    border: 1px solid #1890ff;
+}
+
+.putAdmin div{
+    width: 45%;
+}

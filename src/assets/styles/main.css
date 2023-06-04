@@ -1630,7 +1630,12 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   align-items: center;
 }
 
+.ant-row{
+  /* width: 300%; */
+}
+
 .mb-24 {
+  /* width: 1000px !important; */
   margin-bottom: 24px;
 }
 
@@ -3046,3 +3051,10 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
   path {
   fill: #8c8c8c;
 }
+
+
+#card-userAnt{
+  width: 300%;
+}
+
+

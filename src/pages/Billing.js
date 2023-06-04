@@ -616,7 +616,7 @@ export default function Billing() {
 
   //  { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }
   useEffect(() => {
-    axios.get(`${url}/auth/user/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+    axios.get(`${url}/auth/users/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       var tt = []
       console.log(res.data);
       var dd = []
