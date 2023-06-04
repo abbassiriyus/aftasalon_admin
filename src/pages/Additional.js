@@ -475,7 +475,7 @@ export default function Additional() {
   ];
 
   useEffect(()=>{
-    axios.get(`${url}/api/series/`).then(res=>{
+    axios.get(`${url}/api/series_get/`).then(res=>{
       setfueldata4(res.data)
     }).catch(err=>{
       console.log(err);
@@ -509,7 +509,7 @@ export default function Additional() {
     axios.post(`${url}/api/series/`,series, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
       document.querySelector(".postserisoyna").style = "position: absolute;display:none;"
-      axios.get(`${url}/api/series/`).then(res=>{
+      axios.get(`${url}/api/series_get/`).then(res=>{
         setfueldata4(res.data)
       }).catch(err=>{
         console.log(err);
@@ -525,7 +525,7 @@ export default function Additional() {
     axios.put(`${url}/api/series/${id}/`,series1, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
       document.querySelector(".putserisoyna1").style = "position: absolute;display:none;"
-      axios.get(`${url}/api/series/`).then(res=>{
+      axios.get(`${url}/api/series_get/`).then(res=>{
         setfueldata4(res.data)
       }).catch(err=>{
         console.log(err);
@@ -538,7 +538,7 @@ export default function Additional() {
   function getDeleteseries(id){
     axios.delete(`${url}/api/series/${id}/`,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
       alert("ishladi")
-      axios.get(`${url}/api/series/`).then(res=>{
+      axios.get(`${url}/api/series_get/`).then(res=>{
         setfueldata4(res.data)
       }).catch(err=>{
         console.log(err);
@@ -563,10 +563,6 @@ export default function Additional() {
       title: 'Series',
       render: (item)=>item.series?(item.series.name):("-"),
     },
-    {
-      title: 'Model',
-      render: (item)=>item.series?(item.series.model.name):("-")
-    },
 
     {
       title: 'Edit',
@@ -588,7 +584,7 @@ export default function Additional() {
   ];
 
   useEffect(()=>{
-    axios.get(`${url}/api/position/`).then(res=>{
+    axios.get(`${url}/api/position_get/`).then(res=>{
       setfueldata5(res.data)
 
     }).catch(err=>{
@@ -622,7 +618,7 @@ export default function Additional() {
     axios.post(`${url}/api/position/`,pozition,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
       alert("ishladi")
       document.querySelector(".postpozitsiyaoyna").style = "position: absolute;display:none;"
-      axios.get(`${url}/api/position/`).then(res=>{
+      axios.get(`${url}/api/position_get/`).then(res=>{
         setfueldata5(res.data)
       })
     }).catch(err=>{
@@ -633,12 +629,11 @@ export default function Additional() {
   function putpozition(id){
     var putpozition =new FormData()
     putpozition.append("name",document.querySelector(".putozition").value)
-    putpozition.append("series.name",document.querySelector(".putozition1").value)
-    putpozition.append("series.model.name",document.querySelector(".putozition1").value)
+    putpozition.append("series",document.querySelector(".putozition1").value)
     axios.put(`${url}/api/position/${id}/`,putpozition,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
       alert("ishladi")
       document.querySelector(".putpozitsiyaoyna").style = "position: absolute;display:none;"
-      axios.get(`${url}/api/position/`).then(res=>{
+      axios.get(`${url}/api/position_get/`).then(res=>{
         setfueldata5(res.data)
       })
     }).catch(err=>{
@@ -649,7 +644,7 @@ export default function Additional() {
   function getdeletepozition(id){
     axios.delete(`${url}/api/position/${id}/`, { headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
       alert("ishladi")
-      axios.get(`${url}/api/position/`).then(res=>{
+      axios.get(`${url}/api/position_get/`).then(res=>{
         setfueldata5(res.data)
       })
     }).catch(err=>{
@@ -962,16 +957,9 @@ export default function Additional() {
               <p>Seriyani almashtiring</p>
                <select>
                   {fueldata4.map(item=>{
-                 return   <option className='putozition1'>{item.name}</option>
+                 return   <option value={item.id} className='putozition1'>{item.name}</option>
                   })}  
                </select>
-               <p>Modelni almashtiring</p>
-              <select>
-                <p>Modelni o'gartiring</p>
-                {fueldata3.map(item=>{
-                  return <option className='putozition2' >{item.name}</option>
-                })}
-              </select>
               </div>
               <div className="putbutton11div"><button onClick={()=>putpozition(key4.id)} className='putbutton11' >O'zgartirish</button></div>
           </div>

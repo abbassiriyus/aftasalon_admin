@@ -17,6 +17,8 @@ const Tables = () => {
   const [data4, setdata4] = useState([])
   const [data5, setdata5] = useState([])
   const [data6, setdata6] = useState([])
+  const [data7, setdata7] = useState([])
+  const [data8, setdata8] = useState([])
   const [page, setPage] = useState(1)
   const [ keys, setKeys ] = useState([])
 
@@ -78,13 +80,30 @@ const Tables = () => {
   }
 
   function getData() {
-    axios.get(`${url}/api/cars/`).then(res => {
+    axios.get(`${url}/api/cars_get/`).then(res => {
       setdata1(res.data)
     })
   }
   useEffect(() => {
     getData()
   }, [])
+
+  useEffect(()=>{
+    axios.get(`${url}/api/series_get/`).then(res=>{
+      setdata7(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
+
+
+  useEffect(()=>{
+    axios.get(`${url}/api/models/`).then(res=>{
+      setdata8(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
 
 
   function getFuel() {
@@ -115,7 +134,7 @@ const Tables = () => {
   }, [])
 
   function getPosit() {
-    axios.get(`${url}/api/position/`).then(res => {
+    axios.get(`${url}/api/position_get/`).then(res => {
       setdata6(res.data)
     })
   }
@@ -138,7 +157,9 @@ const Tables = () => {
     console.log(id,"slaom");
     axios.delete(`${url}/api/cars/${id}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
-      window.location.reload()
+      axios.get(`${url}/api/cars/`).then(res => {
+        setdata1(res.data)
+      })
     }).catch(err => {
       alert("ishlamadi")
     })
@@ -146,7 +167,7 @@ const Tables = () => {
 
   function postoyna() {
     document.querySelector(".postoyna").style = "position:fixed;right:0px;  transition: 1s;"
-    document.querySelector("body").style = "background: rgba(0, 0, 0, 0.5);"
+
   }
   function postoynaa() {
     document.querySelector(".postoyna").style = "position:fixed;right:-100%;  transition: 1s;"
@@ -186,7 +207,10 @@ const Tables = () => {
 
     axios.post(`${url}/api/cars/`, formdata, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladimoqda")
-      window.location.reload()
+      document.querySelector(".postoyna").style = "position:fixed;right:-100%;  transition: 1s;"
+      axios.get(`${url}/api/cars_get/`).then(res => {
+        setdata1(res.data)
+      })
     }).catch(err => {
       alert("ishlamadi")
       console.log(err);
@@ -214,11 +238,14 @@ const Tables = () => {
     putData.append("sale",document.querySelector(".sot1").value)
     putData.append("depozit",document.querySelector(".dep1").value)
     putData.append("fuel_consumption",document.querySelector(".yoq11").value)
-    putData.append("is_active",document.querySelector(".faol1").value)
+    putData.append("is_active",document.querySelector(".faol1").checked)
 
     axios.put(`${url}/api/cars/${key}/`, putData, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladimoqda")
-      window.location.reload()
+      document.querySelector(".postoyna1").style = "position:fixed;right:-100%;  transition: 1s;"
+      axios.get(`${url}/api/cars_get/`).then(res => {
+        setdata1(res.data)
+      })
     }).catch(err => {
       alert("ishlamadi")
       console.log(err);
@@ -253,47 +280,67 @@ const Tables = () => {
                 <div className="text1">
                   <div className="text">
                     <h1>Pozitsiya</h1>
-                    <input type="text" value={data.position.name} id='inp1' />
+                    <select className='slect'>
+                      {data6.map(item=>(
+                        <option id='inp1'>{item.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Seriya</h1>
-                    <input type="text" value={data.position.series.name} />
+                    <select className='slect'>
+                    {data7.map(item=>(
+                      <option>{item.name}</option>
+                    ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Model</h1>
-                    <input type="text" value={data.position.series.model.name} />
+                    <select className='slect'>
+                      {data8.map(item=>(
+                        <option>{item.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Yoqilg'i turi</h1>
-                    <input type="text" value={data.fuel_sort.name} />
+                    <select className='slect'>
+                    {data2.map(item=>(
+                    <option>{item.name}</option>
+                    ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Vites qutisi</h1>
-                    <input type="text" value={data.gearbox.name} />
+                    <select className='slect'>
+                      {data3.map(item=>(
+                        <option>{item.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Garant</h1>
-                    <input type="text" value={data.garant.name} />
+                    <input type="text"  />
                     <h1>Garant Soat</h1>
-                    <input type="text" value={data.garant.time} />
+                    <input type="text"  />
                   </div>
                 </div>
                 <div className="text2">
                   <div className="text">
                     <h1>Filial</h1>
-                    <input type="text" value={data.branch.name} />
+                    <input type="text"  />
                   </div>
                   <div className="text">
                     <h1>Yili</h1>
-                    <input type="text" value={data.year} />
+                    <input type="text"  />
                   </div>
                   <div className="text">
                     <h1>Masofa</h1>
-                    <input type="text" value={data.distance} />
+                    <input type="text"  />
                   </div>
                   <div className="text">
                     <h1>Dvigatel</h1>
-                    <input type="text" value={data.engine} />
+                    <input type="text"  />
                   </div>
                   <div className="text">
                     <h1>Rang</h1>

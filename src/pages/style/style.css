@@ -193,3 +193,7 @@ margin-bottom: 20px;
 .table1{
   width: 100%;  
 }
+.slect{
+    width: 350px;
+    border: 1px solid grey;
+}
