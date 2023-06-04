@@ -18,7 +18,7 @@ import {
   InstagramOutlined,
   GithubOutlined,
 } from "@ant-design/icons";
-import  axios  from "axios";
+import axios from "axios";
 import url from "../components/host";
 
 function onChange(checked) {
@@ -30,24 +30,25 @@ const { Footer, Content } = Layout;
 
 export default class SignIn extends Component {
 
-  state={
-  
+  state = {
+
   }
-  login=()=>{
- 
-    var data={
-      phone:document.querySelector(".username1").value,
-      password:document.querySelector(".password1").value
+  login = () => {
+
+    var data = {
+      phone: document.querySelector(".username1").value,
+      password: document.querySelector(".password1").value
     }
 
-axios.post(`${url}/auth/login/`,data).then(res=>{
-  console.log(res.data)
-  sessionStorage.setItem("token",res.data.access)
-  window.location.reload()
-}).catch(err=>{
-  console.log(err);
-})
-  }
+    axios.post(`${url}/auth/login/`, data).then(res => {
+      console.log(res.data)
+      localStorage.setItem("data2", JSON.stringify(data));
+      sessionStorage.setItem("token", res.data.access)
+      window.location.reload()
+    }).catch(err => {
+      console.log(err);
+    })
+  } 
   render() {
     const onFinish = (values) => {
       console.log("Success:", values);
@@ -115,7 +116,7 @@ axios.post(`${url}/auth/login/`,data).then(res=>{
 
                   <Form.Item>
                     <Button
-                    onClick={()=>this.login()}
+                      onClick={() => this.login()}
                       type="primary"
                       htmlType="submit"
                       style={{ width: "100%" }}
