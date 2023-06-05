@@ -283,21 +283,42 @@ select{
 
 .house6{
     margin-top: 28%;
-    position: relative;
+    margin-bottom: 20%;
 }
 .postfillialoyna{
-        width:100% ;
-    position: absolute;
-    bottom:0px;
-    height: 200px;
+    width: 40%;
+  position: fixed;
+    right: -100%;
+    top: 20%;
     background-color: white;
-    display: none;
+    color: black;
 }
 .putfillialoyna{
-            width:100% ;
-    position: absolute;
-    bottom:0px;
-    height: 200px;
+    width: 40%;
+  position: fixed;
+    right: -100%;
+    top: 20%;
     background-color: white;
-    display: none;
+    color: black;
+}
+
+.label{
+    display: block;
+}
+.div20{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+}
+.div20 input{
+    width: 300px;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid #1890ff;
+}
+.close1{
+    font-size: 20px;
+margin-left: 96%;
+margin-top: 1%;
 }

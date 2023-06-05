@@ -40,7 +40,6 @@ textarea{
 .alltext1{
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-around;
 }
 .alltext2{
@@ -192,4 +191,8 @@ margin-bottom: 20px;
 }
 .table1{
   width: 100%;  
+}
+.slect{
+    width: 350px;
+    border: 1px solid grey;
 }

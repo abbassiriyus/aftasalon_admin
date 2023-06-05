@@ -1,3 +1,4 @@
+
 // /*!
 // =========================================================
 // * Muse Ant Design Dashboard - v1.0.0
@@ -565,7 +566,7 @@
 // ];
 
 // function Tables() {
-//   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
+//   const onChange = (e) => console.log(radio checked:${e.target.value});
 //   return (
 //     <>
 //       <div className="tabled">
@@ -608,7 +609,6 @@ import url from '../components/host';
 import './style/Billing.css'
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { Tabs } from 'antd';
-
 
 export default function Billing() {
   const [data, setData] = useState([])
@@ -719,14 +719,14 @@ export default function Billing() {
   const items = [
     {
       key: '1',
-      label: `Admins`,
+      label: 'Admins',
       children:
         <Table columns={columns} pagination={{ pageSize: 10 }} dataSource={data} />
       ,
     },
     {
       key: '2',
-      label: `Users`,
+      label: 'Users',
       children:
       <Table columns={columns2} pagination={{ pageSize: 10 }} dataSource={data2} />
       ,

@@ -17,6 +17,8 @@ const Tables = () => {
   const [data4, setdata4] = useState([])
   const [data5, setdata5] = useState([])
   const [data6, setdata6] = useState([])
+  const [data7, setdata7] = useState([])
+  const [data8, setdata8] = useState([])
   const [page, setPage] = useState(1)
   const [ keys, setKeys ] = useState([])
 
@@ -74,17 +76,35 @@ const Tables = () => {
     setdata(item)
     setPage(2)
     console.log(item);
+    
 
   }
 
   function getData() {
-    axios.get(`${url}/api/cars/`).then(res => {
+    axios.get(`${url}/api/cars_get/`).then(res => {
       setdata1(res.data)
     })
   }
   useEffect(() => {
     getData()
   }, [])
+
+  useEffect(()=>{
+    axios.get(`${url}/api/series_get/`).then(res=>{
+      setdata7(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
+
+
+  useEffect(()=>{
+    axios.get(`${url}/api/models/`).then(res=>{
+      setdata8(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  },[])
 
 
   function getFuel() {
@@ -115,7 +135,7 @@ const Tables = () => {
   }, [])
 
   function getPosit() {
-    axios.get(`${url}/api/position/`).then(res => {
+    axios.get(`${url}/api/position_get/`).then(res => {
       setdata6(res.data)
     })
   }
@@ -138,7 +158,9 @@ const Tables = () => {
     console.log(id,"slaom");
     axios.delete(`${url}/api/cars/${id}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladi")
-      window.location.reload()
+      axios.get(`${url}/api/cars/`).then(res => {
+        setdata1(res.data)
+      })
     }).catch(err => {
       alert("ishlamadi")
     })
@@ -146,7 +168,7 @@ const Tables = () => {
 
   function postoyna() {
     document.querySelector(".postoyna").style = "position:fixed;right:0px;  transition: 1s;"
-    document.querySelector("body").style = "background: rgba(0, 0, 0, 0.5);"
+
   }
   function postoynaa() {
     document.querySelector(".postoyna").style = "position:fixed;right:-100%;  transition: 1s;"
@@ -186,12 +208,16 @@ const Tables = () => {
 
     axios.post(`${url}/api/cars/`, formdata, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladimoqda")
-      window.location.reload()
+      document.querySelector(".postoyna").style = "position:fixed;right:-100%;  transition: 1s;"
+      axios.get(`${url}/api/cars_get/`).then(res => {
+        setdata1(res.data)
+      })
     }).catch(err => {
       alert("ishlamadi")
       console.log(err);
     })
   }
+
 
   function getPut(key) {
     var putData = new FormData()
@@ -214,11 +240,14 @@ const Tables = () => {
     putData.append("sale",document.querySelector(".sot1").value)
     putData.append("depozit",document.querySelector(".dep1").value)
     putData.append("fuel_consumption",document.querySelector(".yoq11").value)
-    putData.append("is_active",document.querySelector(".faol1").value)
+    putData.append("is_active",document.querySelector(".faol1").checked)
 
     axios.put(`${url}/api/cars/${key}/`, putData, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert("ishladimoqda")
-      window.location.reload()
+      document.querySelector(".postoyna1").style = "position:fixed;right:-100%;  transition: 1s;"
+      axios.get(`${url}/api/cars_get/`).then(res => {
+        setdata1(res.data)
+      })
     }).catch(err => {
       alert("ishlamadi")
       console.log(err);
@@ -253,47 +282,77 @@ const Tables = () => {
                 <div className="text1">
                   <div className="text">
                     <h1>Pozitsiya</h1>
-                    <input type="text" value={data.position.name} id='inp1' />
+                    <select className='slect'>
+                      {data6.map(item=>(
+                        <option id='inp1'>{item.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Seriya</h1>
-                    <input type="text" value={data.position.series.name} />
+                    <select className='slect'>
+                    {data7.map(item=>(
+                      <option>{item.name}</option>
+                    ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Model</h1>
-                    <input type="text" value={data.position.series.model.name} />
+                    <select className='slect'>
+                      {data8.map(item=>(
+                        <option>{item.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Yoqilg'i turi</h1>
-                    <input type="text" value={data.fuel_sort.name} />
+                    <select className='slect'>
+                    {data2.map(item=>(
+                    <option>{item.name}</option>
+                    ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Vites qutisi</h1>
-                    <input type="text" value={data.gearbox.name} />
+                    <select className='slect'>
+                      {data3.map(item=>(
+                        <option>{item.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Garant</h1>
-                    <input type="text" value={data.garant.name} />
-                    <h1>Garant Soat</h1>
-                    <input type="text" value={data.garant.time} />
+                    <select className='slect'>
+                      {data4.map(item=>(
+                        <option>{item.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="text">
+                    <h1>Vaqtni yangilangan</h1>
+                    <input type="text" value={data.time_update} />
                   </div>
                 </div>
                 <div className="text2">
                   <div className="text">
                     <h1>Filial</h1>
-                    <input type="text" value={data.branch.name} />
+                    <select className='slect'>
+                    {data5.map(item=>(
+                      <option>{item.name}</option>
+                    ))}
+                    </select>
                   </div>
                   <div className="text">
                     <h1>Yili</h1>
-                    <input type="text" value={data.year} />
+                    <input type="number"  />
                   </div>
                   <div className="text">
                     <h1>Masofa</h1>
-                    <input type="text" value={data.distance} />
+                    <input type="number"  />
                   </div>
                   <div className="text">
                     <h1>Dvigatel</h1>
-                    <input type="text" value={data.engine} />
+                    <input type="number"  />
                   </div>
                   <div className="text">
                     <h1>Rang</h1>
@@ -301,11 +360,11 @@ const Tables = () => {
                   </div>
                   <div className="text">
                     <h1>Ko'rishlar</h1>
-                    <input type="text" value={data.views} />
+                    <input type="number" value={data.views} />
                   </div>
                   <div className="text">
                     <h1>Vaqt_yaratilgan</h1>
-                    <input type="text" value={data.time_create} />
+                    <input type="text"  value={data.time_create} />
                   </div>
                 </div>
                 <div className="text3">
@@ -315,27 +374,23 @@ const Tables = () => {
                   </div>
                   <div className="text">
                     <h1>Boshlang'ich_narx</h1>
-                    <input type="text" value={data.initial_price} />
+                    <input type="number" value={data.initial_price} />
                   </div>
                   <div className="text">
                     <h1>Narx</h1>
-                    <input type="text" value={data.price} />
+                    <input type="number" value={data.price} />
                   </div>
                   <div className="text">
-                    <h1>Sotuv</h1>
-                    <input type="text" value={data.sale} />
+                    <h1>Chegirma</h1>
+                    <input type="number" value={data.sale} />
                   </div>
                   <div className="text">
                     <h1>Depozit</h1>
-                    <input type="text" value={data.depozit} />
+                    <input type="number" value={data.depozit} />
                   </div>
                   <div className="text">
                     <h1>Yoqilg'i iste'moli</h1>
-                    <input type="text" value={data.fuel_consumption} />
-                  </div>
-                  <div className="text">
-                    <h1>Vaqtni yangilangan</h1>
-                    <input type="text" value={data.time_update} />
+                    <input type="number" value={data.fuel_consumption} />
                   </div>
                   {/* <div className="textcheck">
                 <h1>Faol</h1>
