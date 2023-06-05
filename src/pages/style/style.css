@@ -196,3 +196,7 @@ margin-bottom: 20px;
     width: 350px;
     border: 1px solid grey;
 }
+
+.ant-breadcrumb-link a{
+    color: black !important;
+}
