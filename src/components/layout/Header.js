@@ -145,43 +145,51 @@ const clockicon = [
   </svg>,
 ];
 
-const data = [
-  {
-    title: "New message from Sophie",
-    description: <>{clockicon} 2 days ago</>,
 
-    avatar: avtar,
-  },
-  {
-    title: "New album by Travis Scott",
-    description: <>{clockicon} 2 days ago</>,
 
-    avatar: <Avatar shape="square">{wifi}</Avatar>,
-  },
-  {
-    title: "Payment completed",
-    description: <>{clockicon} 2 days ago</>,
-    avatar: <Avatar shape="square">{credit}</Avatar>,
-  },
-];
 
-const menu = (
-  <List
-    min-width="100%"
-    className="header-notifications-dropdown "
-    itemLayout="horizontal"
-    dataSource={data}
-    renderItem={(item) => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={<Avatar shape="square" src={item.avatar} />}
-          title={item.title}
-          description={item.description}
-        />
-      </List.Item>
-    )}
-  />
-);
+
+// const data = [
+//   {
+//     title: "New message from Sophie",
+//     description: <>{clockicon} 2 days ago</>,
+
+//     avatar: avtar,
+//   },
+//   {
+//     title: "New album by Travis Scott",
+//     description: <>{clockicon} 2 days ago</>,
+
+//     avatar: <Avatar shape="square">{wifi}</Avatar>,
+//   },
+//   {
+//     title: "Payment completed",
+//     description: <>{clockicon} 2 days ago</>,
+//     avatar: <Avatar shape="square">{credit}</Avatar>,
+//   },
+// ];
+
+
+
+
+
+// const menu = (
+//   <List
+//     min-width="100%"
+//     className="header-notifications-dropdown "
+//     itemLayout="horizontal"
+//     dataSource={data}
+//     renderItem={(item) => (
+//       <List.Item>
+//         <List.Item.Meta
+//           avatar={<Avatar shape="square" src={item.avatar} />}
+//           title={item.title}
+//           description={item.description}
+//         />
+//       </List.Item>
+//     )}
+//   />
+// );
 
 const logsetting = [
   <svg
@@ -293,17 +301,6 @@ function Header({
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
-          <Badge size="small" count={4}>
-            <Dropdown overlay={menu} trigger={["click"]}>
-              <a
-                href="#pablo"
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}
-              >
-                {bell}
-              </a>
-            </Dropdown>
-          </Badge>
           <Button type="link" onClick={showDrawer}>
             {logsetting}
           </Button>
@@ -396,15 +393,15 @@ function Header({
                   <Title level={5}>Navbar Fixed </Title>
                   <Switch onChange={(e) => handleFixedNavbar(e)} />
                 </div>
-                <div className="ant-docment">
+                {/* <div className="ant-docment">
                   <ButtonContainer>
                     <Button type="black" size="large">
                       FREE DOWNLOAD
                     </Button>
                     <Button size="large">VIEW DOCUMENTATION</Button>
                   </ButtonContainer>
-                </div>
-                <div className="viewstar">
+                </div> */}
+                {/* <div className="viewstar">
                   <a href="#pablo">{<StarOutlined />} Star</a>
                   <a href="#pablo"> 190</a>
                 </div>
@@ -417,13 +414,13 @@ function Header({
                     <Button type="black">{<TwitterOutlined />}TWEET</Button>
                     <Button type="black">{<FacebookFilled />}SHARE</Button>
                   </ButtonContainer>
-                </div>
+                </div> */}
               </div>
             </div>
           </Drawer>
-          <Link to="/sign-in" className="btn-sign-in">
+          <Link to="/profile#pablo" className="btn-sign-in">
             {profile}
-            <span>Sign in</span>
+            <span>Sign out</span>
           </Link>
           <Input
             className="header-search"

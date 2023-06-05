@@ -282,7 +282,7 @@ function Home() {
             <img className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <img className="tootip-" src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -382,7 +382,7 @@ function Home() {
             </Card>
           </Col>
         </Row>
-
+{/* 
         <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={16} className="mb-24">
             <Card bordered={false} className="criclebox cardbody h-full">
@@ -418,7 +418,7 @@ function Home() {
                       <tr key={index}>
                         <td>
                           <h6>
-                            <img
+                            <
                               src={d.img}
                               alt=""
                               className="avatar-sm mr-10"
@@ -434,7 +434,7 @@ function Home() {
                         </td>
                         <td>
                           <div className="percent-progress">{d.progress}</div>
-                        </td>
+ main.cs                       </td>
                       </tr>
                     ))}
                   </tbody>
@@ -483,7 +483,7 @@ function Home() {
               </div>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
  
       </div>

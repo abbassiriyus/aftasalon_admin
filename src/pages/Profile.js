@@ -187,6 +187,37 @@ function Profile() {
 
 
 
+  function modalOpen(key) {
+    document.querySelector('.putAdmin').style = 'right: 10px;'
+    localStorage.setItem('idUser', key)
+  }
+
+  function modalClose() {
+    document.querySelector('.putAdmin').style = 'right: -100%;'
+  }
+
+  function postModal() {
+    // document.querySelector('.putAdmin').style = 'right: -100%;'
+    var key = localStorage.getItem('idUser')
+    var local = localStorage.getItem('data2')
+    var data = new FormData();
+    data.append('birthday', document.querySelector('.birthday').value)
+    data.append('email', document.querySelector('.email').value)
+    data.append('image', document.querySelector('.image').files[0])
+    data.append('passport_number', document.querySelector('.passport_number').value)
+    data.append('passport_series', document.querySelector('.passport_series').value)
+    data.append('username', document.querySelector('.username').value)
+    data.append('phone',  local.phone)
+    data.append('password',  local.password)
+    axios.put(`${url}/auth/users/${key}/`, data, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+      alert('success')
+      window.location.reload()
+    }).catch(err => {
+      alert(err)
+    })
+  }
+
+
 
   return (
     <>
@@ -196,34 +227,37 @@ function Profile() {
       ></div>
       <div className="putAdmin">
         <div>
-
-        <p>
-          asd
-        </p>
-        <input type="text" />
-        <p>
-          asd
-        </p>
-        <input type="text" />
-        <p>
-          asd
-        </p>
-        <input type="text" />
+          <h4>Edit Profile</h4>
+          <span onClick={() => modalClose()}>X</span>
+          <p>
+            birthday
+          </p>
+          <input className="birthday" type="date" />
+          <p>
+            email
+          </p>
+          <input className="email" type="email" />
+          <p>
+            image
+          </p>
+          <input className="image" type="file" />
         </div>
         <div>
-
-        <p>
-          asd
-        </p>
-        <input type="text" />
-        <p>
-          asd
-        </p>
-        <input type="text" />
-        <p>
-          asd
-        </p>
-        <input type="text" />
+          <h4>&nbsp;</h4>
+          {/* <span>&nbsp;</span>   */}
+          <p>
+            passport_number
+          </p>
+          <input className="passport_number" type="number" />
+          <p>
+            passport_series
+          </p>
+          <input className="passport_series" type="number" />
+          <p>
+            username
+          </p>
+          <input className="username" type="text" />
+          <button className="successBtn" onClick={() => postModal()}>Edit</button>
         </div>
       </div>
 
@@ -260,7 +294,7 @@ function Profile() {
               }}
             >
               <Radio.Group defaultValue="a">
-                <Radio.Button value="a">
+                <Radio.Button value="a" onClick={() => modalOpen(data3.id)}>
                   {/* <BiSolidEditAlt /> */}
                   Edit Profile
                 </Radio.Button>

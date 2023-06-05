@@ -208,17 +208,32 @@ margin-bottom: 20px;
     width: 350px;
     border: 1px solid grey;
 }
+
 .img{
     width: 100%;
     display: block;
+    margin-left: 15%;
+    margin-top:5%;
+    flex-wrap: wrap;
+    align-items: center;
+    align-items: center;
     justify-content: space-around;
-    flex-direction:row;
-    /* align-items: center; */
-    /* justify-content: center; */
 }
 .image img{
-    width: 120px;
+    width: 80%;
+
+    border-radius: 40px;
 }
+.img1{
+    margin-top: 10%;
+    gap: 120px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around   ;
+   
+}
+
 .malumotbutton{
     width: 100px;
     height: 40px;
@@ -228,6 +243,8 @@ margin-bottom: 20px;
     color: white;
     margin-left: 5.9%;
 }
-.malumotinput{
-    width: 90%;
+
+
+.ant-breadcrumb-link a{
+    color: black !important;
 }
