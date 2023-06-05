@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import url from "../components/host";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import "./style/style.css";
+import Form from "antd/lib/form/Form";
 
 const Tables = () => {
   const [setSelectedRowKeys] = useState([]);
@@ -109,7 +110,7 @@ const Tables = () => {
       document.querySelector(".slect4").value = item.fuel_sort.id;
       document.querySelector(".slect5").value = item.gearbox.id;
       document.querySelector(".slect6").value = item.garant.id;
-      document.querySelector(".slect7").value = item.branch.id;
+      // document.querySelector(".slect7").value = item.branch.id;
       document.querySelector(".slect8").value = item.year;
       document.querySelector(".slect9").value = item.distance;
       document.querySelector(".slect10").value = item.engine;
@@ -306,7 +307,12 @@ const Tables = () => {
 
 
   function malumotpostdefect(){
-    axios.post(`${url}/api/`)
+    var  malumotpostdefect=new FormData()
+    malumotpostdefect.append("description",document.querySelector(""))
+
+    axios.post(`${url}/api/defect/`).then(res=>{
+
+    })
   }
 
   function malumotput() {
@@ -457,7 +463,7 @@ const Tables = () => {
                 <div className="text2">
                   <div className="text">
                     <h1>Filial</h1>
-                    <select className="slect slect7">
+                    <select className="slect slect7" >
                       {data5.map((item) => (
                         <option value={item.id}>{item.name}</option>
                       ))}
@@ -538,8 +544,8 @@ const Tables = () => {
           <div className="img">
             {data9.map((item) => {
               return (
-                <div>
-                  <h1 className="malumotinput">{item.description}</h1>
+                <div className="img1">
+                  <textarea  rows="27" cols="100" className="malumotinput">{item.description}</textarea>
                   {item.image.map((item2) => {
                     return (
                       <div className="image">
