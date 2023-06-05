@@ -21,6 +21,7 @@ const Tables = () => {
   const [data8, setdata8] = useState([])
   const [page, setPage] = useState(1)
   const [ keys, setKeys ] = useState([])
+  
 
 
 
@@ -76,13 +77,36 @@ const Tables = () => {
     setdata(item)
     setPage(2)
     console.log(item);
-    
+
+    setTimeout(() => {  
+      document.querySelector(".slect1").value=item.position.id
+      document.querySelector(".slect2").value=item.position.series.id
+      document.querySelector(".slect3").value=item.position.series.model.id
+      document.querySelector(".slect4").value=item.fuel_sort.id
+      document.querySelector(".slect5").value=item.gearbox.id
+      document.querySelector(".slect6").value=item.garant.id
+      document.querySelector(".slect7").value=item.branch.id
+      document.querySelector(".slect8").value=item.year
+      document.querySelector(".slect9").value=item.distance
+      document.querySelector(".slect10").value=item.engine
+      document.querySelector(".slect11").value=item.colour
+      document.querySelector(".slect12").value=item.name
+      document.querySelector(".slect13").value=item.initial_price
+      document.querySelector(".slect14").value=item.price
+      document.querySelector(".slect15").value=item.sale
+      document.querySelector(".slect16").value=item.depozit
+      document.querySelector(".slect17").value=item.fuel_consumption
+      document.querySelector(".slect18").value=item.description
+      
+
+    }, 1000);
 
   }
 
-  function getData() {
+  function getData(id) {
     axios.get(`${url}/api/cars_get/`).then(res => {
       setdata1(res.data)
+      setKeys(id)
     })
   }
   useEffect(() => {
@@ -207,7 +231,7 @@ const Tables = () => {
 
 
     axios.post(`${url}/api/cars/`, formdata, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      alert("ishladimoqda")
+      alert("ishladi")
       document.querySelector(".postoyna").style = "position:fixed;right:-100%;  transition: 1s;"
       axios.get(`${url}/api/cars_get/`).then(res => {
         setdata1(res.data)
@@ -243,7 +267,7 @@ const Tables = () => {
     putData.append("is_active",document.querySelector(".faol1").checked)
 
     axios.put(`${url}/api/cars/${key}/`, putData, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      alert("ishladimoqda")
+      alert("ishladi")
       document.querySelector(".postoyna1").style = "position:fixed;right:-100%;  transition: 1s;"
       axios.get(`${url}/api/cars_get/`).then(res => {
         setdata1(res.data)
@@ -252,6 +276,38 @@ const Tables = () => {
       alert("ishlamadi")
       console.log(err);
     })
+  }
+
+  function malumotput(key){
+
+  var malumotput=new FormData()
+  malumotput.append("position.id",document.querySelector(".slect1").value)
+  malumotput.append("position.series.id",document.querySelector(".slect2").value)
+  malumotput.append("position.series.model.id",document.querySelector(".slect3").value)
+  malumotput.append("fuel_sort.id",document.querySelector(".slect4").value)
+  malumotput.append("gearbox.id",document.querySelector(".slect5").value)
+  malumotput.append("garant.id",document.querySelector(".slect6").value)
+  malumotput.append("branch.id",document.querySelector(".slect7").value)
+  malumotput.append("year",document.querySelector(".slect8").value)
+  malumotput.append("distance",document.querySelector(".slect9").value)
+  malumotput.append("engine",document.querySelector(".slect10").value)
+  malumotput.append("colour",document.querySelector(".slect11").value)
+  malumotput.append("name",document.querySelector(".slect12").value)
+  malumotput.append("initial_price",document.querySelector(".slect13").value)
+  malumotput.append("price",document.querySelector(".slect14").value)
+  malumotput.append("sale",document.querySelector(".slect15").value)
+  malumotput.append("depozit",document.querySelector(".slect16").value)
+  malumotput.append("fuel_consumption",document.querySelector(".slect17").value)
+  malumotput.append("description",document.querySelector(".slect18").value)
+
+  axios.put(`${url}/api/cars/${key}/`,malumotput,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+    alert("ishladi")
+    axios.get(`${url}/api/cars_get/`).then(res => {
+      setdata1(res.data)
+    })
+  }).catch(err=>{
+    alert("ishlamadi")
+  })
   }
 
   // const start = () => {
@@ -274,7 +330,9 @@ const Tables = () => {
         <div>
           <div className="nomi1">
             <h1 className='nomi'>{data.name}</h1>
-            <Button onClick={() => (setPage(1))} type="danger">Orqaga</Button>
+            <div style={{ width:'200px',display:'flex',justifyContent:'space-around' }}>
+            <Button onClick={()=>malumotput(keys)} type="primary">O'zgertirish</Button>
+            <Button onClick={() => (setPage(1))} type="danger">Orqaga</Button></div>
           </div>
           <div className="alltext">
             <div className="alltext2">
@@ -282,115 +340,115 @@ const Tables = () => {
                 <div className="text1">
                   <div className="text">
                     <h1>Pozitsiya</h1>
-                    <select className='slect'>
+                    <select className='slect slect1'>
                       {data6.map(item=>(
-                        <option id='inp1'>{item.name}</option>
+                        <option id='inp1' value={item.id} >{item.name}</option>
                       ))}
                     </select>
                   </div>
                   <div className="text">
                     <h1>Seriya</h1>
-                    <select className='slect'>
+                    <select className='slect slect2'>
                     {data7.map(item=>(
-                      <option>{item.name}</option>
+                      <option value={item.id}>{item.name}</option>
                     ))}
                     </select>
                   </div>
                   <div className="text">
                     <h1>Model</h1>
-                    <select className='slect'>
+                    <select className='slect slect3'>
                       {data8.map(item=>(
-                        <option>{item.name}</option>
+                        <option value={item.id}>{item.name}</option>
                       ))}
                     </select>
                   </div>
                   <div className="text">
                     <h1>Yoqilg'i turi</h1>
-                    <select className='slect'>
+                    <select className='slect slect4'>
                     {data2.map(item=>(
-                    <option>{item.name}</option>
+                    <option value={item.id}>{item.name}</option>
                     ))}
                     </select>
                   </div>
                   <div className="text">
-                    <h1>Vites qutisi</h1>
-                    <select className='slect'>
+                    <h1>Boshqaruv qutisi</h1>
+                    <select className='slect slect5'>
                       {data3.map(item=>(
-                        <option>{item.name}</option>
+                        <option value={item.id}>{item.name}</option>
                       ))}
                     </select>
                   </div>
                   <div className="text">
                     <h1>Garant</h1>
-                    <select className='slect'>
+                    <select className='slect slect6'>
                       {data4.map(item=>(
-                        <option>{item.name}</option>
+                        <option value={item.id}>{item.name}</option>
                       ))}
                     </select>
                   </div>
                   <div className="text">
                     <h1>Vaqtni yangilangan</h1>
-                    <input type="text" value={data.time_update} />
+                    <input type="text"  value={data.time_update.slice(0,10)} />
                   </div>
                 </div>
                 <div className="text2">
                   <div className="text">
                     <h1>Filial</h1>
-                    <select className='slect'>
+                    <select className='slect slect7'>
                     {data5.map(item=>(
-                      <option>{item.name}</option>
+                      <option value={item.id}>{item.name}</option>
                     ))}
                     </select>
                   </div>
                   <div className="text">
                     <h1>Yili</h1>
-                    <input type="number"  />
+                    <input className='slect8' type="number"  />
                   </div>
                   <div className="text">
                     <h1>Masofa</h1>
-                    <input type="number"  />
+                    <input className='slect9' type="number"  />
                   </div>
                   <div className="text">
                     <h1>Dvigatel</h1>
-                    <input type="number"  />
+                    <input className='slect10' type="number"  />
                   </div>
                   <div className="text">
                     <h1>Rang</h1>
-                    <input type="text" value={data.colour} />
+                    <input type="text" className='slect11'/>
                   </div>
                   <div className="text">
                     <h1>Ko'rishlar</h1>
                     <input type="number" value={data.views} />
                   </div>
                   <div className="text">
-                    <h1>Vaqt_yaratilgan</h1>
-                    <input type="text"  value={data.time_create} />
+                    <h1>Yaratilgan vaqt</h1>
+                    <input type="text" className='slect19' value={data.time_update.slice(0,10)} />
                   </div>
                 </div>
                 <div className="text3">
                   <div className="text">
                     <h1>Ism</h1>
-                    <input type="text" value={data.name} />
+                    <input type="text" className='slect12' />
                   </div>
                   <div className="text">
-                    <h1>Boshlang'ich_narx</h1>
-                    <input type="number" value={data.initial_price} />
+                    <h1>Boshlang'ich narx</h1>
+                    <input type="number" className='slect13' />
                   </div>
                   <div className="text">
                     <h1>Narx</h1>
-                    <input type="number" value={data.price} />
+                    <input type="number" className='slect14' />
                   </div>
                   <div className="text">
                     <h1>Chegirma</h1>
-                    <input type="number" value={data.sale} />
+                    <input type="number" className='slect15' />
                   </div>
                   <div className="text">
                     <h1>Depozit</h1>
-                    <input type="number" value={data.depozit} />
+                    <input type="number" className='slect16' />
                   </div>
                   <div className="text">
                     <h1>Yoqilg'i iste'moli</h1>
-                    <input type="number" value={data.fuel_consumption} />
+                    <input type="number" className='slect17' />
                   </div>
                   {/* <div className="textcheck">
                 <h1>Faol</h1>
@@ -400,7 +458,7 @@ const Tables = () => {
               </div>
               <div className="textsmall">
                 <h1>Tavsifi</h1>
-                <textarea id="w3review" rows="19" value={data.description} cols="101"></textarea>
+                <textarea id="w3review" rows="19" className='slect18' cols="101"></textarea>
               </div>
             </div>
           </div>
@@ -543,7 +601,7 @@ const Tables = () => {
                   <input type="checkbox" className='faol' />
                 </div>
               </div>
-              <Button typeof='button' className='postbutton' onClick={() => getPost()} type='primary' >Post</Button>
+              <Button typeof='button' className='postbutton' onClick={() => getPost()} type='primary' >Qo'shish</Button>
             </div>
           </div>
         </div>
@@ -677,7 +735,7 @@ const Tables = () => {
                 </div>
               </div>
                   <Button 
-                  className='postbutton1 primary' onClick={() => getPut(keys)} type='button' >Post</Button>
+                  className='postbutton1 primary' onClick={() => getPut(keys)} type='button' >O'zgartirish</Button>
             </div>
           </div>
         </div>
