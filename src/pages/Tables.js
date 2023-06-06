@@ -114,7 +114,7 @@ const Tables = () => {
       document.querySelector(".slect4").value = item.fuel_sort.id;
       document.querySelector(".slect5").value = item.gearbox.id;
       document.querySelector(".slect6").value = item.garant.id;
-      // document.querySelector(".slect7").value = item.branch.id;
+      document.querySelector(".slect7").value = item.branch.id;
       document.querySelector(".slect8").value = item.year;
       document.querySelector(".slect9").value = item.distance;
       document.querySelector(".slect10").value = item.engine;
