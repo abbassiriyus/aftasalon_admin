@@ -83,3 +83,80 @@
     margin-left: 90%;
     /* height: 20px; */
 }
+
+.ModalComment{
+    position: absolute;
+    top: -100%;
+    /* top: 300px; */
+    left: 100px;
+    width: 30%;
+    min-height: 20vh;
+    box-shadow: 0 0 3px black;
+    z-index: 1200312 !important;
+    padding-top: 30px;
+    background: #fff;
+    margin-left: 25%;
+    border-radius: 10px;
+    transition: .4s;
+}
+
+
+.ModalComment textarea {
+    width: 90%;
+    margin-left: 5% !important;
+    padding: 10px;
+}
+
+.ModalComment button{
+    width: 40%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background: #1890ff;
+    color: white;
+    font-weight: 700;
+    margin-left: 30%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.ModalComment span{
+    font-size: 25px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+}
+
+.ModalComment select{
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+}
+
+.PrewComents{
+    position: absolute;
+    top: -100%;
+    left: 500px;
+    width: 500px;
+    min-height: 400px;
+    box-shadow: 0 0 10px black;
+    z-index: 99999999999;
+    background: #00000088;
+    padding: 20px;
+    border-radius: 10px;
+    transition: .4s;
+}
+
+.PrewComents p{
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+}
+
+.PrewComents span{
+    font-size: 25px;
+    margin-left: 90%;
+    color: white;
+    cursor: pointer;
+}
