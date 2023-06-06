@@ -613,6 +613,9 @@ import { Tabs } from 'antd';
 export default function Billing() {
   const [data, setData] = useState([])
   const [data2, setData2] = useState([])
+  const [data3, setData3] = useState([])
+  const [data4, setData4] = useState([])
+  const [data5, setData5] = useState([])
 
   //  { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }
   useEffect(() => {
@@ -630,6 +633,15 @@ export default function Billing() {
       setData(tt)
       setData2(dd)
       console.log(tt);
+
+
+
+
+
+      axios.get(`${url}/api/branch/`).then(res => {
+        setData3(res.data)
+        // console.log(res.data, 'branch');
+      })
     })
   }, [])
 
@@ -660,30 +672,78 @@ export default function Billing() {
         <Button onClick={() => deleteData(data.id)} type="danger" className='delte'>Delete</Button>
       ),
     },
+    {
+      title: 'Izoh qoldirish',
+      render: (data2) => (
+        <Button type="arrow" className='Izoh' onClick={() => comment(data2.id)}>Izoh qoldirish</Button>
+      ),
+    }, {
+      title: 'Izoh qoldirish',
+      render: (data2) => (
+        <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)}>Izoh lar</Button>
+      ),
+    },
   ];
 
 
 
-   const columns2 = [
-     {
-       title: 'ID',
-       dataIndex: 'id',
-     },
-     {
-       title: 'Name',
-       dataIndex: 'username',
-     },
-     {
-       title: 'Phone',
-       dataIndex: 'phone',
-     },
-     {
-       title: 'Delete',
-       render: (data2) => (
-         <Button onClick={() => deleteData(data2.id)} type="danger" className='delte'>Delete</Button>
-       ),
-     },
-   ];
+  const columns2 = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'username',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+    },
+    {
+      title: 'Delete',
+      render: (data2) => (
+        <Button onClick={() => deleteData(data2.id)} type="danger" className='delte'>Delete</Button>
+      ),
+    },
+    {
+      title: 'Izoh qoldirish',
+      render: (data2) => (
+        <Button type="arrow" className='Izoh' onClick={() => comment(data2.id)} >Izoh qoldirish</Button>
+      ),
+    }, {
+      title: 'Izoh qoldirish',
+      render: (data2) => (
+        <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)} >Izohlar</Button>
+      ),
+    },
+  ];
+
+  function commentPrewiev(key) {
+    console.log(key);
+    axios.get(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+      axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res2 => {
+        for (let i = 0; i < res.data.length; i++) {
+          for (let j = 0; j < res2.data.length; j++) {
+            if (res.data[i].id == res2.data[j].user) {
+              res.data[i].description = res2.data[j].description
+              console.log(res2.data,"ishladi");
+            }
+          }
+        }
+        setData5(res2.data)
+        console.log(res.data,"salom");
+        console.log(res2.data,"salom1");
+      })
+    })
+    document.querySelector('.PrewComents').style = 'top: 250px'
+    
+  }
+  
+
+  function commentPrewievClose() {
+    document.querySelector('.PrewComents').style = 'top: -100%'
+  }
 
   function ModalPost() {
     document.querySelector('.ModalPost').style = 'top: 200px'
@@ -728,21 +788,70 @@ export default function Billing() {
       key: '2',
       label: 'Users',
       children:
-      <Table columns={columns2} pagination={{ pageSize: 10 }} dataSource={data2} />
+        <Table columns={columns2} pagination={{ pageSize: 10 }} dataSource={data2} />
       ,
     }
   ];
 
   function deleteData(key) {
-    axios.delete(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token")}}).then (res => {
+    axios.delete(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       alert('Delete user')
-      // window.location.reload()
+      window.location.reload()
     }).catch(err => {
       alert(err)
     })
   }
-return (
+  function comment(key) {
+    console.log(key);
+    localStorage.setItem('username', key)
+    document.querySelector('.ModalComment').style = 'top: 300px'
+  }
+
+  function commentPost() {
+    var datte = new FormData()
+    // datte.append('userid', 3)
+    // datte.append('description', 'description')
+    // datte.append('branch', 'branch')
+    datte.append('user', localStorage.getItem('username'))
+    datte.append('description', document.querySelector('.description').value)
+    datte.append('branch', document.querySelector('.branch').value)
+    axios.post(`${url}/api/comment/`, datte, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+      alert('Successfully posted comment')
+      window.location.reload()
+    }).catch(err => {
+      alert(err)
+    })
+  }
+
+  function commentClose() {
+    document.querySelector('.ModalComment').style = 'top: -100%'
+  }
+
+  return (
     <div>
+      <div className='PrewComents'>
+        <span onClick={() => commentPrewievClose()}>X</span>
+        <p>
+          {
+            data5.map(item => {
+              return <p>{item.description}</p>
+            })
+          }
+        </p>
+      </div>
+      <div className='ModalComment'>
+        <span onClick={() => commentClose()}>X</span>
+        <center><h4>Izoh qoldirish</h4></center>
+        <select className='branch'>
+          {
+            data3.map(item => {
+              return <option value={item.id}>{item.name}</option>
+            })
+          }
+        </select>
+        <textarea className='description'></textarea><br />
+        <button onClick={() => commentPost()}>Izoh qoldirish</button>
+      </div>
       <div className='ModalPost'>
         <AiOutlineClose className='iconClose' onClick={() => ModalPostClose()} />
         <h3>Ism</h3>

@@ -199,7 +199,7 @@ function Profile() {
   function postModal() {
     // document.querySelector('.putAdmin').style = 'right: -100%;'
     var key = localStorage.getItem('idUser')
-    var local = localStorage.getItem('data2')
+    var local = JSON.parse(localStorage.getItem("data2"))
     var data = new FormData();
     data.append('birthday', document.querySelector('.birthday').value)
     data.append('email', document.querySelector('.email').value)
