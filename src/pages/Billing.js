@@ -615,7 +615,7 @@ export default function Billing() {
   const [data2, setData2] = useState([])
   const [data3, setData3] = useState([])
   const [data4, setData4] = useState([])
-  const [data5, setData5] = useState([])
+  const [ description, setDescription] = useState({})
 
   //  { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }
   useEffect(() => {
@@ -720,26 +720,34 @@ export default function Billing() {
   ];
 
   function commentPrewiev(key) {
-    console.log(key);
-    axios.get(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res2 => {
-        for (let i = 0; i < res.data.length; i++) {
-          for (let j = 0; j < res2.data.length; j++) {
-            if (res.data[i].id == res2.data[j].user) {
-              res.data[i].description = res2.data[j].description
-              console.log(res2.data,"ishladi");
-            }
-          }
+    // console.log(key);
+    // axios.get(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+    //   axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res2 => {
+    //     for (let i = 0; i < res.data.length; i++) {
+    //       for (let j = 0; j < res2.data.length; j++) {
+    //         if (res.data[i].id == res2.data[j].user) {
+    //           res.data[i].description = res2.data[j].description
+    //           console.log(res2.data,"ishladi");
+    //         }
+    //       }
+    //     }
+    //     setData5(res2.data)
+    //     console.log(res.data,"salom");
+    //     console.log(res2.data,"salom1");
+    //   })
+    // })
+    axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+      res.data.map(item => {
+        if (item.user == key) {
+          setDescription(item)
         }
-        setData5(res2.data)
-        console.log(res.data,"salom");
-        console.log(res2.data,"salom1");
       })
     })
+    console.log(key);
     document.querySelector('.PrewComents').style = 'top: 250px'
-    
+
   }
-  
+
 
   function commentPrewievClose() {
     document.querySelector('.PrewComents').style = 'top: -100%'
@@ -831,13 +839,16 @@ export default function Billing() {
     <div>
       <div className='PrewComents'>
         <span onClick={() => commentPrewievClose()}>X</span>
-        <p>
-          {
-            data5.map(item => {
-              return <p>{item.description}</p>
-            })
-          }
-        </p>
+        <p>{description.description}</p>
+        {/* {
+          description.map(item => {
+            return (
+              <div>
+                <p>{item.description}</p>
+              </div>
+            )
+          })
+        } */}
       </div>
       <div className='ModalComment'>
         <span onClick={() => commentClose()}>X</span>
