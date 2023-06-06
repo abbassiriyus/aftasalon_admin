@@ -725,17 +725,21 @@ export default function Billing() {
       axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res2 => {
         for (let i = 0; i < res.data.length; i++) {
           for (let j = 0; j < res2.data.length; j++) {
-            if (res.data[i].userid == res2.data[j].user) {
+            if (res.data[i].id == res2.data[j].user) {
               res.data[i].description = res2.data[j].description
-              console.log(res2.data,"salom");
+              console.log(res2.data,"ishladi");
             }
           }
         }
-        setData5(res.data)
+        setData5(res2.data)
+        console.log(res.data,"salom");
+        console.log(res2.data,"salom1");
       })
     })
     document.querySelector('.PrewComents').style = 'top: 250px'
+    
   }
+  
 
   function commentPrewievClose() {
     document.querySelector('.PrewComents').style = 'top: -100%'

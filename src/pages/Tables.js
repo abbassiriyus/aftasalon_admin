@@ -21,6 +21,8 @@ const Tables = () => {
   const [data9, setdata9] = useState([]);
   const [page, setPage] = useState(1);
   const [keys, setKeys] = useState([]);
+  const [keys1, setKeys1] = useState([]);
+  const [keys2, setKeys2] = useState([]);
 
   const columns = [
     {
@@ -90,6 +92,7 @@ const Tables = () => {
   const getOneProduct = (item) => {
     setdata(item);
     setPage(2);
+    setKeys1(item.id)
     console.log(item, "lox");
     axios.get(`${url}/api/defect_get/`).then((res) => {
       var hh = [];
@@ -101,6 +104,7 @@ const Tables = () => {
         }
       }
       setdata9(hh);
+      console.log(keys2);
     });
 
     setTimeout(() => {
@@ -306,14 +310,7 @@ const Tables = () => {
   }
 
 
-  function malumotpostdefect(){
-    var  malumotpostdefect=new FormData()
-    malumotpostdefect.append("description",document.querySelector(""))
 
-    axios.post(`${url}/api/defect/`).then(res=>{
-
-    })
-  }
 
   function malumotput() {
     var malumotput = new FormData();
@@ -362,6 +359,38 @@ const Tables = () => {
       .catch((err) => {
         alert("ishlamadi");
       });
+  }
+
+  function malumotpostdefect(){
+    var  malumotpostdefect=new FormData()
+    malumotpostdefect.append("description",document.querySelector(".defectdest").value)
+    malumotpostdefect.append("car",keys1)
+    malumotpostdefect.append("image",keys2)
+    console.log(keys2,"salom");
+
+    axios.post(`${url}/api/defect/`,malumotpostdefect,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+    alert("ishladi")
+    window.location.reload()
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+    var  malumotpostdefect1=new FormData()
+    malumotpostdefect1.append("image",document.querySelector(".defectfile").files[0])
+
+    axios.post(`${url}/api/defect_images/`,malumotpostdefect1,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
+    setKeys2(res.data.id)
+    }).catch(err=>{
+      alert("ishlamadi")
+    })
+  }
+
+  function defectpost() {
+    document.querySelector(".defectoyna").style="position:fixed;top:35%;transition:1s;"
+    
+  }
+  function defectpost1() {
+    document.querySelector(".defectoyna").style="position:fixed;top:-100%;transition:1s;"
+    
   }
 
   // const start = () => {
@@ -540,12 +569,13 @@ const Tables = () => {
               </div>
             </div>
           </div>
-          <button className="malumotbutton" type="primary">Qo'shish</button>
+          <h1 className="defect">Mashinaning yoqmagan joylari</h1>
+          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
           <div className="img">
             {data9.map((item) => {
               return (
                 <div className="img1">
-                  <textarea  rows="27" cols="100" className="malumotinput">{item.description}</textarea>
+                  <textarea  rows="15" cols="100" className="malumotinput">{item.description}</textarea>
                   {item.image.map((item2) => {
                     return (
                       <div className="image">
@@ -655,7 +685,7 @@ const Tables = () => {
                   <h1>Ko'rishlar</h1>
                   <input className="kor" type="number" />
                 </div>
-              </div>
+              </div>shish
             </div>
             <div className="textsmal">
               <h1>Tavsifi</h1>
@@ -679,6 +709,17 @@ const Tables = () => {
           </div>
         </div>
       </div>
+
+       <div className="defectoyna1">
+      <div className='defectoyna'>
+        <span className="defectclose" onClick={()=>defectpost1()} >X</span>
+        <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
+        <input className="defectfile" type="file" />
+        <textarea className="defectdest" ></textarea><br />
+        <button onClick={()=>malumotpostdefect()} className="primary">Q'oshish</button></center>
+      </div></div>
+
+
 
       {/* <div className="postoyna1">
         <AiOutlineClose onClick={() => postoynaa1()} className='close' />

@@ -235,6 +235,7 @@ margin-bottom: 20px;
 }
 
 .malumotbutton{
+    cursor: pointer;
     width: 100px;
     height: 40px;
     border-radius: 5px;
@@ -247,4 +248,50 @@ margin-bottom: 20px;
 
 .ant-breadcrumb-link a{
     color: black !important;
+}
+.defect{
+    margin-left: 6%;
+    margin-bottom: 1%;
+    font-size: 20px;
+}
+
+.defectoyna{
+width: 20%;
+background-color: white;
+box-shadow: 0px 0px 10px 0px;
+border-radius: 5px;
+position: fixed;
+top: -100%;
+}
+.defectoyna1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.defectdest{
+    width: 90%;
+    height: 100px;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+.primary{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #1890ff;;
+    border: 1px solid #1890ff;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.defectfile{
+    width: 90%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+.defectclose{
+    cursor: pointer;
+    margin-left: 95%;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
