@@ -465,7 +465,7 @@ const Tables = () => {
                     <h1>Filial</h1>
                     <select className="slect slect7" >
                       {data5.map((item) => (
-                        <option value={item.id}>{item.name}</option>
+                        <option value={item.name}>{item.name}</option>
                       ))}
                     </select>
                   </div>
