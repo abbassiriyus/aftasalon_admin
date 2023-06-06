@@ -362,26 +362,7 @@ const Tables = () => {
   }
 
   function malumotpostdefect(){
-    var  malumotpostdefect=new FormData()
-    malumotpostdefect.append("description",document.querySelector(".defectdest").value)
-    malumotpostdefect.append("car",keys1)
-    malumotpostdefect.append("image",keys2)
-    console.log(keys2,"salom");
 
-    axios.post(`${url}/api/defect/`,malumotpostdefect,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
-    alert("ishladi")
-    window.location.reload()
-    }).catch(err=>{
-      alert("ishlamadi")
-    })
-    var  malumotpostdefect1=new FormData()
-    malumotpostdefect1.append("image",document.querySelector(".defectfile").files[0])
-
-    axios.post(`${url}/api/defect_images/`,malumotpostdefect1,{ headers: { 'Authorization' : 'Bearer ' + sessionStorage.getItem("token")}}).then(res=>{
-    setKeys2(res.data.id)
-    }).catch(err=>{
-      alert("ishlamadi")
-    })
   }
 
   function defectpost() {
@@ -494,7 +475,7 @@ const Tables = () => {
                     <h1>Filial</h1>
                     <select className="slect slect7" >
                       {data5.map((item) => (
-                        <option value={item.name}>{item.name}</option>
+                        <option value={item.id}>{item.name}</option>
                       ))}
                     </select>
                   </div>
@@ -569,7 +550,7 @@ const Tables = () => {
               </div>
             </div>
           </div>
-          <h1 className="defect">Mashinaning yoqmagan joylari</h1>
+          <h1 className="defect">Mashinaning nuqsonlari </h1>
           <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
           <div className="img">
             {data9.map((item) => {
