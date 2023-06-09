@@ -23,7 +23,7 @@ const Tables = () => {
   const [keys, setKeys] = useState([]);
   const [keys1, setKeys1] = useState([]);
   const [keys2, setKeys2] = useState([]);
-
+  const [num, setNum] = useState([]);
   const columns = [
     {
       title: "Id",
@@ -188,7 +188,6 @@ const Tables = () => {
   useEffect(() => {
     getGar();
   }, []);
-
   function getPosit() {
     axios.get(`${url}/api/position_get/`).then((res) => {
       setdata6(res.data);
@@ -197,7 +196,6 @@ const Tables = () => {
   useEffect(() => {
     getPosit();
   }, []);
-
   function getBranch() {
     axios.get(`${url}/api/branch/`).then((res) => {
       setdata5(res.data);
@@ -206,7 +204,6 @@ const Tables = () => {
   useEffect(() => {
     getBranch();
   }, []);
-
   function daleteAxiox(id) {
     console.log(id, "salom");
     axios
@@ -251,7 +248,6 @@ const Tables = () => {
         alert("ishlamadi");
       });
   }
-
   function postoyna() {
     document.querySelector(".postoyna").style =
       "position:fixed;right:0px;  transition: 1s;";
@@ -269,7 +265,6 @@ const Tables = () => {
     document.querySelector(".postoyna1").style =
       "position:fixed;right:-100%;  transition: 1s;";
   }
-
   function getPost() {
     var formdata = new FormData();
     formdata.append("position", document.querySelector("#poz").value);
@@ -308,10 +303,6 @@ const Tables = () => {
         console.log(err);
       });
   }
-
-
-
-
   function malumotput() {
     var malumotput = new FormData();
     malumotput.append("position", document.querySelector("#slect1").value);
@@ -373,16 +364,55 @@ const Tables = () => {
     document.querySelector(".defectoyna").style="position:fixed;top:-100%;transition:1s;"
     
   }
-
-  // const start = () => {
-  //   setLoading(true);
-  //   // ajax request after empty completing
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 100);
-  // };
-
+  function postNumber() {
+    var formdata = new FormData();
+    formdata.append("image", document.querySelector("#rasm").files[0]);
+  
+    axios
+    .post(`${url}/api/defect_images/`, formdata, {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+    })
+    .then((res) => {
+      axios
+        .get(`${url}/api/defect_images/`, {
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+        })
+        .then((res1) => {
+          const search = res1.data.filter(item => item.id === res.data.id)
+          const id = search[0].id;
+          setNum([...num, id]); // добавляем новый id в состояние
+        })
+        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+  }
+  
+  function functionName() {
+    const formData = new FormData();
+    formData.append("car", 47);
+    formData.append("description", "ss");
+  
+ // eslint-disable-next-line no-lone-blocks
+ {num.map((item)=>{
+  formData.append("image", item);
+ })}
+    axios
+      .post(`${url}/api/defect/`, formData, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+      })
+      .then(response => {
+        alert("gavnso");
+      })
+      .catch(error => {
+        alert("lox");
+      });
+  }
+  
+  // вызываем postNumber только один раз при монтировании компонента
+  useEffect(() => {
+    postNumber();
+  }, []);
+  
   return (
     <div>
       {page == 1 ? (
@@ -570,7 +600,6 @@ const Tables = () => {
           </div>
         </div>
       )}
-
       <div className="postoyna">
         <AiOutlineClose onClick={() => postoynaa()} className="close" />
         <div className="alltext">
@@ -669,6 +698,10 @@ const Tables = () => {
               </div>shish
             </div>
             <div className="textsmal">
+            <div>
+                {num.map((item)=>{
+                return<><p>{item}</p></>
+              })}</div>
               <h1>Tavsifi</h1>
               <textarea className="tavsifi" rows="10" cols="100"></textarea>
             </div>
@@ -678,6 +711,9 @@ const Tables = () => {
                   <input type="checkbox" className="faol" />
                 </div>
               </div>
+              <button onClick={() => postNumber()}>get</button>
+              <button onClick={() => functionName()}>get2</button>
+              <input id="rasm" type="file"/>
               <Button
                 typeof="button"
                 className="postbutton"
@@ -690,151 +726,14 @@ const Tables = () => {
           </div>
         </div>
       </div>
-
-       <div className="defectoyna1">
+       {/* <div className="defectoyna1">
       <div className='defectoyna'>
         <span className="defectclose" onClick={()=>defectpost1()} >X</span>
         <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
         <input className="defectfile" type="file" />
         <textarea className="defectdest" ></textarea><br />
         <button onClick={()=>malumotpostdefect()} className="primary">Q'oshish</button></center>
-      </div></div>
-
-
-
-      {/* <div className="postoyna1">
-        <AiOutlineClose onClick={() => postoynaa1()} className='close' />
-        <div className="alltext">
-          <div className="alltext2">
-            <div className="alltext1">
-              <div className="text1">
-                <div className="text5">
-                  <h1>Pozitsiya</h1>
-                  <select className='select' id="poz1">
-                    {data6.map(item=>{
-                      return(
-                    <option value={item.id}>{item.name}</option>
-                    )})}
-                  </select>
-                </div>
-                <div className="text5">
-                  <h1>Yoqilg'i turi</h1>
-                    <select className='select' id='yoq1'>
-                      {
-                        data2.map(item => {
-                          return(
-                            <option value={item.id}>{item.name}</option>
-                          )
-                        })
-                      }
-                    </select>
-                </div>
-                <div className="text5">
-                  <h1>Vites qutisi</h1>
-                  <select className='select' id='vit1'>
-                    {data3.map(item=>{
-                      return(
-                        <option value={item.id}>{item.name}</option>
-                      )
-                    })}
-                  </select>
-                </div>
-                <div className="text5">
-                  <h1>Garant</h1>
-                  <select id='gar1'  className='select'>
-                  {data4.map(item=>{
-                    return(
-                      <option value={item.id} >{item.name}</option>
-                    )
-                  })}
-                  </select>
-                </div>
-                <div className="text5">
-                  <h1>Vaqt_yaratilgan</h1>
-                  <input className='vaqt2' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Vaqtni yangilangan</h1>
-                  <input className='vaqt11' type="text" />
-                </div>
-              </div>
-              <div className="text2">
-                <div className="text5">
-                  <h1>Filial</h1>
-                  <select id='fil1' className='select'>
-                    {data5.map(item=>{
-                      return(<option value={item.id}>
-                        {item.name}
-                      </option>)
-                    })}
-                  </select>
-                </div>
-                <div className="text5">
-                  <h1>Yili</h1>
-                  <input className='yil1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Masofa</h1>
-                  <input className='mas1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Dvigatel</h1>
-                  <input className='dvi1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Rang</h1>
-                  <input className='rang1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Ko'rishlar</h1>
-                  <input className='kor1' type="text" />
-                </div>
-
-              </div>
-              <div className="text3">
-                <div className="text5">
-                  <h1>Ism</h1>
-                  <input className='ism1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Boshlang'ich_narx</h1>
-                  <input className='bosh1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Narx</h1>
-                  <input className='narx1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Sotuv</h1>
-                  <input className='sot1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Depozit</h1>
-                  <input className='dep1' type="text" />
-                </div>
-                <div className="text5">
-                  <h1>Yoqilg'i iste'moli</h1>
-                  <input className='yoq11' type="text" />
-                </div>
-
-              </div>
-            </div>
-            <div className="textsmal">
-              <h1>Tavsifi</h1>
-              <textarea className="tavsifi1" rows="10" cols="100"></textarea>
-            </div>
-            <div className="df">
-              <div className="df1">
-                <div className="textcheck5">
-                  <input type="checkbox" className='faol1' />
-                </div>
-              </div>
-                  <Button 
-                  className='postbutton1 primary' onClick={() => getPut(keys)} type='button' >O'zgartirish</Button>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      </div></div> */}
     </div>
   );
 };
