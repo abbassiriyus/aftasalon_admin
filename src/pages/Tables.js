@@ -24,6 +24,7 @@ const Tables = () => {
   const [keys1, setKeys1] = useState([]);
   const [keys2, setKeys2] = useState([]);
   const [num, setNum] = useState([]);
+  const [images, setImages] = useState([]);
   const columns = [
     {
       title: "Id",
@@ -291,11 +292,37 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        const formData = new FormData();
+        formData.append("car", res.data.id);
+        formData.append("description", document.querySelector("#zaybal").value);
+     // eslint-disable-next-line no-lone-blocks
+     {num.map((item)=>{
+      formData.append("image", item);
+     })}
+        axios
+          .post(`${url}/api/defect/`, formData, {
+            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+          })
+          .then(response => {
+            alert("gavnso");
+          })
+          .catch(error => {
+            alert("lox");
+          });
+
+
+
+
         alert("ishladi");
+
+
+
+
+
         document.querySelector(".postoyna").style =
           "position:fixed;right:-100%;  transition: 1s;";
-        axios.get(`${url}/api/cars_get/`).then((res) => {
-          setdata1(res.data);
+        axios.get(`${url}/api/cars_get/`).then((res2) => {
+          setdata1(res2.data);
         });
       })
       .catch((err) => {
@@ -352,9 +379,6 @@ const Tables = () => {
       });
   }
 
-  function malumotpostdefect(){
-
-  }
 
   function defectpost() {
     document.querySelector(".defectoyna").style="position:fixed;top:35%;transition:1s;"
@@ -381,32 +405,36 @@ const Tables = () => {
           const search = res1.data.filter(item => item.id === res.data.id)
           const id = search[0].id;
           setNum([...num, id]); // добавляем новый id в состояние
+          axios.get(`${url}/api/defect_images/`, {
+            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+          }).then((res)=>{
+            setImages(res.data)
+          })
         })
         .catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
   }
   
-  function functionName() {
-    const formData = new FormData();
-    formData.append("car", 47);
-    formData.append("description", "ss");
-  
- // eslint-disable-next-line no-lone-blocks
- {num.map((item)=>{
-  formData.append("image", item);
- })}
-    axios
-      .post(`${url}/api/defect/`, formData, {
-        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
-      })
-      .then(response => {
-        alert("gavnso");
-      })
-      .catch(error => {
-        alert("lox");
-      });
-  }
+//   function functionName() {
+//     const formData = new FormData();
+//     formData.append("car", 47);
+//     formData.append("description", "ss");
+//  // eslint-disable-next-line no-lone-blocks
+//  {num.map((item)=>{
+//   formData.append("image", item);
+//  })}
+//     axios
+//       .post(`${url}/api/defect/`, formData, {
+//         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+//       })
+//       .then(response => {
+//         alert("gavnso");
+//       })
+//       .catch(error => {
+//         alert("lox");
+//       });
+//   }
   useEffect(() => {
     postNumber();
   }, []);
@@ -699,10 +727,6 @@ const Tables = () => {
 
             </div>
             <div className="textsmal">
-            <div>
-                {num.map((item)=>{
-                return<><p>{item}</p></>
-              })}</div>
               <h1>Tavsifi</h1>
               <textarea className="tavsifi" rows="10" cols="100"></textarea>
             </div>
@@ -712,16 +736,16 @@ const Tables = () => {
                   <input type="checkbox" className="faol" />
                 </div>
               </div>
-              <button onClick={() => postNumber()}>get</button>
+              {/* <button onClick={() => postNumber()}>get</button>
               <button onClick={() => functionName()}>get2</button>
-              <input id="rasm" type="file"/>
+              <input id="rasm" type="file"/> */}
               <Button
                 typeof="button"
                 className="postbutton"
-                onClick={() => postNumber()}
+                onClick={() => getPost()}
                 type="primary"
               >
-                Qo'shish
+                Qo'shish jjjjj
               </Button>
             </div>
           </div>
@@ -730,11 +754,19 @@ const Tables = () => {
       <div className='defectoyna'>
         <span className="defectclose" onClick={()=>defectpost1()} >X</span>
         <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
-        <button onClick={() => postNumber()}>get</button>
-              <button onClick={() => functionName()}>get2</button>
+                   <div>
+                {num.map((item)=>{
+                return<>{images.map((item2)=>{
+                  if (item===item2.id) {
+                    return<img className="imgdafect" src={item2.image} alt={item2.image}/>
+                  }
+                })}
+                </>
+              })}</div>
+              {/* <button onClick={() => functionName()}>get2</button> */}
               <input id="rasm" type="file"/>
-        <textarea className="defectdest" ></textarea><br />
-        <button onClick={()=>malumotpostdefect()} className="primary">Q'oshish</button></center>
+        <textarea id="zaybal" className="defectdest" ></textarea><br />
+        <button onClick={() => postNumber()} className="primary">Q'oshish</button></center>
       </div></div>
       </div>
        <div className="defectoyna1">
@@ -743,7 +775,7 @@ const Tables = () => {
         <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
         <input className="defectfile" type="file" />
         <textarea className="defectdest" ></textarea><br />
-        <button onClick={()=>malumotpostdefect()} className="primary">Q'oshish</button></center>
+        <button className="primary">Q'oshish</button></center>
       </div></div>
     </div>
   );
