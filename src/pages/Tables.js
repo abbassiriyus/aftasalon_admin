@@ -407,8 +407,6 @@ const Tables = () => {
         alert("lox");
       });
   }
-  
-  // вызываем postNumber только один раз при монтировании компонента
   useEffect(() => {
     postNumber();
   }, []);
@@ -694,8 +692,11 @@ const Tables = () => {
                 <div className="text5">
                   <h1>Ko'rishlar</h1>
                   <input className="kor" type="number" />
+                  <h1 className="defect">Mashinaning nuqsonlari </h1>
+          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
                 </div>
-              </div>shish
+              </div>
+
             </div>
             <div className="textsmal">
             <div>
@@ -717,7 +718,7 @@ const Tables = () => {
               <Button
                 typeof="button"
                 className="postbutton"
-                onClick={() => getPost()}
+                onClick={() => postNumber()}
                 type="primary"
               >
                 Qo'shish
@@ -725,15 +726,25 @@ const Tables = () => {
             </div>
           </div>
         </div>
+        <div className="defectoyna1">
+      <div className='defectoyna'>
+        <span className="defectclose" onClick={()=>defectpost1()} >X</span>
+        <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
+        <button onClick={() => postNumber()}>get</button>
+              <button onClick={() => functionName()}>get2</button>
+              <input id="rasm" type="file"/>
+        <textarea className="defectdest" ></textarea><br />
+        <button onClick={()=>malumotpostdefect()} className="primary">Q'oshish</button></center>
+      </div></div>
       </div>
-       {/* <div className="defectoyna1">
+       <div className="defectoyna1">
       <div className='defectoyna'>
         <span className="defectclose" onClick={()=>defectpost1()} >X</span>
         <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
         <input className="defectfile" type="file" />
         <textarea className="defectdest" ></textarea><br />
         <button onClick={()=>malumotpostdefect()} className="primary">Q'oshish</button></center>
-      </div></div> */}
+      </div></div>
     </div>
   );
 };
