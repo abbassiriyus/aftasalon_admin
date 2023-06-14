@@ -23,7 +23,8 @@ const Tables = () => {
   const [keys, setKeys] = useState([]);
   const [keys1, setKeys1] = useState([]);
   const [keys2, setKeys2] = useState([]);
-  const [num, setNum] = useState([]);
+  const [datadefect, setdatadefect] = useState([]);
+  const [datadeimg, setdataimg] = useState([]);
   const [images, setImages] = useState([]);
   const columns = [
     {
@@ -292,38 +293,40 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        const formData = new FormData();
-        formData.append("car", res.data.id);
-        formData.append("description", document.querySelector("#zaybal").value);
-     // eslint-disable-next-line no-lone-blocks
-     {num.map((item)=>{
-      formData.append("image", item);
-     })}
-        axios
-          .post(`${url}/api/defect/`, formData, {
-            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
+        console.log(res.data,"danniy");
+        var formdata2 = new FormData();
+        // eslint-disable-next-line no-lone-blocks
+        {datadefect.map((item)=>{
+          formdata2.append("car", res.data.id);
+          formdata2.append("image1", item.image1);
+          formdata2.append("image2", item.image2);
+          formdata2.append("description", item.description);
+          axios
+          .post(`${url}/api/defect/`, formdata2, {
+            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
           })
-          .then(response => {
-            alert("gavnso");
+          .then((res3)=>{
+          //   document.querySelector(".postoyna").style =
+          //   "position:fixed;right:-100%;  transition: 1s;";
+          // axios.get(`${url}/api/cars_get/`).then((res2) => {
+          //   setdata1(res2.data);
+          // });
           })
-          .catch(error => {
-            alert("lox");
-          });
+        })}
+        var formdata3 = new FormData();
+        // eslint-disable-next-line no-lone-blocks
+        {datadeimg.map((item2)=>{
+          formdata3.append("car", res.data.id);
+          formdata3.append("image", item2.image);
+          axios
+          .post(`${url}/api/images/`, formdata3, {
+            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+          }).then((res33)=>{
+            window.location.reload()
+          })
+        })}
 
 
-
-
-        alert("ishladi");
-
-
-
-
-
-        document.querySelector(".postoyna").style =
-          "position:fixed;right:-100%;  transition: 1s;";
-        axios.get(`${url}/api/cars_get/`).then((res2) => {
-          setdata1(res2.data);
-        });
       })
       .catch((err) => {
         alert("ishlamadi");
@@ -388,34 +391,51 @@ const Tables = () => {
     document.querySelector(".defectoyna").style="position:fixed;top:-100%;transition:1s;"
     
   }
-  function postNumber() {
-    var formdata = new FormData();
-    formdata.append("image", document.querySelector("#rasm").files[0]);
-  
-    axios
-    .post(`${url}/api/defect_images/`, formdata, {
-      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
-    })
-    .then((res) => {
-      axios
-        .get(`${url}/api/defect_images/`, {
-          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
-        })
-        .then((res1) => {
-          const search = res1.data.filter(item => item.id === res.data.id)
-          const id = search[0].id;
-          setNum([...num, id]); // добавляем новый id в состояние
-          axios.get(`${url}/api/defect_images/`, {
-            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
-          }).then((res)=>{
-            setImages(res.data)
-          })
-        })
-        .catch((error) => console.log(error));
-    })
-    .catch((error) => console.log(error));
+  function imgpost() {
+    document.querySelector(".postimagesoyna").style="position:fixed;top:35%;transition:1s;" 
   }
-  
+  function imgpost1() {
+    document.querySelector(".postimagesoyna").style="position:fixed;top:-100%;transition:1s";
+    
+  }
+  function postDataforcardefect() {
+//    var datafordefect=
+// {   
+//     image1: document.querySelector("#rasm_1").files[0],
+//     image2: document.querySelector("#rasm_2").files[0],
+//     description: document.querySelector("#text_defect").value
+// }
+// setdatadefect([...datadefect,datafordefect])
+// console.log(datafordefect,"1");
+// console.log(datadefect,"2");
+
+if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2").value<1&&document.querySelector("#text_defect").value<1) {
+  alert("not enough infa")
+}else{
+  var datafordefect=
+  {   
+      image1: document.querySelector("#rasm_1").files[0],
+      image2: document.querySelector("#rasm_2").files[0],
+      description: document.querySelector("#text_defect").value
+  }
+  setdatadefect([...datadefect,datafordefect])
+  document.querySelector("#rasm_1").value=""
+  document.querySelector("#rasm_2").value=""
+  document.querySelector("#text_defect").value=""
+}
+  }
+  function postDataforcarimg() {
+    if (document.querySelector("#rasm_img").value<1) {
+      alert("not enough infa")
+    }else{
+      var dataforimg=
+      {   
+          image: document.querySelector("#rasm_img").files[0],
+      }
+      setdataimg([...datadeimg,dataforimg])
+      document.querySelector("#rasm_img").value=""
+    }
+      }
 //   function functionName() {
 //     const formData = new FormData();
 //     formData.append("car", 47);
@@ -435,9 +455,9 @@ const Tables = () => {
 //         alert("lox");
 //       });
 //   }
-  useEffect(() => {
-    postNumber();
-  }, []);
+  // useEffect(() => {
+  //   postNumber();
+  // }, []);
   
   return (
     <div>
@@ -720,8 +740,14 @@ const Tables = () => {
                 <div className="text5">
                   <h1>Ko'rishlar</h1>
                   <input className="kor" type="number" />
-                  <h1 className="defect">Mashinaning nuqsonlari </h1>
+                </div>
+                <div className="text5">
+                  <h6>Mashinaning nuqsonlari </h6>
           <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
+                </div>
+                <div className="text5">
+                  <h6>Mashinaning rasmlari </h6>
+          <button className="malumotbutton" onClick={()=>imgpost()} type="primary">Qo'shish</button>
                 </div>
               </div>
 
@@ -736,16 +762,13 @@ const Tables = () => {
                   <input type="checkbox" className="faol" />
                 </div>
               </div>
-              {/* <button onClick={() => postNumber()}>get</button>
-              <button onClick={() => functionName()}>get2</button>
-              <input id="rasm" type="file"/> */}
               <Button
                 typeof="button"
                 className="postbutton"
                 onClick={() => getPost()}
                 type="primary"
               >
-                Qo'shish jjjjj
+                Qo'shish
               </Button>
             </div>
           </div>
@@ -754,20 +777,60 @@ const Tables = () => {
       <div className='defectoyna'>
         <span className="defectclose" onClick={()=>defectpost1()} >X</span>
         <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
-                   <div>
-                {num.map((item)=>{
-                return<>{images.map((item2)=>{
-                  if (item===item2.id) {
-                    return<img className="imgdafect" src={item2.image} alt={item2.image}/>
-                  }
-                })}
-                </>
-              })}</div>
-              {/* <button onClick={() => functionName()}>get2</button> */}
-              <input id="rasm" type="file"/>
-        <textarea id="zaybal" className="defectdest" ></textarea><br />
-        <button onClick={() => postNumber()} className="primary">Q'oshish</button></center>
-      </div></div>
+        <div className="defect_div">
+        <input className="input_defect" id="rasm_1" type="file"/>
+        <input className="input_defect" id="rasm_2" type="file"/>
+        <textarea id="text_defect" className="defectdest" ></textarea><br />
+        <button className="btn_defect" onClick={()=>postDataforcardefect()}>qoshish</button>
+        </div>
+
+     </center>
+     <div className="main_div_defect">
+        {datadefect.map((item,index)=>{
+          if (datadefect.length>=1) {
+            return<div className="tablediv_defect">
+            <div className="div_img_defect">
+            <img className="img_defect" src={URL.createObjectURL(item.image1)} alt={item.image1.name} />
+            <img className="img_defect" src={URL.createObjectURL(item.image2)} alt={item.image2.name} />
+            </div>
+            <p className="p_defect">{item.description}</p>
+            </div>
+          }else{
+            return<p>pustoy</p>
+          }
+
+        })}
+      </div>
+      </div>
+      
+      </div>
+      <div className="postimagesoyna">
+      <div className='defectoyna'>
+        <span className="defectclose" onClick={()=>imgpost1()} >X</span>
+        <center><h4>Mashinaning rasmlari qo'shish</h4>
+        <div className="defect_div">
+        <input className="input_defect" id="rasm_img" type="file"/>
+        <button className="btn_defect" onClick={()=>postDataforcarimg()}>qoshish</button>
+        </div>
+
+     </center>
+     <div className="main_div_defect">
+        {datadeimg.map((item)=>{
+          if (datadeimg.length>=1) {
+            return<div className="tablediv_defect">
+            <div className="div_img_defect">
+            <img className="img_defect" src={URL.createObjectURL(item.image)} alt={item.image.name} />
+            </div>
+            </div>
+          }else{
+            return<p>pustoy</p>
+          }
+
+        })}
+      </div>
+      </div>
+      
+      </div>
       </div>
        <div className="defectoyna1">
       <div className='defectoyna'>
