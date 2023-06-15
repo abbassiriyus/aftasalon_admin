@@ -2,7 +2,7 @@ const eChart = {
   series: [
     {
       name: "Sales",
-      data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+      data: [450, 200, 100, 220, 500, 100, 400, 230, 500,300,300,300],
       color: "#fff",
     },
   ],
@@ -39,6 +39,7 @@ const eChart = {
     },
     xaxis: {
       categories: [
+        "Jan",
         "Feb",
         "Mar",
         "Apr",
@@ -48,6 +49,8 @@ const eChart = {
         "Aug",
         "Sep",
         "Oct",
+        "Nov",
+        "Dec"
       ],
       labels: {
         show: true,
@@ -56,6 +59,8 @@ const eChart = {
         maxWidth: 160,
         style: {
           colors: [
+            "#fff",
+            "#fff",
             "#fff",
             "#fff",
             "#fff",

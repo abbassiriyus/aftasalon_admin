@@ -77,14 +77,28 @@ const Tables = () => {
       },
     },
     {
+      title: "sotildi",
+      key: "delete",
+      width: "5%",
+      render: (key) => {
+        return (
+          <div>
+            <Button onClick={() => daleteAxiox(key)} type="success">
+              sotildi
+            </Button>
+          </div>
+        );
+      },
+    },
+    {
       title: "Delete",
       key: "delete",
       width: "5%",
       render: (key) => {
         return (
           <div>
-            <Button onClick={() => daleteAxiox(key)} type="danger">
-              O'chirish
+            <Button onClick={() => daleteAxiox2(key)} type="danger">
+              delete
             </Button>
           </div>
         );
@@ -250,6 +264,21 @@ const Tables = () => {
         alert("ishlamadi");
       });
   }
+  function daleteAxiox2(id) {
+    axios
+      .delete(`${url}/api/cars/${id.id}/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      })
+      .then((res) => {
+        alert("ishladi");
+        axios.get(`${url}/api/cars/`).then((res) => {
+          setdata1(res.data);
+        });
+      })
+      .catch((err) => {
+        alert("ishlamadi");
+      });
+  }
   function postoyna() {
     document.querySelector(".postoyna").style =
       "position:fixed;right:0px;  transition: 1s;";
@@ -399,16 +428,6 @@ const Tables = () => {
     
   }
   function postDataforcardefect() {
-//    var datafordefect=
-// {   
-//     image1: document.querySelector("#rasm_1").files[0],
-//     image2: document.querySelector("#rasm_2").files[0],
-//     description: document.querySelector("#text_defect").value
-// }
-// setdatadefect([...datadefect,datafordefect])
-// console.log(datafordefect,"1");
-// console.log(datadefect,"2");
-
 if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2").value<1&&document.querySelector("#text_defect").value<1) {
   alert("not enough infa")
 }else{
@@ -436,29 +455,6 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
       document.querySelector("#rasm_img").value=""
     }
       }
-//   function functionName() {
-//     const formData = new FormData();
-//     formData.append("car", 47);
-//     formData.append("description", "ss");
-//  // eslint-disable-next-line no-lone-blocks
-//  {num.map((item)=>{
-//   formData.append("image", item);
-//  })}
-//     axios
-//       .post(`${url}/api/defect/`, formData, {
-//         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") }
-//       })
-//       .then(response => {
-//         alert("gavnso");
-//       })
-//       .catch(error => {
-//         alert("lox");
-//       });
-//   }
-  // useEffect(() => {
-  //   postNumber();
-  // }, []);
-  
   return (
     <div>
       {page == 1 ? (
@@ -619,7 +615,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                 <h1>Tavsifi</h1>
                 <textarea
                   id="w3review"
-                  rows="19"
+                  rows="1"
                   className="slect18"
                   cols="101"
                 ></textarea>
@@ -628,22 +624,6 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
           </div>
           <h1 className="defect">Mashinaning nuqsonlari </h1>
           <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
-          <div className="img">
-            {data9.map((item) => {
-              return (
-                <div className="img1">
-                  <textarea  rows="15" cols="100" className="malumotinput">{item.description}</textarea>
-                  {item.image.map((item2) => {
-                    return (
-                      <div className="image">
-                        <img src={item2.image} alt="" />
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
         </div>
       )}
       <div className="postoyna">
