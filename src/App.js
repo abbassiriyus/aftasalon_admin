@@ -26,7 +26,7 @@ const [login, setLogin]=useState(sessionStorage.getItem("token"))
    </Switch>):(
         <Switch>
         <Main> 
-          <Redirect from="*" to="/dashboard" />
+          <Redirect from="*" to="/" />
           <Route exact path="/dashboard" component={Home} />
           <Route exact path="/cars" component={Tables} />
           <Route exact path="/additional" component={Additional} />
