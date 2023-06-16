@@ -421,7 +421,7 @@ const Tables = () => {
     
   }
   function imgpost() {
-    document.querySelector(".postimagesoyna").style="position:fixed;top:35%;transition:1s;" 
+    document.querySelector(".postimagesoyna").style="position:fixed;top:34%;transition:1s;" 
   }
   function imgpost1() {
     document.querySelector(".postimagesoyna").style="position:fixed;top:-100%;transition:1s";
@@ -785,7 +785,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
       
       </div>
       <div className="postimagesoyna">
-      <div className='defectoyna'>
+      <div className='defectoynaw'>
         <span className="defectclose" onClick={()=>imgpost1()} >X</span>
         <center><h4>Mashinaning rasmlari qo'shish</h4>
         <div className="defect_div">

@@ -375,7 +375,8 @@ export default function Additional() {
     }).catch(err=>{
       console.log(err);
     })
-  },[])
+
+    },[])
 
 
   function postmodeloyna() {
@@ -916,6 +917,16 @@ export default function Additional() {
           <div className="created">
             <AiOutlineClose onClick={()=>postseriesoyna1()} className='close' />
             <div className="div10"><p>Seriyani kiriting</p>
+            <select>
+              {
+                fueldata3.map(item => {
+                  return(
+                    <option>{item.name}</option>
+                  )
+                })
+              }
+            </select>
+            <h1>&nbsp;</h1>
               <input className='seriyapost' type="text" />
               </div>
               <div className="putbutton11div"><button className='putbutton11' onClick={()=>getpostseries()} >Qo'shish</button></div>
