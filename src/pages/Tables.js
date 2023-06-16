@@ -5,6 +5,7 @@ import url from "../components/host";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import "./style/style.css";
 import Form from "antd/lib/form/Form";
+import { AiOutlineEdit,AiFillDelete } from "react-icons/ai";
 
 const Tables = () => {
   const [setSelectedRowKeys] = useState([]);
@@ -26,6 +27,7 @@ const Tables = () => {
   const [datadefect, setdatadefect] = useState([]);
   const [datadeimg, setdataimg] = useState([]);
   const [images, setImages] = useState([]);
+  const [editimages, setEditImages] = useState([]);
   const columns = [
     {
       title: "Id",
@@ -91,14 +93,14 @@ const Tables = () => {
       },
     },
     {
-      title: "Delete",
-      key: "delete",
+      title: "O'chirish",
+      key: "O'chirish",
       width: "5%",
       render: (key) => {
         return (
           <div>
             <Button onClick={() => daleteAxiox2(key)} type="danger">
-              delete
+            O'chirish
             </Button>
           </div>
         );
@@ -307,7 +309,7 @@ const Tables = () => {
     formdata.append("distance", document.querySelector(".mas").value);
     formdata.append("engine", document.querySelector(".dvi").value);
     formdata.append("colour", document.querySelector(".rang").value);
-    formdata.append("views", document.querySelector(".kor").value);
+    // formdata.append("views", document.querySelector(".kor").value);
     formdata.append("description", document.querySelector(".tavsifi").value);
     formdata.append("is_active", document.querySelector(".faol").checked);
     formdata.append("name", document.querySelector(".ism").value);
@@ -411,10 +413,165 @@ const Tables = () => {
       });
   }
 
+function malumotDefectbtn () {
+  axios
+  .get(`${url}/api/defect_get/`, {
+    headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+  }).then((res)=>{
+    const filter=res.data.filter(item=>item.car===data.id)
+    console.log(filter);
+    console.log(data.id,"id");
+    setEditImages(filter)
+  })
+  document.querySelector(".defectoyna_edit").style="position:fixed;top:35%;transition:1s;" 
+}
+function malumotDefectbtn_close () {
+  document.querySelector(".defectoyna_edit").style="position:fixed;top:-100%;transition:1s;" 
+}
+
+
+function deletEditImage (id) {
+  axios
+  .delete(`${url}/api/defect/${id}/`, {
+    headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+  }).then((res)=>{
+    axios
+    .get(`${url}/api/defect_get/`, {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+    }).then((res)=>{
+      const filter=res.data.filter(item=>item.car=data.id)
+      setEditImages(filter)
+    })
+  })
+}
+function putEditImage (id) {
+  var formdata = new FormData();
+  formdata.append("car",data.id)
+  formdata.append("image1",document.querySelector("#rasm_1_edit").files[0],)
+  formdata.append("image2",document.querySelector("#rasm_2_edit").files[0],)
+  formdata.append("description",document.querySelector("#text_defect_edit").value)
+  axios
+  .put(`${url}/api/defect/${id}/`,formdata, {
+    headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+  }).then((res)=>{
+    axios
+    .get(`${url}/api/defect/`, {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+    }).then((res)=>{
+      const filter=res.data.filter(item=>item.car=data.id)
+      setEditImages(filter)
+      document.querySelector("#rasm_1_edit").value=""
+      document.querySelector("#rasm_2_edit").value=""
+      document.querySelector("#text_defect_edit").value=""
+    })
+  })
+}
+function postDataforcardefect_edit() {
+  if (document.querySelector("#rasm_1_edit").value<1&&document.querySelector("#rasm_2_edit").value<1&&document.querySelector("#text_defect_edit").value<1) {
+    alert("not enough infa")
+  }else{
+    var formdata = new FormData();
+    formdata.append("car",data.id)
+    formdata.append("image1",document.querySelector("#rasm_1_edit").files[0],)
+    formdata.append("image2",document.querySelector("#rasm_2_edit").files[0],)
+    formdata.append("description",document.querySelector("#text_defect_edit").value)
+    axios
+    .post(`${url}/api/defect/`,formdata, {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+    }).then((res)=>{
+      axios
+      .get(`${url}/api/defect/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      }).then((res)=>{
+        const filter=res.data.filter(item=>item.car=data.id)
+        setEditImages(filter)
+        document.querySelector("#rasm_1_edit").value=""
+        document.querySelector("#rasm_2_edit").value=""
+        document.querySelector("#text_defect_edit").value=""
+      })
+    })
+
+  }
+    }
+
+
+    function malumotImagebtn () {
+      axios
+      .get(`${url}/api/images/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      }).then((res)=>{
+        const filter=res.data.filter(item=>item.car===data.id)
+        console.log(filter);
+        console.log(data.id,"id");
+        setImages(filter)
+      })
+      document.querySelector(".defecto_edit_img").style="position:fixed;top:35%;transition:1s;" 
+    }
+    function malumotImagebtn_close () {
+      document.querySelector(".defecto_edit_img").style="position:fixed;top:-100%;transition:1s;" 
+    }
+
+
+    function deletimage (id) {
+      axios
+      .delete(`${url}/api/images/${id}/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      }).then((res)=>{
+        axios
+        .get(`${url}/api/images/`, {
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+        }).then((res)=>{
+          const filter=res.data.filter(item=>item.car===data.id)
+          setImages(filter)
+        })
+      })
+    }
+    function putimage (id) {
+      var formdata = new FormData();
+      formdata.append("car",data.id)
+      formdata.append("image",document.querySelector("#rasm_imgd").files[0],)
+      axios
+      .put(`${url}/api/images/${id}/`,formdata, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      }).then((res)=>{
+        axios
+        .get(`${url}/api/images/`, {
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+        }).then((res)=>{
+          const filter=res.data.filter(item=>item.car===data.id)
+          setImages(filter)
+          document.querySelector("#rasm_imgd").value=""
+        })
+      })
+    }
+    function postimageeDdit() {
+      if (document.querySelector("#rasm_imgd").value<1) {
+        alert("not enough infa")
+      }else{
+        var formdata = new FormData();
+        formdata.append("car",data.id)
+        formdata.append("image",document.querySelector("#rasm_imgd").files[0],)
+        axios
+        .post(`${url}/api/images/`,formdata, {
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+        }).then((res)=>{
+          axios
+          .get(`${url}/api/images/`, {
+            headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+          }).then((res)=>{
+            const filter=res.data.filter(item=>item.car===data.id)
+            setImages(filter)
+            document.querySelector("#rasm_imgd").value=""
+
+          })
+        })
+    
+      }
+        }
+
 
   function defectpost() {
     document.querySelector(".defectoyna").style="position:fixed;top:35%;transition:1s;"
-    
   }
   function defectpost1() {
     document.querySelector(".defectoyna").style="position:fixed;top:-100%;transition:1s;"
@@ -537,10 +694,10 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                       ))}
                     </select>
                   </div>
-                  <div className="text">
+                  {/* <div className="text">
                     <h1>Vaqtni yangilangan</h1>
                     <input type="text" value={data.time_update.slice(0, 10)} />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="text2">
                   <div className="text">
@@ -622,8 +779,13 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
               </div>
             </div>
           </div>
+          <div className="zb">
           <h1 className="defect">Mashinaning nuqsonlari </h1>
-          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
+          <button className="malumotbutton" onClick={()=>malumotDefectbtn()} type="primary">Qo'shiddsh</button>
+          <h1 className="defect">Mashinaning rasmlari </h1>
+          <button className="malumotbutton" onClick={()=>malumotImagebtn()} type="primary">Qo'shiddsh</button>
+          </div>
+
         </div>
       )}
       <div className="postoyna">
@@ -717,10 +879,10 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Depozit</h1>
                   <input className="dep" type="number" />
                 </div>
-                <div className="text5">
+                {/* <div className="text5">
                   <h1>Ko'rishlar</h1>
                   <input className="kor" type="number" />
-                </div>
+                </div> */}
                 <div className="text5">
                   <h6>Mashinaning nuqsonlari </h6>
           <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
@@ -812,14 +974,65 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
       
       </div>
       </div>
-       <div className="defectoyna1">
-      <div className='defectoyna'>
-        <span className="defectclose" onClick={()=>defectpost1()} >X</span>
+       <div className="defectoyna_ediddt">
+      <div className='defectoyna_edit'>
+        <span className="defectclose" onClick={()=>malumotDefectbtn_close()} >X</span>
         <center><h4>Mashinaning nuqsonlarini qo'shish</h4>
-        <input className="defectfile" type="file" />
-        <textarea className="defectdest" ></textarea><br />
-        <button className="primary">Q'oshish</button></center>
-      </div></div>
+        <div className="defect_div">
+        <input className="input_defect" id="rasm_1_edit" type="file"/>
+        <input className="input_defect" id="rasm_2_edit" type="file"/>
+        <textarea id="text_defect_edit" className="defectdest_edit" ></textarea><br />
+        <button className="btn_defect" onClick={()=>postDataforcardefect_edit()}>qoshish</button>
+        </div>
+
+     </center>
+     <div className="main_div_defect">
+        {editimages.map((item,index)=>{
+          if (editimages.length>=1) {
+            return<div className="tablediv_defect">
+            <div className="div_img_defect">
+            <img className="img_defect" src={item.image1} alt={item.image1} />
+            <img className="img_defect" src={item.image2} alt={item.image2} />
+            </div>
+            <p className="p_defect">{item.description}</p>
+            <div className="edit_window"><AiOutlineEdit onClick={()=>putEditImage(item.id)}  className="editicon"/><AiFillDelete onClick={()=>deletEditImage(item.id)} className="editicon"/></div>
+            </div>
+          }else{
+            return<p>pustoy</p>
+          }
+
+        })}
+      </div>
+      </div>
+      </div>
+      <div className="postimagesoyna_edidit">
+      <div className='defecto_edit_img'>
+        <span className="defectclose" onClick={()=>malumotImagebtn_close()} >X</span>
+        <center><h4>Mashinaning rasmlari qo'shish</h4>
+        <div className="defect_div">
+        <input className="input_defect_edit" id="rasm_imgd" type="file"/>
+        <button className="btn_defect" onClick={()=>postimageeDdit()}>qoshish</button>
+        </div>
+
+     </center>
+     <div className="main_div_defect">
+        {images.map((item)=>{
+          if (images.length>=1) {
+            return<div className="tablediv_defect">
+            <div className="div_img_defect">
+            <img className="img_img" src={ item.image} alt={item.image} />
+            </div>
+            <div className="edit_window"><AiOutlineEdit onClick={()=>putimage(item.id)}  className="editicon"/><AiFillDelete onClick={()=>deletimage(item.id)} className="editicon"/></div>
+            </div>
+          }else{
+            return<p>pustoy</p>
+          }
+
+        })}
+      </div>
+      </div>
+      
+      </div>
     </div>
   );
 };
