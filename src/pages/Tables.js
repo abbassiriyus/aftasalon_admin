@@ -439,7 +439,7 @@ function deletEditImage (id) {
     .get(`${url}/api/defect_get/`, {
       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
     }).then((res)=>{
-      const filter=res.data.filter(item=>item.car=data.id)
+      const filter=res.data.filter(item=>item.car===data.id)
       setEditImages(filter)
     })
   })
@@ -458,7 +458,7 @@ function putEditImage (id) {
     .get(`${url}/api/defect/`, {
       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
     }).then((res)=>{
-      const filter=res.data.filter(item=>item.car=data.id)
+      const filter=res.data.filter(item=>item.car===data.id)
       setEditImages(filter)
       document.querySelector("#rasm_1_edit").value=""
       document.querySelector("#rasm_2_edit").value=""
@@ -483,7 +483,7 @@ function postDataforcardefect_edit() {
       .get(`${url}/api/defect/`, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }).then((res)=>{
-        const filter=res.data.filter(item=>item.car=data.id)
+        const filter=res.data.filter(item=>item.car===data.id)
         setEditImages(filter)
         document.querySelector("#rasm_1_edit").value=""
         document.querySelector("#rasm_2_edit").value=""
