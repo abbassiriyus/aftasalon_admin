@@ -185,9 +185,11 @@ function putOrder (order) {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div>
-      {page == 1 ? (
+        <div className="fff">dddfddf</div>
+      {page === 1 ? (
         <div>
           <Table className="table1" columns={columns} dataSource={data1} />
         </div>
