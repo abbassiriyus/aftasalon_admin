@@ -158,7 +158,7 @@ function Sidenav({ color }) {
             >
               {tables}
             </span>
-            <span className="label">All Cars</span>
+            <span className="label">Cars</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="3">
@@ -171,7 +171,7 @@ function Sidenav({ color }) {
             >
               {billing}
             </span>
-            <span className="label">All created</span>
+            <span className="label">Created</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="4">
@@ -184,7 +184,7 @@ function Sidenav({ color }) {
             >
               {billing}
             </span>
-            <span className="label">All Admins</span>
+            <span className="label">Admins</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="7">
@@ -197,7 +197,20 @@ function Sidenav({ color }) {
             >
               {tables}
             </span>
-            <span className="label">All Car_history</span>
+            <span className="label">Car history</span>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="8">
+          <NavLink to="/orders">
+          <span
+              className="icon"
+              style={{
+                background: page === "tables" ? color : "",
+              }}
+            >
+              {tables}
+            </span>
+            <span className="label">Orders</span>
           </NavLink>
         </Menu.Item>
          <Menu.Item className="menu-item-header" key="5">
