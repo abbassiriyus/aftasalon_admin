@@ -649,7 +649,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <select className="slect slect1" id="slect1">
                       {data6.map((item) => (
                         <option id="inp1" value={item.id}>
-                          {item.name}
+                          {item.name} {item.series.name} {item.series.model.name}
                         </option>
                       ))}
                     </select>
@@ -803,7 +803,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Pozitsiya</h1>
                   <select className="select" id="poz">
                     {data6.map((item) => {
-                      return <option value={item.id}>{item.name}</option>;
+                      return <option value={item.id}>{item.name} {item.series.name} {item.series.model.name}</option>;
                     })}
                   </select>
                 </div>
@@ -879,10 +879,6 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Depozit</h1>
                   <input className="dep" type="number" />
                 </div>
-                {/* <div className="text5">
-                  <h1>Ko'rishlar</h1>
-                  <input className="kor" type="number" />
-                </div> */}
                 <div className="text5">
                   <h6>Mashinaning nuqsonlari </h6>
           <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
