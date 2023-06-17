@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import Tables from "./pages/Tables";
 import Additional from "./pages/Additional";
+import CarHistory from "./pages/CarHistory";
 import Billing from "./pages/Billing";
 import Rtl from "./pages/Rtl";
 import Profile from "./pages/Profile";
@@ -31,6 +32,7 @@ const [login, setLogin]=useState(sessionStorage.getItem("token"))
           <Route exact path="/cars" component={Tables} />
           <Route exact path="/additional" component={Additional} />
           <Route exact path="/users" component={Billing} />
+          <Route exact path="/carHistory" component={CarHistory} />
           <Route exact path="/rtl" component={Rtl} />
           <Route exact path="/profile" component={Profile} /> 
         </Main>

@@ -187,6 +187,19 @@ function Sidenav({ color }) {
             <span className="label">All Admins</span>
           </NavLink>
         </Menu.Item>
+        <Menu.Item key="7">
+          <NavLink to="/carHistory">
+          <span
+              className="icon"
+              style={{
+                background: page === "tables" ? color : "",
+              }}
+            >
+              {tables}
+            </span>
+            <span className="label">All Car_history</span>
+          </NavLink>
+        </Menu.Item>
          <Menu.Item className="menu-item-header" key="5">
           Account Pages
         </Menu.Item>
