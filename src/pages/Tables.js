@@ -1,4 +1,5 @@
-import { Button, Table } from "antd";
+import { Button, Table,Input } from "antd";
+import {SearchOutlined,} from "@ant-design/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import url from "../components/host";
@@ -28,6 +29,7 @@ const Tables = () => {
   const [datadeimg, setdataimg] = useState([]);
   const [images, setImages] = useState([]);
   const [editimages, setEditImages] = useState([]);
+  const[search,setSearch]=useState('');
   const columns = [
     {
       title: "Id",
@@ -151,7 +153,8 @@ const Tables = () => {
   function getData(id) {
     axios.get(`${url}/api/cars_get/`).then((res) => {
       setdata1(res.data);
-      setKeys(id);
+
+      // setKeys(id);
     });
   }
   useEffect(() => {
@@ -612,13 +615,38 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
       document.querySelector("#rasm_img").value=""
     }
       }
+      const handleInputChange = (event) => {
+        setSearch(event.target.value);
+        const searchRegex = new RegExp(`^${event.target.value}`, 'i');
+        axios.get(`${url}/api/cars_get/`).then((res) => {
+          const searchdata = res.data.filter((item) => {
+            return (
+              searchRegex.test(item.name) ||
+              searchRegex.test(item.position.name)||
+              searchRegex.test(item.position.series.name)||
+              searchRegex.test(item.position.series.model.name)||
+              searchRegex.test(item.price)||
+              searchRegex.test(item.id)
+            );
+          });
+          
+          setdata1(searchdata);
+        });
+      }
   return (
     <div>
-      {page == 1 ? (
+      {page === 1 ? (
         <div>
+          <div className="search_div">
           <Button onClick={() => postoyna()} className="qoshish" type="primary">
             Qo'shish
           </Button>
+          <Input
+            className="header-search"
+            prefix={<SearchOutlined />}
+            onChange={handleInputChange}
+          />
+          </div>
           <Table className="table1" columns={columns} dataSource={data1} />
         </div>
       ) : (

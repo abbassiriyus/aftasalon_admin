@@ -1,4 +1,5 @@
-import { Button, Table } from "antd";
+import { Button, Table,Input } from "antd";
+import {SearchOutlined,} from "@ant-design/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import url from "../components/host";
@@ -109,17 +110,37 @@ const CarHistory = () => {
               });
           });
   };
-// function deletecar (car) {
-//     console.log(car);
-//     axios.delete(`${url}/api/car_history/${car.id}/`, {
-//         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
-//       }).then((res2) => {
-//         axios.get(`${url}/api/car_history/`).then((res) => {
-//             setdata1(res.data);
-//           });
+const handleInputChange = (event) => {
+  const searchRegex = new RegExp(`^${event.target.value}`, 'i');
+  axios.get(`${url}/api/car_history/`).then((res) => {
+    axios.get(`${url}/api/position_get/`).then((res2) => {
+      const database=[]
+      for (let i = 0; i < res.data.length; i++) {  
+        for (let b = 0; b < res2.data.length; b++) {
+          if (res.data[i].position===res2.data[b].id) {
+            res.data[i].positionName=res2.data[b].name
+            res.data[i].seriesName=res2.data[b].series.name
+            res.data[i].modelName=res2.data[b].series.model.name
+            database.push(res.data[i]);
+          }
+          const searchdata = database.filter((item) => {
+            return (
+              searchRegex.test(item.name) ||
+              searchRegex.test(item.positionName)||
+              searchRegex.test(item.seriesName)||
+              searchRegex.test(item.modelName)||
+              searchRegex.test(item.price)||
+              searchRegex.test(item.id)||
+              searchRegex.test(item.price)
+            );
+          });
+          setdata1(searchdata);
+        }
+      }
+    })
 
-//       });
-// }
+  });
+}
   function getData() {
     axios.get(`${url}/api/car_history/`).then((res) => {
       setdata1(res.data);
@@ -132,6 +153,11 @@ const CarHistory = () => {
     <div>
       {page == 1 ? (
         <div>
+                   <Input
+            className="header-search"
+            prefix={<SearchOutlined />}
+            onChange={handleInputChange}
+          />
           <Table className="table1" columns={columns} dataSource={data1} />
         </div>
       ) : (
