@@ -1,15 +1,3 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import ReactApexChart from "react-apexcharts";
 import { Row, Col, Typography } from "antd";
 import eChart from "./configs/eChart";
@@ -23,13 +11,21 @@ function EChart() {
   const [data3, setData3] = useState('');
   const [data4, setData4] = useState('');
   const [data5, setData5] = useState('');
-  var [chart,setChart]=useState(eChart)
+  const[search,setSearch]=useState(new Date().getFullYear().toString());
+  const [chart, setChart] = useState({
+    series: [{
+      name: "Sales",
+      data: [],
+color: "#155998"
+    }]
+  });
   useEffect(() => {
+    console.log(search,"zzzz");
     axios
     .get(`${url}/api/car_history/`)
     .then((resmonth) => {
       const filteredData = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "01";
+        return item.time_create.slice(0, 7) === `${search}-01`
       });
       const totalPrice = filteredData.reduce((acc, cur) => {
         return acc + cur.price;
@@ -41,7 +37,7 @@ function EChart() {
 
 
       const filteredData2 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "02";
+        return item.time_create.slice(0, 7) === `${search}-02`
       });
       const totalPrice2 = filteredData2.reduce((acc, cur) => {
         return acc + cur.price;
@@ -53,7 +49,7 @@ function EChart() {
 
 
       const filteredData3 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "03";
+        return item.time_create.slice(0, 7) === `${search}-03`
       });
       const totalPrice3 = filteredData3.reduce((acc, cur) => {
         return acc + cur.price;
@@ -65,7 +61,7 @@ function EChart() {
 
 
       const filteredData4 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "04";
+        return item.time_create.slice(0, 7) === `${search}-04`
       });
       const totalPrice4 = filteredData4.reduce((acc, cur) => {
         return acc + cur.price;
@@ -77,7 +73,7 @@ function EChart() {
 
 
       const filteredData5 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "05";
+        return item.time_create.slice(0, 7) === `${search}-05`
       });
       const totalPrice5 = filteredData5.reduce((acc, cur) => {
         return acc + cur.price;
@@ -89,7 +85,7 @@ function EChart() {
 
 
       const filteredData6 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "06";
+        return item.time_create.slice(0, 7) === `${search}-06`
       });
       const totalPrice6 = filteredData6.reduce((acc, cur) => {
         return acc + cur.price;
@@ -101,7 +97,7 @@ function EChart() {
 
 
       const filteredData7 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "07";
+        return item.time_create.slice(0, 7) === `${search}-07`
       });
       const totalPrice7 = filteredData7.reduce((acc, cur) => {
         return acc + cur.price;
@@ -113,7 +109,7 @@ function EChart() {
 
 
       const filteredData8 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "08";
+        return item.time_create.slice(0, 7) === `${search}-08`
       });
       const totalPrice8 = filteredData8.reduce((acc, cur) => {
         return acc + cur.price;
@@ -125,7 +121,7 @@ function EChart() {
 
 
       const filteredData9 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "08";
+        return item.time_create.slice(0, 7) === `${search}-09`
       });
       const totalPrice9 = filteredData9.reduce((acc, cur) => {
         return acc + cur.price;
@@ -137,7 +133,7 @@ function EChart() {
 
 
       const filteredData10 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "08";
+        return item.time_create.slice(0, 7) === `${search}-10`
       });
       const totalPrice10 = filteredData10.reduce((acc, cur) => {
         return acc + cur.price;
@@ -149,7 +145,7 @@ function EChart() {
 
    
       const filteredData11 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "08";
+        return item.time_create.slice(0, 7) === `${search}-11`
       });
       const totalPrice11 = filteredData11.reduce((acc, cur) => {
         return acc + cur.price;
@@ -161,7 +157,7 @@ function EChart() {
 
 
       const filteredData12 = resmonth.data.filter((item) => {
-        return item.time_create.slice(5, 7) === "08";
+        return item.time_create.slice(0, 7) === `${search}-12`
       });
       const totalPrice12 = filteredData12.reduce((acc, cur) => {
         return acc + cur.price;
@@ -171,19 +167,24 @@ function EChart() {
       }, 0);
       const profit12 = totalPrice12 - totalinitialprice12;
       
-      setChart((chart.series[0].data[0] = profit,
-        chart.series[0].data[1] = profit2,
-        chart.series[0].data[2] = profit3,
-        chart.series[0].data[3] = profit4,
-        chart.series[0].data[4] = profit5,
-        chart.series[0].data[5] = profit6,
-        chart.series[0].data[6] = profit7,
-        chart.series[0].data[7] = profit8,
-        chart.series[0].data[8] = profit9,
-        chart.series[0].data[9] = profit10,
-        chart.series[0].data[10] = profit11,
-        chart.series[0].data[11] = profit12
-        ));
+      setChart({
+        series: [{
+          data: [
+            profit,
+            profit2,
+            profit3,
+            profit4,
+            profit5,
+            profit6,
+            profit7,
+            profit8,
+            profit9,
+            profit10,
+            profit11,
+            profit12
+          ]
+        }]
+      });
     });
     axios
     .get(`${url}/api/car_history/`)
@@ -236,7 +237,6 @@ function EChart() {
         console.log(err);
       });
   }, []);
-
   const items = [
     {
       Title: data3,
@@ -259,13 +259,189 @@ function EChart() {
       user: "bor moshina",
     },
   ];
+  const handleInputChange = (event) => {
+    setSearch(event.target.value);
+    console.log(event.target.value);
+    axios
+    .get(`${url}/api/car_history/`)
+    .then((resmonth) => {
+      const filteredData = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-01`
+      });
+      const totalPrice = filteredData.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice = filteredData.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit = totalPrice - totalinitialprice;
 
+
+      const filteredData2 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-02`
+      });
+      const totalPrice2 = filteredData2.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice2 = filteredData2.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit2 = totalPrice2 - totalinitialprice2;
+
+
+      const filteredData3 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-03`
+      });
+      const totalPrice3 = filteredData3.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice3 = filteredData3.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit3 = totalPrice3 - totalinitialprice3;
+
+
+      const filteredData4 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-04`
+      });
+      const totalPrice4 = filteredData4.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice4 = filteredData4.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit4 = totalPrice4 - totalinitialprice4;
+
+
+      const filteredData5 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-05`
+      });
+      const totalPrice5 = filteredData5.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice5 = filteredData5.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit5 = totalPrice5 - totalinitialprice5;
+
+
+      const filteredData6 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-06`
+      });
+      const totalPrice6 = filteredData6.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice6 = filteredData6.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit6 = totalPrice6 - totalinitialprice6;
+
+
+      const filteredData7 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-07`
+      });
+      const totalPrice7 = filteredData7.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice7 = filteredData7.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit7 = totalPrice7 - totalinitialprice7;
+
+
+      const filteredData8 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-08`
+      });
+      const totalPrice8 = filteredData8.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice8 = filteredData8.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit8 = totalPrice8 - totalinitialprice8;
+
+
+      const filteredData9 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-09`
+      });
+      const totalPrice9 = filteredData9.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice9 = filteredData9.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit9 = totalPrice9 - totalinitialprice9;
+
+
+      const filteredData10 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-10`
+      });
+      const totalPrice10 = filteredData10.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice10 = filteredData10.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit10 = totalPrice10 - totalinitialprice10;
+
+   
+      const filteredData11 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-11`
+      });
+      const totalPrice11 = filteredData11.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice11 = filteredData11.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit11 = totalPrice11 - totalinitialprice11;
+
+
+      const filteredData12 = resmonth.data.filter((item) => {
+        return item.time_create.slice(0, 7) === `${event.target.value}-12`
+      });
+      const totalPrice12 = filteredData12.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const totalinitialprice12 = filteredData12.reduce((acc, cur) => {
+        return acc + cur.initial_price;
+      }, 0);
+      const profit12 = totalPrice12 - totalinitialprice12;
+      
+      setChart({
+        series: [{
+          data: [
+            profit,
+            profit2,
+            profit3,
+            profit4,
+            profit5,
+            profit6,
+            profit7,
+            profit8,
+            profit9,
+            profit10,
+            profit11,
+            profit12
+          ]
+        }]
+      });
+    });
+  }
   return (
     <>
+    <select onChange={handleInputChange}>
+      <option>2023</option>
+      <option>2024</option>
+      <option>2025</option>
+      <option>2026</option>
+      <option>2027</option>
+      <option>2028</option>
+    </select>
       <div id="chart">
         <ReactApexChart
           className="bar-chart"
-          options={chart.options}
+          options={eChart.options}
           series={chart.series}
           type="bar"
           height={220}
