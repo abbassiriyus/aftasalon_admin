@@ -166,10 +166,8 @@ export default function Billing() {
     dataPost.append('password', document.querySelector('.password').value)
     dataPost.append('is_staff', true)
     axios.post(`${url}/auth/register/`, dataPost, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      alert('Post user')
       window.location.reload()
     }).catch(err => {
-      alert(err)
     })
   }
 
@@ -200,10 +198,8 @@ export default function Billing() {
 
   function deleteData(key) {
     axios.delete(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      alert('Delete user')
       window.location.reload()
     }).catch(err => {
-      alert(err)
     })
   }
   function comment(key) {
@@ -221,10 +217,8 @@ export default function Billing() {
     datte.append('description', document.querySelector('.description').value)
     datte.append('branch', document.querySelector('.branch').value)
     axios.post(`${url}/api/comment/`, datte, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      alert('Successfully posted comment')
       window.location.reload()
     }).catch(err => {
-      alert(err)
     })
   }
 

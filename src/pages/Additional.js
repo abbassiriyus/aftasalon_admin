@@ -85,7 +85,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("O'chirildi");
         axios
           .get(`${url}/api/fuel_sort/`)
           .then((res) => {
@@ -96,7 +95,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ochirilmadi");
         console.log(err);
       });
   }
@@ -110,7 +108,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postoyna10").style =
           "position: absolute;display:none;    transition: 1s;";
         axios
@@ -123,7 +120,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -136,7 +132,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postoyna11").style =
           "position: absolute;display:none;    transition: 1s;";
         axios
@@ -149,7 +144,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -255,7 +249,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putoyanfuel").style =
           "position: absolute;display:none;    transition: 1s;";
         axios
@@ -268,7 +261,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
   function getPut2(id) {
@@ -280,7 +272,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putoyanfuel1").style =
           "position: fixed;display:none;   transition: 1s;";
         axios
@@ -293,7 +284,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -303,11 +293,9 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         window.location.reload();
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -389,7 +377,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postgarantoyna").style =
           "position: absolute;display:none;   transition: 1s;";
         axios
@@ -402,7 +389,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
   function getPut3(id) {
@@ -415,7 +401,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putgarantoyna").style =
           "position: absolute;display:none;    transition: 1s;";
         axios
@@ -428,7 +413,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -438,7 +422,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios
           .get(`${url}/api/garant/`)
           .then((res) => {
@@ -449,9 +432,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert((err) => {
-          alert("ishlamadi");
-        });
       });
   }
 
@@ -549,7 +529,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postmodeloyna").style =
           "position: absolute;display:none;   transition: 1s;";
         axios
@@ -558,11 +537,10 @@ export default function Additional() {
             setfueldata3(res.data);
           })
           .catch((err) => {
-            console.log(err, "ishlamadi");
+
           });
       })
       .catch((err1) => {
-        alert("ishlamadi");
       });
   }
 
@@ -575,7 +553,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putmodeloyna").style =
           "position: absolute;display:none;   transition: 1s;";
         axios
@@ -588,7 +565,6 @@ export default function Additional() {
           });
       })
       .catch((err1) => {
-        alert("ishlamadi");
       });
   }
 
@@ -598,18 +574,15 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios
           .get(`${url}/api/models/`)
           .then((res) => {
             setfueldata3(res.data);
           })
           .catch((err) => {
-            console.log(err, "ishlamadi");
           });
       })
       .catch((err1) => {
-        alert("ishlamadi");
       });
   }
 
@@ -712,7 +685,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postserisoyna").style =
           "position: absolute;display:none;";
         axios
@@ -725,7 +697,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
   function getputseries(id) {
@@ -737,7 +708,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putserisoyna1").style =
           "position: absolute;display:none;";
         axios
@@ -750,7 +720,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -760,7 +729,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios
           .get(`${url}/api/series_get/`)
           .then((res) => {
@@ -771,7 +739,6 @@ export default function Additional() {
           });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -872,7 +839,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postpozitsiyaoyna").style =
           "position: absolute;display:none;";
         axios.get(`${url}/api/position_get/`).then((res) => {
@@ -906,7 +872,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putpozitsiyaoyna").style =
           "position: absolute;display:none;";
         axios.get(`${url}/api/position_get/`).then((res) => {
@@ -924,7 +889,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios.get(`${url}/api/position_get/`).then((res) => {
           setfueldata5(res.data);
         });
@@ -1030,7 +994,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".postfillialoyna").style =
           "position:fixed;right:-100%;    transition: 1s;";
         axios.get(`${url}/api/branch/`).then((res) => {
@@ -1038,7 +1001,6 @@ export default function Additional() {
         });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -1066,7 +1028,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         document.querySelector(".putfillialoyna").style =
           "position:fixed;right:-100%;    transition: 1s;";
         axios.get(`${url}/api/branch/`).then((res) => {
@@ -1074,7 +1035,6 @@ export default function Additional() {
         });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 
@@ -1084,7 +1044,6 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios.get(`${url}/api/branch/`).then((res) => {
           setfueldata6(res.data);
         });
@@ -1101,7 +1060,7 @@ export default function Additional() {
           <button onClick={() => postoyna10()} className="post10">
             Qo'shish
           </button>
-          <h1>Yoqilg'i turini kiriting</h1>
+          <h1>Yoqilg'i turlari</h1>
           <Table
             className="table"
             pagination={{ pageSize: 4 }}
@@ -1117,7 +1076,7 @@ export default function Additional() {
               />
               <div className="div10">
                 {" "}
-                <p>Yoqilg'i turini kiriting</p>
+                <p>Yoqilg'i turilari </p>
                 <input className="fuelname11" type="text" />
                 <button onClick={() => getPost1()} className="post11">
                   Qo'shish
@@ -1133,7 +1092,7 @@ export default function Additional() {
               />
               <div className="div10">
                 {" "}
-                <p>Yoqilg'i turini o'zgartiring</p>
+                <p>Yoqilg'i turilari o'zgartiring</p>
                 <input
                   className="fuelname10"
                   placeholder={id.name}
@@ -1153,7 +1112,7 @@ export default function Additional() {
           <button onClick={() => putoyanfuel()} className="post11">
             Qo'shish
           </button>
-          <h1>Mashina turuni kiriting</h1>
+          <h1>Boshqaruv qutisi turilari </h1>
           <Table
             className="table"
             pagination={{ pageSize: 4 }}
@@ -1168,7 +1127,7 @@ export default function Additional() {
                 onClick={() => putoyanfuel1()}
               />
               <div className="div10">
-                <p>Mashinani turin kiriting</p>
+                <p>Mashinalari turin </p>
                 <input className="gearinput" type="text" />
                 <button onClick={() => getPost2()} className="putbutton">
                   Qo'shish
@@ -1183,7 +1142,7 @@ export default function Additional() {
                 onClick={() => putoyanfuel3()}
               />
               <div className="div10">
-                <p>Mashinani turin kiriting</p>
+                <p>Mashinalari turin </p>
                 <input
                   className="gearinput1"
                   placeholder={key.name}
@@ -1205,7 +1164,7 @@ export default function Additional() {
           <button onClick={() => postgarantoyna()} className="post11">
             Qo'shish
           </button>
-          <h1>Garantni kiriting</h1>
+          <h1>Garantlari </h1>
           <Table
             className="table"
             pagination={{ pageSize: 4 }}
@@ -1220,7 +1179,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Garant kiriting</p>
+                <p>Garant </p>
                 <input className="gearinput2" type="text" />
                 <p>Soati</p>
                 <input className="gearinput3" type="number" />
@@ -1239,7 +1198,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Garant kiriting</p>
+                <p>Garant </p>
                 <input
                   className="gearinput5"
                   placeholder={key1.name}
@@ -1265,12 +1224,11 @@ export default function Additional() {
         </div>
 
         {/* 4-page */}
-
         <div className="house3">
           <button className="post11" onClick={() => postmodeloyna()}>
             Qo'shish
           </button>
-          <h1>Modelni qo'shing</h1>
+          <h1>Modellari</h1>
           <Table
             className="table"
             pagination={{ pageSize: 4 }}
@@ -1285,7 +1243,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Modelni kiriting</p>
+                <p>Modellari </p>
                 <input type="text" className="modelinput" />
                 <div className="putbutton11div">
                   <button
@@ -1305,7 +1263,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Modelni kiriting</p>
+                <p>Modellari </p>
                 <input
                   type="text"
                   placeholder={key2.name}
@@ -1331,7 +1289,7 @@ export default function Additional() {
           <button className="post11" onClick={() => postseriesoyna()}>
             Qo'shish
           </button>
-          <h1>Seriyani kiriting</h1>
+          <h1>Seriyalari </h1>
           <Table
             className="table"
             pagination={{ pageSize: 4 }}
@@ -1346,7 +1304,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Seriyani kiriting</p>
+                <p>Seriyalari </p>
                 <select className="selectFuels" onClick={() => renderSelect()}>
                   {fueldata3.map((item) => {
                     return <option>{item.name}</option>;
@@ -1369,7 +1327,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Seriyani kiriting</p>
+                <p>Seriyalari </p>
                 <input
                   className="seriyaput"
                   placeholder={key3.name}
@@ -1394,7 +1352,7 @@ export default function Additional() {
           <button className="post11" onClick={() => postpozitsiyaoyna()}>
             Qo'shish
           </button>
-          <h1>Pozitsiyani kiriting</h1>
+          <h1>Pozitsiyalari </h1>
           <Table
             className="table"
             style={{ width: "800px" }}
@@ -1410,7 +1368,7 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Pozitsiyani kiriting</p>
+                <p>Pozitsiyalari </p>
                 <select onClick={() => testSseries()} className="testSeri">
                   {
                     seria.map(item => {
@@ -1437,13 +1395,13 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Pozitsiyani almashtiring</p>
+                <p>Pozitsiyalari almashtiring</p>
                 <input
                   className="putozition"
                   placeholder={key4.name}
                   type="text"
                 />
-                <p>Seriyani almashtiring</p>
+                <p>Seriyalari almashtiring</p>
                 <select>
                   {fueldata4.map((item) => {
                     return (

@@ -232,7 +232,6 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios.get(`${url}/api/cars/`).then((res) => {
           setdata1(res.data);
         });
@@ -266,7 +265,6 @@ const Tables = () => {
           .then((res) => {});
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
   function daleteAxiox2(id) {
@@ -275,13 +273,11 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios.get(`${url}/api/cars/`).then((res) => {
           setdata1(res.data);
         });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
   function postoyna() {
@@ -290,15 +286,6 @@ const Tables = () => {
   }
   function postoynaa() {
     document.querySelector(".postoyna").style =
-      "position:fixed;right:-100%;  transition: 1s;";
-  }
-  function postoyna1(key) {
-    document.querySelector(".postoyna1").style =
-      "position:fixed;right:0;  transition: 1s;";
-    setKeys(key);
-  }
-  function postoynaa1() {
-    document.querySelector(".postoyna1").style =
       "position:fixed;right:-100%;  transition: 1s;";
   }
   function getPost() {
@@ -363,7 +350,6 @@ const Tables = () => {
 
       })
       .catch((err) => {
-        alert("ishlamadi");
         console.log(err);
       });
   }
@@ -406,13 +392,11 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        alert("ishladi");
         axios.get(`${url}/api/cars_get/`).then((res) => {
           setdata1(res.data);
         });
       })
       .catch((err) => {
-        alert("ishlamadi");
       });
   }
 

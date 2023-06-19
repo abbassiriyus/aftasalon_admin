@@ -210,10 +210,8 @@ function Profile() {
     data.append('phone',  local.phone)
     data.append('password',  local.password)
     axios.put(`${url}/auth/users/${key}/`, data, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      alert('success')
       window.location.reload()
     }).catch(err => {
-      alert(err)
     })
   }
 
