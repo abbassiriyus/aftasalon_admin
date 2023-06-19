@@ -1,17 +1,19 @@
-import { Button, Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import url from "../components/host";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import {SearchOutlined,} from "@ant-design/icons";
+import { Button, Table,Input } from "antd";
 import "./style/style.css";
 const CarHistory = () => {
   const [data, setdata] = useState([]);
   const [data1, setdata1] = useState([]);
+  const [data2, setdata2] = useState([]);
   const [page, setPage] = useState(1);
   const [id, setId] = useState('');
   const [timeCreate, setTimeCreate] = useState('');
   const [visitTime, setVisitTime] = useState('');
-  const [isActive, setIsactive] = useState('');
+  const [select, setselect] = useState('');
   const [user, setUser] = useState('');
   const [car, setCar] = useState('');
   const [branch, setBranch] = useState('');
@@ -184,11 +186,123 @@ function putOrder (order) {
   }
   useEffect(() => {
     getData();
+    axios.get(`${url}/api/branch/`,     ).then((res) => {
+    setdata2(res.data);
+    console.log(res.data,'DATA2');
+  })
   }, []);
+
+  const handleInputChange = (event) => {
+    const searchRegex = new RegExp(`^${event.target.value}`, 'i');
+    if (select.length<1) {
+      axios
+      .get(`${url}/api/order_get/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      })
+      .then((res) => {
+        const searchdata = res.data.filter((item) => {
+          return (
+            searchRegex.test(item.car.name) ||
+            searchRegex.test(item.car.position.name) ||
+            searchRegex.test(item.car.position.series.name) ||
+            searchRegex.test(item.car.position.series.model.name) ||
+            searchRegex.test(item.car.price) ||
+            searchRegex.test(item.id) ||
+            searchRegex.test(item.user.username)
+          );
+        });
+        setdata1(searchdata);
+      })
+    }else{
+      axios
+      .get(`${url}/api/order_get/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      })
+      .then((res) => {
+          const filteredData = res.data.filter((item) => item.branch.id ===parseInt(select));
+          const searchdata = filteredData.filter((item) => {
+            return (
+              searchRegex.test(item.car.name) ||
+              searchRegex.test(item.car.position.name) ||
+              searchRegex.test(item.car.position.series.name) ||
+              searchRegex.test(item.car.position.series.model.name) ||
+              searchRegex.test(item.car.price) ||
+              searchRegex.test(item.id) ||
+              searchRegex.test(item.user.username)
+            );
+          });
+          setdata1(searchdata);  
+      }); 
+    }
+  };
+  const handleInputChange2 = (event) => {
+    setselect(event.target.value);
+    const searchRegex = new RegExp(`^${event.target.value}`, 'i');
+    axios
+      .get(`${url}/api/order_get/`, {
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      })
+      .then((res) => {
+        const searchdata = res.data.filter((item) => {
+          return searchRegex.test(item.branch.id);
+        });
+        setdata1(searchdata);
+      });
+  };
+  // const handleInputChange = (event) => {
+  //   const searchRegex = new RegExp(`^${event.target.value}, 'i'`);
+  //   axios.get(`${url}/api/order_get/`, {
+  //     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+  //   }).then((res) => {
+  //     for (let o = 0; o < res.data.length; o++) {
+  //       if (res.data[o].branch.id===select) {
+  //         const searchdata = res.data[o].filter((item) => {
+  //           return (
+  //             searchRegex.test(item.car.name) ||
+  //             searchRegex.test(item.car.position.name) ||
+  //             searchRegex.test(item.car.position.series.name) ||
+  //             searchRegex.test(item.car.position.series.model.name) ||
+  //             searchRegex.test(item.car.price) ||
+  //             searchRegex.test(item.id) ||
+  //             searchRegex.test(item.user.username)
+  //           );
+  //         });
+  //         setdata1(searchdata);
+  //       }    
+  //     }
+  //   });
+  // }
+  // const handleInputChange2 = (event) => {
+  //   setselect(event.target.value)
+  //   const searchRegex = new RegExp(`^${event.target.value}`, 'i');
+  //   axios.get(`${url}/api/order_get/`,{
+  //     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+  //   }).then((res) => {
+  //     const searchdata = res.data.filter((item) => {
+  //       return (
+  //         searchRegex.test(item.branch.id)
+  //       );
+  //     });
+
+  //     setdata1(searchdata);
+  //   })
+  // }
 
   return (
     <div>
-        <div className="fff">dddfddf</div>
+          <div className="search_div">
+            <select onChange={handleInputChange2} className="select_search">
+              <option></option>
+              {data2.map((item)=>{
+                return<option value={item.id}>{item.name}</option>
+              })}
+            </select>
+          <Input
+            className="header-search_orders"
+            prefix={<SearchOutlined />}
+            onChange={handleInputChange}
+          />
+          </div>
       {page === 1 ? (
         <div>
           <Table className="table1" columns={columns} dataSource={data1} />

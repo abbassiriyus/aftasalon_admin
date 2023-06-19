@@ -626,7 +626,8 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
               searchRegex.test(item.position.series.name)||
               searchRegex.test(item.position.series.model.name)||
               searchRegex.test(item.price)||
-              searchRegex.test(item.id)
+              searchRegex.test(item.id)||
+              searchRegex.test(item.year)
             );
           });
           

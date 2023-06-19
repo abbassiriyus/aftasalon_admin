@@ -256,6 +256,14 @@ margin-bottom: 20px;
     height: 47px;
     margin-left: 70%;
 }
+.header-search_orders{
+    width: 30% !important;
+    height: 47px;
+    margin-left: 60%; 
+}
+.select_search{
+    width: 15%;
+}
 .ant-breadcrumb-link a{
     color: black !important;
 }
