@@ -22,7 +22,8 @@ export default function Additional() {
   const [key4, setkey4] = useState(0);
   const [key5, setkey5] = useState(0);
   const [ seria, setSeria ] = useState([])
-
+  const [ SelectSerias, setSelectSerias ] = useState('')
+  const [ SelectPosition, setSelectPosition ] = useState('')
   // 1 - page
 
   const columns = [
@@ -31,9 +32,14 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
+      title: "Name_uz",
       witdh: "5%",
-      dataIndex: "name",
+      dataIndex: "name_uz",
+    },
+    {
+      title: "Name_ru",
+      witdh: "5%",
+      dataIndex: "name_ru",
     },
 
     {
@@ -101,8 +107,8 @@ export default function Additional() {
 
   function getPost1() {
     var formdata1 = new FormData();
-    formdata1.append("name", document.querySelector(".fuelname11").value);
-
+    formdata1.append("name_uz", document.querySelector("#fuel_sort_post_uz").value);
+    formdata1.append("name_ru", document.querySelector("#fuel_sort_post_ru").value);
     axios
       .post(`${url}/api/fuel_sort/ `, formdata1, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -454,8 +460,12 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_ru",
+      dataIndex: "name_ru",
+    },
+    {
+      title: "Name_uz",
+      dataIndex: "name_uz",
     },
 
     {
@@ -522,7 +532,8 @@ export default function Additional() {
 
   function getPostmodel() {
     var model = new FormData();
-    model.append("name", document.querySelector(".modelinput").value);
+    model.append("name_uz", document.querySelector("#model_post_uz").value);
+    model.append("name_ru", document.querySelector("#model_post_ru").value);
 
     axios
       .post(`${url}/api/models/`, model, {
@@ -546,8 +557,8 @@ export default function Additional() {
 
   function getPutmodel(id) {
     var model = new FormData();
-    model.append("name", document.querySelector(".modelinput1").value);
-
+    model.append("name_uz", document.querySelector("#model_put_uz").value);
+    model.append("name_ru", document.querySelector("#model_put_ru").value);
     axios
       .put(`${url}/api/models/${id}/`, model, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -594,8 +605,12 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name ru",
+      dataIndex: "name_ru",
+    },
+    {
+      title: "Name uz",
+      dataIndex: "name_uz",
     },
 
     {
@@ -631,7 +646,7 @@ export default function Additional() {
 
   useEffect(() => {
     axios
-      .get(`${url}/api/series_get/`)
+      .get(`${url}/api/series/`)
       .then((res) => {
         setfueldata4(res.data);
       })
@@ -676,10 +691,10 @@ export default function Additional() {
   }
 
   function getpostseries() {
-    var modelId = localStorage.getItem("idModel");
     var series = new FormData();
-    series.append("name", document.querySelector(".seriyapost").value);
-    series.append("model", modelId);
+    series.append("name_uz", document.querySelector("#seria_post_uz").value);
+    series.append("name_ru", document.querySelector("#seria_post_ru").value);
+    series.append("model",SelectSerias); 
     axios
       .post(`${url}/api/series/`, series, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -688,7 +703,7 @@ export default function Additional() {
         document.querySelector(".postserisoyna").style =
           "position: absolute;display:none;";
         axios
-          .get(`${url}/api/series_get/`)
+          .get(`${url}/api/series/`)
           .then((res) => {
             setfueldata4(res.data);
           })
@@ -701,8 +716,9 @@ export default function Additional() {
   }
   function getputseries(id) {
     var series1 = new FormData();
-    series1.append("name", document.querySelector(".seriyaput").value);
-
+    series1.append("name_uz", document.querySelector("#put_series_uz").value);
+    series1.append("name_ru", document.querySelector("#put_series_ru").value);
+    series1.append("model", SelectSerias);
     axios
       .put(`${url}/api/series/${id}/`, series1, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -711,7 +727,7 @@ export default function Additional() {
         document.querySelector(".putserisoyna1").style =
           "position: absolute;display:none;";
         axios
-          .get(`${url}/api/series_get/`)
+          .get(`${url}/api/series/`)
           .then((res) => {
             setfueldata4(res.data);
           })
@@ -730,7 +746,7 @@ export default function Additional() {
       })
       .then((res) => {
         axios
-          .get(`${url}/api/series_get/`)
+          .get(`${url}/api/series/`)
           .then((res) => {
             setfueldata4(res.data);
           })
@@ -750,14 +766,13 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_uz",
+      dataIndex: "name_uz",
     },
     {
-      title: "Series",
-      render: (item) => (item.series ? item.series.name : "-"),
+      title: "Name_ru",
+      dataIndex: "name_ru",
     },
-
     {
       title: "Edit",
       render: (fueldata5) => {
@@ -791,7 +806,7 @@ export default function Additional() {
 
   useEffect(() => {
     axios
-      .get(`${url}/api/position_get/`)
+      .get(`${url}/api/position/`)
       .then((res) => {
         setfueldata5(res.data);
       })
@@ -799,7 +814,7 @@ export default function Additional() {
         console.log(err);
       });
 
-      axios.get(`${url}/api/series_get/`).then(res => {
+      axios.get(`${url}/api/series/`).then(res => {
         setSeria(res.data)
       })
   }, []);
@@ -826,14 +841,10 @@ export default function Additional() {
   }
 
   function postpozition() {
-    // axios.get(`${url}/api/series_get/`).then(res => {
-    //   console.log(res.data);
-    // })
-    var localVal = localStorage.getItem('keysSerie')
     var pozition = new FormData();
-    pozition.append("name", document.querySelector(".postpozition").value);
-    pozition.append("id", localVal);
-
+    pozition.append("name_uz", document.querySelector("#position_post_uz").value);
+    pozition.append("name_ru", document.querySelector("#position_post_ru").value);
+    pozition.append("series", SelectPosition);
     axios
       .post(`${url}/api/position/`, pozition, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -841,7 +852,7 @@ export default function Additional() {
       .then((res) => {
         document.querySelector(".postpozitsiyaoyna").style =
           "position: absolute;display:none;";
-        axios.get(`${url}/api/position_get/`).then((res) => {
+        axios.get(`${url}/api/position/`).then((res) => {
           setfueldata5(res.data);
         });
       })
@@ -1075,12 +1086,17 @@ export default function Additional() {
                 onClick={() => postoynaclose10()}
               />
               <div className="div10">
-                {" "}
                 <p>Yoqilg'i turilari </p>
-                <input className="fuelname11" type="text" />
-                <button onClick={() => getPost1()} className="post11">
-                  Qo'shish
-                </button>
+                <input placeholder="uz" id="fuel_sort_post_uz" className="fuelname11" type="text" />
+                <input placeholder="ru" id="fuel_sort_post_ru" className="fuelname11" type="text" />
+                <div className="putbutton11div">
+                  <button
+                    onClick={() => getPost1()}
+                    className="putbutton11"
+                  >
+                    Qo'shish
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1091,7 +1107,7 @@ export default function Additional() {
                 onClick={() => postoynaclose11()}
               />
               <div className="div10">
-                {" "}
+
                 <p>Yoqilg'i turilari o'zgartiring</p>
                 <input
                   className="fuelname10"
@@ -1244,7 +1260,8 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Modellari </p>
-                <input type="text" className="modelinput" />
+                <input type="text" placeholder="uz" id="model_post_uz" className="modelinput" />
+                <input type="text" placeholder="ru" id="model_post_ru" className="modelinput" />
                 <div className="putbutton11div">
                   <button
                     onClick={() => getPostmodel()}
@@ -1266,8 +1283,15 @@ export default function Additional() {
                 <p>Modellari </p>
                 <input
                   type="text"
-                  placeholder={key2.name}
+                  placeholder={key2.name_uz}
                   className="modelinput1"
+                  id="model_put_uz"
+                />
+                                <input
+                  type="text"
+                  placeholder={key2.name_ru}
+                  className="modelinput1"
+                  id="model_put_ru"
                 />
                 <div className="putbutton11div">
                   <button
@@ -1305,13 +1329,15 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Seriyalari </p>
-                <select className="selectFuels" onClick={() => renderSelect()}>
+                <select onChange={(e)=>setSelectSerias(e.target.value)} className="selectFuels" onClick={() => renderSelect()}>
+                  <option></option>
                   {fueldata3.map((item) => {
-                    return <option>{item.name}</option>;
+                    return <option value={item.id}>(uz){item.name_uz}   (ru){item.name_ru}</option>;
                   })}
                 </select>
                 <h1>&nbsp;</h1>
-                <input className="seriyapost" type="text" />
+                <input className="seriyapost" placeholder="uz" type="text" id="seria_post_uz" />
+                <input className="seriyapost" placeholder="ru" type="text" id="seria_post_ru" />
               </div>
               <div className="putbutton11div">
                 <button className="putbutton11" onClick={() => getpostseries()}>
@@ -1330,9 +1356,22 @@ export default function Additional() {
                 <p>Seriyalari </p>
                 <input
                   className="seriyaput"
-                  placeholder={key3.name}
+                  placeholder={key3.name_uz}
                   type="text"
+                  id="put_series_uz"
                 />
+                                <input
+                  className="seriyaput"
+                  placeholder={key3.name_ru}
+                  type="text"
+                  id="put_series_ru"
+                />
+                             <select onChange={(e)=>setSelectSerias(e.target.value)} className="selectFuels" onClick={() => renderSelect()}>
+                  <option></option>
+                  {fueldata3.map((item) => {
+                    return <option value={item.id}>(uz){item.name_uz}   (ru){item.name_ru}</option>;
+                  })}
+                </select>
               </div>
               <div className="putbutton11div">
                 <button
@@ -1369,17 +1408,19 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Pozitsiyalari </p>
-                <select onClick={() => testSseries()} className="testSeri">
+                <select onChange={(e)=>setSelectPosition(e.target.value)} onClick={() => testSseries()} className="testSeri">
+                  <option></option>
                   {
                     seria.map(item => {
                       return (
-                        <option>{item.name}</option>
+                        <option value={item.model}>(uz){item.name_uz}  (ru){item.name_ru}</option>
                       )
                     })
                   }
                 </select>
                 <p>&nbsp;</p>
-                <input className="postpozition" type="text" />
+                <input placeholder="uz" className="postpozition" type="text" id="position_post_uz" />
+                <input placeholder="ru" className="postpozition" type="text" id="position_post_ru" />
               </div>
               <div className="putbutton11div">
                 <button onClick={() => postpozition()} className="putbutton11">
@@ -1406,7 +1447,7 @@ export default function Additional() {
                   {fueldata4.map((item) => {
                     return (
                       <option value={item.id} className="putozition1">
-                        {item.name}
+                        {item.name_uz}
                       </option>
                     );
                   })}

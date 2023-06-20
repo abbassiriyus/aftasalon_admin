@@ -80,7 +80,6 @@
 .postoyna10{
     width: 100%;
     position: absolute;
-    height: 170px;
     bottom: 0px;
     background-color: white;
     display: none;
@@ -234,7 +233,7 @@ display: none;
     width:100% ;
     position: absolute;
     bottom:0px;
-    height: 200px;
+
     background-color: white;
     display: none;
 }
@@ -259,7 +258,6 @@ display: none;
     width:100% ;
     position: absolute;
     bottom:0px;
-    height: 200px;
     background-color: white;
     display: none;
 }
