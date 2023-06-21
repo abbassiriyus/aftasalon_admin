@@ -42,9 +42,14 @@ export default class SignIn extends Component {
 
     axios.post(`${url}/auth/login/`, data).then(res => {
       console.log(res.data)
-      localStorage.setItem("data2", JSON.stringify(data));
-      sessionStorage.setItem("token", res.data.access)
-      window.location.reload()
+      if (res.data.is_staff===true) {
+        window.location.reload()
+        localStorage.setItem("data2", JSON.stringify(data));
+        sessionStorage.setItem("token", res.data.access)
+        sessionStorage.setItem("superadmin", res.data.is_superuser)
+      }else{
+        alert("this admin not exist")
+      }
     }).catch(err => {
       console.log(err);
     })

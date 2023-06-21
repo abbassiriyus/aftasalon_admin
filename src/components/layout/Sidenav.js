@@ -1,12 +1,19 @@
-
+import { useEffect,useState } from "react";
 import { Menu, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-
 function Sidenav({ color }) {
   const { pathname } = useLocation();
   const page = pathname.replace("/", "");
+  const [superadmin, setSuperadmin] = useState(false);
 
+  useEffect(() => {
+    if (sessionStorage.getItem("superadmin") === "true") {
+      setSuperadmin(true);
+    } else {
+      setSuperadmin(false);
+    }
+  }, []);
   const dashboard = [
     <svg
       width="20"
@@ -134,20 +141,18 @@ function Sidenav({ color }) {
         <span> Dashboard</span>
       </div>
       <hr />
-      <Menu theme="light" mode="inline">
-        <Menu.Item key="1">
-          <NavLink to="/dashboard">
-            <span
-              className="icon"
-              style={{
-                background: page === "dashboard" ? color : "",
-              }}
-            >
-              {dashboard}
-            </span>
-            <span className="label">Dashboard</span>
-          </NavLink>
-        </Menu.Item>
+      <Menu  theme="light" mode="inline">
+{superadmin && (
+  <Menu.Item key="1">
+    <NavLink to="/dashboard">
+      <span className="icon" style={{ background: page === "dashboard" ? color : "" }}>
+        {dashboard}
+      </span>
+      <span className="label">Dashboard</span>
+    </NavLink>
+  </Menu.Item>
+)}
+
         <Menu.Item key="2">
           <NavLink to="/cars">
             <span

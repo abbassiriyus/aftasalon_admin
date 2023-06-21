@@ -21,9 +21,11 @@ export default function Additional() {
   const [key3, setkey3] = useState(0);
   const [key4, setkey4] = useState(0);
   const [key5, setkey5] = useState(0);
-  const [ seria, setSeria ] = useState([])
-  const [ SelectSerias, setSelectSerias ] = useState('')
-  const [ SelectPosition, setSelectPosition ] = useState('')
+  const [seria, setSeria] = useState([]);
+  const [SelectSerias, setSelectSerias] = useState("");
+  const [SelectPosition, setSelectPosition] = useState("");
+  const [blank, setBlank] = useState([]);
+  const [keyBlank, setKeyBlank] = useState([]);
   // 1 - page
 
   const columns = [
@@ -107,8 +109,14 @@ export default function Additional() {
 
   function getPost1() {
     var formdata1 = new FormData();
-    formdata1.append("name_uz", document.querySelector("#fuel_sort_post_uz").value);
-    formdata1.append("name_ru", document.querySelector("#fuel_sort_post_ru").value);
+    formdata1.append(
+      "name_uz",
+      document.querySelector("#fuel_sort_post_uz").value
+    );
+    formdata1.append(
+      "name_ru",
+      document.querySelector("#fuel_sort_post_ru").value
+    );
     axios
       .post(`${url}/api/fuel_sort/ `, formdata1, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -125,14 +133,19 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function getPut1(id) {
     var formdata2 = new FormData();
-    formdata2.append("name", document.querySelector(".fuelname10").value);
-
+    formdata2.append(
+      "name_uz",
+      document.querySelector("#fuel_sort_put_uz").value
+    );
+    formdata2.append(
+      "name_ru",
+      document.querySelector("#fuel_sort_put_ru").value
+    );
     axios
       .put(`${url}/api/fuel_sort/${id}/`, formdata2, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -149,8 +162,7 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function postoyna11(id) {
@@ -180,8 +192,12 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_uz",
+      dataIndex: "name_uz",
+    },
+    {
+      title: "Name_ru",
+      dataIndex: "name_ru",
     },
 
     {
@@ -248,8 +264,14 @@ export default function Additional() {
 
   function getPost2() {
     var formdata3 = new FormData();
-    formdata3.append("name", document.querySelector(".gearinput").value);
-
+    formdata3.append(
+      "name_uz",
+      document.querySelector("#gearbox_post_uz").value
+    );
+    formdata3.append(
+      "name_ru",
+      document.querySelector("#gearbox_post_ru").value
+    );
     axios
       .post(`${url}/api/gear_box/`, formdata3, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -266,13 +288,18 @@ export default function Additional() {
             console.log(err, "salom");
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
   function getPut2(id) {
     var formdata4 = new FormData();
-    formdata4.append("name", document.querySelector(".gearinput1").value);
-
+    formdata4.append(
+      "name_uz",
+      document.querySelector("#gearbox_put_uz").value
+    );
+    formdata4.append(
+      "name_ru",
+      document.querySelector("#gearbox_put_ru").value
+    );
     axios
       .put(`${url}/api/gear_box/${id}/`, formdata4, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -289,8 +316,7 @@ export default function Additional() {
             console.log(err, "salom");
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function deletegear(id) {
@@ -299,10 +325,11 @@ export default function Additional() {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        window.location.reload();
+        axios.get(`${url}/api/gear_box/`).then((res) => {
+          setfueldata1(res.data);
+        });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   // 3- page
@@ -313,8 +340,12 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_uz",
+      dataIndex: "name_uz",
+    },
+    {
+      title: "Name_ru",
+      dataIndex: "name_ru",
     },
     {
       title: "Time",
@@ -375,8 +406,15 @@ export default function Additional() {
 
   function getPost3() {
     var formdata5 = new FormData();
-    formdata5.append("name", document.querySelector(".gearinput2").value);
-    formdata5.append("time", document.querySelector(".gearinput3").value);
+    formdata5.append(
+      "name_uz",
+      document.querySelector("#garant_post_uz").value
+    );
+    formdata5.append(
+      "name_ru",
+      document.querySelector("#garant_post_ru").value
+    );
+    formdata5.append("time", document.querySelector("#garant_post_time").value);
 
     axios
       .post(`${url}/api/garant/`, formdata5, {
@@ -394,13 +432,13 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
   function getPut3(id) {
     var formdata6 = new FormData();
-    formdata6.append("name", document.querySelector(".gearinput5").value);
-    formdata6.append("time", document.querySelector(".gearinput4").value);
+    formdata6.append("name_uz", document.querySelector("#garant_put_uz").value);
+    formdata6.append("name_ru", document.querySelector("#garant_put_uz").value);
+    formdata6.append("time", document.querySelector("#garant_put_time").value);
 
     axios
       .put(`${url}/api/garant/${id}/`, formdata6, {
@@ -418,8 +456,7 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function deletegarant(id) {
@@ -437,8 +474,7 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function putgarantoyna(id) {
@@ -547,12 +583,9 @@ export default function Additional() {
           .then((res) => {
             setfueldata3(res.data);
           })
-          .catch((err) => {
-
-          });
+          .catch((err) => {});
       })
-      .catch((err1) => {
-      });
+      .catch((err1) => {});
   }
 
   function getPutmodel(id) {
@@ -575,8 +608,7 @@ export default function Additional() {
             console.log(err, "ishlamadi");
           });
       })
-      .catch((err1) => {
-      });
+      .catch((err1) => {});
   }
 
   function getdeletemodel(id) {
@@ -590,11 +622,9 @@ export default function Additional() {
           .then((res) => {
             setfueldata3(res.data);
           })
-          .catch((err) => {
-          });
+          .catch((err) => {});
       })
-      .catch((err1) => {
-      });
+      .catch((err1) => {});
   }
 
   // 5 -pages
@@ -694,7 +724,7 @@ export default function Additional() {
     var series = new FormData();
     series.append("name_uz", document.querySelector("#seria_post_uz").value);
     series.append("name_ru", document.querySelector("#seria_post_ru").value);
-    series.append("model",SelectSerias); 
+    series.append("model", SelectSerias);
     axios
       .post(`${url}/api/series/`, series, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -710,9 +740,11 @@ export default function Additional() {
           .catch((err) => {
             console.log(err);
           });
+        axios.get(`${url}/api/series/`).then((res) => {
+          setSeria(res.data);
+        });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
   function getputseries(id) {
     var series1 = new FormData();
@@ -735,8 +767,7 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function getDeleteseries(id) {
@@ -754,8 +785,7 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   // 6-page
@@ -814,9 +844,9 @@ export default function Additional() {
         console.log(err);
       });
 
-      axios.get(`${url}/api/series/`).then(res => {
-        setSeria(res.data)
-      })
+    axios.get(`${url}/api/series/`).then((res) => {
+      setSeria(res.data);
+    });
   }, []);
 
   function postpozitsiyaoyna() {
@@ -842,8 +872,14 @@ export default function Additional() {
 
   function postpozition() {
     var pozition = new FormData();
-    pozition.append("name_uz", document.querySelector("#position_post_uz").value);
-    pozition.append("name_ru", document.querySelector("#position_post_ru").value);
+    pozition.append(
+      "name_uz",
+      document.querySelector("#position_post_uz").value
+    );
+    pozition.append(
+      "name_ru",
+      document.querySelector("#position_post_ru").value
+    );
     pozition.append("series", SelectPosition);
     axios
       .post(`${url}/api/position/`, pozition, {
@@ -862,21 +898,28 @@ export default function Additional() {
   }
 
   function testSseries() {
-    var vall = document.querySelector('.testSeri').value
-    axios.get(`${url}/api/series_get/`).then(res => {
-      res.data.map(item => {
-      if (vall == item.name) {
-        localStorage.setItem('keysSerie', item.id)
-        // JSON.stringify(localStorage.setItem('keySerie', item))
-        // console.log(item.id);
-      }
-      })
-    })
+    var vall = document.querySelector(".testSeri").value;
+    axios.get(`${url}/api/series_get/`).then((res) => {
+      res.data.map((item) => {
+        if (vall == item.name) {
+          localStorage.setItem("keysSerie", item.id);
+          // JSON.stringify(localStorage.setItem('keySerie', item))
+          // console.log(item.id);
+        }
+      });
+    });
   }
 
   function putpozition(id) {
     var putpozition = new FormData();
-    putpozition.append("name", document.querySelector(".putozition").value);
+    putpozition.append(
+      "name_uz",
+      document.querySelector("#positon_put_uz").value
+    );
+    putpozition.append(
+      "name_ru",
+      document.querySelector("#positon_put_ru").value
+    );
     putpozition.append("series", document.querySelector(".putozition1").value);
     axios
       .put(`${url}/api/position/${id}/`, putpozition, {
@@ -885,7 +928,7 @@ export default function Additional() {
       .then((res) => {
         document.querySelector(".putpozitsiyaoyna").style =
           "position: absolute;display:none;";
-        axios.get(`${url}/api/position_get/`).then((res) => {
+        axios.get(`${url}/api/position/`).then((res) => {
           setfueldata5(res.data);
         });
       })
@@ -917,28 +960,56 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_uz",
+      dataIndex: "name_uz",
     },
     {
-      title: "Country",
-      dataIndex: "country",
+      title: "Country_uz",
+      dataIndex: "country_uz",
     },
     {
-      title: "Region",
-      dataIndex: "region",
+      title: "Region_uz",
+      dataIndex: "region_uz",
     },
     {
-      title: "City",
-      dataIndex: "city",
+      title: "City_uz",
+      dataIndex: "city_uz",
     },
     {
-      title: "District",
-      dataIndex: "district",
+      title: "District_uz",
+      dataIndex: "district_uz",
     },
     {
-      title: "Street",
-      dataIndex: "street",
+      title: "Street_uz",
+      dataIndex: "street_uz",
+    },
+    {
+      title: "|",
+      dataIndex: "|",
+    },
+    {
+      title: "Name_ru",
+      dataIndex: "name_ru",
+    },
+    {
+      title: "Country_ru",
+      dataIndex: "country_ru",
+    },
+    {
+      title: "Region_ru",
+      dataIndex: "region_ru",
+    },
+    {
+      title: "City_ru",
+      dataIndex: "city_ru",
+    },
+    {
+      title: "District_ru",
+      dataIndex: "district_ru",
+    },
+    {
+      title: "Street_ru",
+      dataIndex: "street_ru",
     },
     {
       title: "Edit",
@@ -970,7 +1041,77 @@ export default function Additional() {
       },
     },
   ];
-
+  // 8 -page
+  const columns7 = [
+{
+  title: "id",
+  dataIndex: "id",
+},
+{
+  title: "Title",
+  dataIndex: "title",
+},
+{
+  title: "Text",
+  dataIndex: "text",
+},
+    {
+      title: "Edit",
+      render: (blank) => {
+        return (
+          <div>
+            <Button
+              onClick={() => putClickBlank(blank)}
+              style={{ background: "orange", color: "white" }}
+              type="button"
+            >
+              O'zgartirish
+            </Button>
+          </div>
+        );
+      },
+    },
+    {
+      title: "Delet",
+      witdh: "5%",
+      render: (key) => {
+        return (
+          <div>
+            <Button onClick={() => deletefilial(key.id)} type="danger">
+              O'chirish
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+  function putClickBlank (item) {
+    document.querySelector(".putBlank").style =
+      "position:fixed;right:0;    transition: 1s;";
+    setKeyBlank(item)
+   }
+   function putCloseBlank () {
+    document.querySelector(".putBlank").style =
+      "position:fixed;right:-100%;    transition: 1s;";
+   }
+   function putBlank () {
+    var blankform = new FormData();
+    blankform.append("title", document.querySelector("#put_blank_title").value);
+    blankform.append("text", document.querySelector("#put_blank_text").value);
+    axios
+    .put(`${url}/api/blank/${keyBlank.id}/`, blankform, {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+    })
+    .then((res) => {
+      document.querySelector(".putBlank").style =
+        "position:fixed;right:-100%;    transition: 1s;";
+      axios.get(`${url}/api/blank/`,
+       {headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },}
+      ).then((res) => {
+        setBlank(res.data);
+      });
+    })
+   }
   useEffect(() => {
     axios
       .get(`${url}/api/branch/`)
@@ -980,6 +1121,13 @@ export default function Additional() {
       .catch((err) => {
         console.log(err);
       });
+      axios
+      .get(`${url}/api/blank/`,{
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+      })
+      .then((res) => {
+        setBlank(res.data);
+      })
   }, []);
 
   function postfillialoyna() {
@@ -993,12 +1141,19 @@ export default function Additional() {
 
   function postfillial() {
     var Fillial = new FormData();
-    Fillial.append("name", document.querySelector(".nom").value);
-    Fillial.append("country", document.querySelector(".mamlakat").value);
-    Fillial.append("region", document.querySelector(".mintaqa").value);
-    Fillial.append("city", document.querySelector(".shahar").value);
-    Fillial.append("district", document.querySelector(".tuman").value);
-    Fillial.append("street", document.querySelector(".kocha").value);
+    Fillial.append("name_ru", document.querySelector("#branch_post_name_uz").value);
+    Fillial.append("country_uz", document.querySelector("#branch_post_country_uz").value);
+    Fillial.append("region_uz", document.querySelector("#branch_post_region_uz").value);
+    Fillial.append("city_uz", document.querySelector("#branch_post_city_uz").value);
+    Fillial.append("district_uz", document.querySelector("#branch_post_district_uz").value);
+    Fillial.append("street_uz", document.querySelector("#branch_post_street_uz").value);
+
+    Fillial.append("name_ru", document.querySelector("#branch_post_name_ru").value);
+    Fillial.append("country_ru", document.querySelector("#branch_post_country_ru").value);
+    Fillial.append("region_ru", document.querySelector("#branch_post_region_ru").value);
+    Fillial.append("city_ru", document.querySelector("#branch_post_city_ru").value);
+    Fillial.append("district_ru", document.querySelector("#branch_post_district_ru").value);
+    Fillial.append("street_ru", document.querySelector("#branch_post_street_ru").value);
 
     axios
       .post(`${url}/api/branch/`, Fillial, {
@@ -1011,8 +1166,7 @@ export default function Additional() {
           setfueldata6(res.data);
         });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function putfillialoyna(id) {
@@ -1027,13 +1181,19 @@ export default function Additional() {
 
   function putfillial(id) {
     var Fillial1 = new FormData();
-    Fillial1.append("name", document.querySelector(".nom1").value);
-    Fillial1.append("country", document.querySelector(".mamlakat1").value);
-    Fillial1.append("region", document.querySelector(".mintaqa1").value);
-    Fillial1.append("city", document.querySelector(".shahar1").value);
-    Fillial1.append("district", document.querySelector(".tuman1").value);
-    Fillial1.append("street", document.querySelector(".kocha1").value);
+    Fillial1.append("name_uz", document.querySelector("#branch_put_name_uz").value);
+    Fillial1.append("country_uz", document.querySelector("#branch_put_country_uz").value);
+    Fillial1.append("region_uz", document.querySelector("#branch_put_region_uz").value);
+    Fillial1.append("city_uz", document.querySelector("#branch_put_city_uz").value);
+    Fillial1.append("district_uz", document.querySelector("#branch_put_district_uz").value);
+    Fillial1.append("street_uz", document.querySelector("#branch_put_street_uz").value);
 
+    Fillial1.append("name_ru", document.querySelector("#branch_put_name_ru").value);
+    Fillial1.append("country_ru", document.querySelector("#branch_put_country_ru").value);
+    Fillial1.append("region_ru", document.querySelector("#branch_put_region_ru").value);
+    Fillial1.append("city_ru", document.querySelector("#branch_put_city_ru").value);
+    Fillial1.append("district_ru", document.querySelector("#branch_put_district_ru").value);
+    Fillial1.append("street_ru", document.querySelector("#branch_put_street_ru").value);
     axios
       .put(`${url}/api/branch/${id}/`, Fillial1, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -1045,8 +1205,7 @@ export default function Additional() {
           setfueldata6(res.data);
         });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function deletefilial(id) {
@@ -1087,13 +1246,20 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Yoqilg'i turilari </p>
-                <input placeholder="uz" id="fuel_sort_post_uz" className="fuelname11" type="text" />
-                <input placeholder="ru" id="fuel_sort_post_ru" className="fuelname11" type="text" />
+                <input
+                  placeholder="uz"
+                  id="fuel_sort_post_uz"
+                  className="fuelname11"
+                  type="text"
+                />
+                <input
+                  placeholder="ru"
+                  id="fuel_sort_post_ru"
+                  className="fuelname11"
+                  type="text"
+                />
                 <div className="putbutton11div">
-                  <button
-                    onClick={() => getPost1()}
-                    className="putbutton11"
-                  >
+                  <button onClick={() => getPost1()} className="putbutton11">
                     Qo'shish
                   </button>
                 </div>
@@ -1107,16 +1273,24 @@ export default function Additional() {
                 onClick={() => postoynaclose11()}
               />
               <div className="div10">
-
                 <p>Yoqilg'i turilari o'zgartiring</p>
                 <input
                   className="fuelname10"
-                  placeholder={id.name}
+                  placeholder={id.name_uz}
                   type="text"
+                  id="fuel_sort_put_uz"
                 />
-                <button onClick={() => getPut1(id.id)} className="post11">
-                  O'zgartirish
-                </button>
+                <input
+                  className="fuelname10"
+                  placeholder={id.name_ru}
+                  type="text"
+                  id="fuel_sort_put_ru"
+                />
+                <div>
+                  <button onClick={() => getPut1(id.id)} className="post11">
+                    O'zgartirish
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1143,11 +1317,24 @@ export default function Additional() {
                 onClick={() => putoyanfuel1()}
               />
               <div className="div10">
-                <p>Mashinalari turin </p>
-                <input className="gearinput" type="text" />
-                <button onClick={() => getPost2()} className="putbutton">
-                  Qo'shish
-                </button>
+                <p>Boshqaruv qutisi turilari </p>
+                <input
+                  placeholder="uz"
+                  id="gearbox_post_uz"
+                  className="gearinput"
+                  type="text"
+                />
+                <input
+                  placeholder="ru"
+                  id="gearbox_post_ru"
+                  className="gearinput"
+                  type="text"
+                />
+                <div className="putbutton11div">
+                  <button onClick={() => getPost2()} className="putbutton">
+                    Qo'shish
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1161,12 +1348,22 @@ export default function Additional() {
                 <p>Mashinalari turin </p>
                 <input
                   className="gearinput1"
-                  placeholder={key.name}
+                  placeholder={key.name_uz}
                   type="text"
+                  id="gearbox_put_uz"
                 />
-                <button onClick={() => getPut2(key.id)} className="putbutton">
-                  O'zgartirish
-                </button>
+                <input
+                  className="gearinput1"
+                  placeholder={key.name_ru}
+                  type="text"
+                  id="gearbox_put_ru"
+                />
+                <div>
+                  {" "}
+                  <button onClick={() => getPut2(key.id)} className="putbutton">
+                    O'zgartirish
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1195,10 +1392,16 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Garant </p>
-                <input className="gearinput2" type="text" />
-                <p>Soati</p>
-                <input className="gearinput3" type="number" />
+                <p>Garant uz </p>
+                <input id="garant_post_uz" className="gearinput2" type="text" />
+                <p>Garant ru</p>
+                <input id="garant_post_ru" className="gearinput2" type="text" />
+                <p>Data</p>
+                <input
+                  id="garant_post_time"
+                  className="gearinput3"
+                  type="number"
+                />
               </div>
               <div className="putbutton11div">
                 <button onClick={() => getPost3()} className="putbutton11">
@@ -1214,17 +1417,26 @@ export default function Additional() {
                 className="close"
               />
               <div className="div10">
-                <p>Garant </p>
+                <p>Garant_uz</p>
                 <input
                   className="gearinput5"
-                  placeholder={key1.name}
+                  placeholder={key1.name_uz}
                   type="text"
+                  id="garant_put_uz"
+                />
+                <p>Garant_ru</p>
+                <input
+                  className="gearinput5"
+                  placeholder={key1.name_ru}
+                  type="text"
+                  id="garant_put_ru"
                 />
                 <p>Soati</p>
                 <input
                   className="gearinput4"
                   placeholder={key1.time}
                   type="number"
+                  id="garant_put_time"
                 />
               </div>
               <div className="putbutton11div">
@@ -1260,8 +1472,18 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Modellari </p>
-                <input type="text" placeholder="uz" id="model_post_uz" className="modelinput" />
-                <input type="text" placeholder="ru" id="model_post_ru" className="modelinput" />
+                <input
+                  type="text"
+                  placeholder="uz"
+                  id="model_post_uz"
+                  className="modelinput"
+                />
+                <input
+                  type="text"
+                  placeholder="ru"
+                  id="model_post_ru"
+                  className="modelinput"
+                />
                 <div className="putbutton11div">
                   <button
                     onClick={() => getPostmodel()}
@@ -1287,7 +1509,7 @@ export default function Additional() {
                   className="modelinput1"
                   id="model_put_uz"
                 />
-                                <input
+                <input
                   type="text"
                   placeholder={key2.name_ru}
                   className="modelinput1"
@@ -1329,15 +1551,33 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Seriyalari </p>
-                <select onChange={(e)=>setSelectSerias(e.target.value)} className="selectFuels" onClick={() => renderSelect()}>
+                <select
+                  onChange={(e) => setSelectSerias(e.target.value)}
+                  className="selectFuels"
+                  onClick={() => renderSelect()}
+                >
                   <option></option>
                   {fueldata3.map((item) => {
-                    return <option value={item.id}>(uz){item.name_uz}   (ru){item.name_ru}</option>;
+                    return (
+                      <option value={item.id}>
+                        (uz){item.name_uz} (ru){item.name_ru}
+                      </option>
+                    );
                   })}
                 </select>
                 <h1>&nbsp;</h1>
-                <input className="seriyapost" placeholder="uz" type="text" id="seria_post_uz" />
-                <input className="seriyapost" placeholder="ru" type="text" id="seria_post_ru" />
+                <input
+                  className="seriyapost"
+                  placeholder="uz"
+                  type="text"
+                  id="seria_post_uz"
+                />
+                <input
+                  className="seriyapost"
+                  placeholder="ru"
+                  type="text"
+                  id="seria_post_ru"
+                />
               </div>
               <div className="putbutton11div">
                 <button className="putbutton11" onClick={() => getpostseries()}>
@@ -1360,16 +1600,24 @@ export default function Additional() {
                   type="text"
                   id="put_series_uz"
                 />
-                                <input
+                <input
                   className="seriyaput"
                   placeholder={key3.name_ru}
                   type="text"
                   id="put_series_ru"
                 />
-                             <select onChange={(e)=>setSelectSerias(e.target.value)} className="selectFuels" onClick={() => renderSelect()}>
+                <select
+                  onChange={(e) => setSelectSerias(e.target.value)}
+                  className="selectFuels"
+                  onClick={() => renderSelect()}
+                >
                   <option></option>
                   {fueldata3.map((item) => {
-                    return <option value={item.id}>(uz){item.name_uz}   (ru){item.name_ru}</option>;
+                    return (
+                      <option value={item.id}>
+                        (uz){item.name_uz} (ru){item.name_ru}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
@@ -1408,19 +1656,33 @@ export default function Additional() {
               />
               <div className="div10">
                 <p>Pozitsiyalari </p>
-                <select onChange={(e)=>setSelectPosition(e.target.value)} onClick={() => testSseries()} className="testSeri">
+                <select
+                  onChange={(e) => setSelectPosition(e.target.value)}
+                  onClick={() => testSseries()}
+                  className="testSeri"
+                >
                   <option></option>
-                  {
-                    seria.map(item => {
-                      return (
-                        <option value={item.model}>(uz){item.name_uz}  (ru){item.name_ru}</option>
-                      )
-                    })
-                  }
+                  {seria.map((item) => {
+                    return (
+                      <option value={item.model}>
+                        (uz){item.name_uz} (ru){item.name_ru}
+                      </option>
+                    );
+                  })}
                 </select>
                 <p>&nbsp;</p>
-                <input placeholder="uz" className="postpozition" type="text" id="position_post_uz" />
-                <input placeholder="ru" className="postpozition" type="text" id="position_post_ru" />
+                <input
+                  placeholder="uz"
+                  className="postpozition"
+                  type="text"
+                  id="position_post_uz"
+                />
+                <input
+                  placeholder="ru"
+                  className="postpozition"
+                  type="text"
+                  id="position_post_ru"
+                />
               </div>
               <div className="putbutton11div">
                 <button onClick={() => postpozition()} className="putbutton11">
@@ -1439,15 +1701,22 @@ export default function Additional() {
                 <p>Pozitsiyalari almashtiring</p>
                 <input
                   className="putozition"
-                  placeholder={key4.name}
+                  placeholder={key4.name_uz}
                   type="text"
+                  id="positon_put_uz"
+                />
+                <input
+                  className="putozition"
+                  placeholder={key4.name_ru}
+                  type="text"
+                  id="positon_put_ru"
                 />
                 <p>Seriyalari almashtiring</p>
                 <select>
                   {fueldata4.map((item) => {
                     return (
                       <option value={item.id} className="putozition1">
-                        {item.name_uz}
+                        {item.name_uz} {item.name_ru}
                       </option>
                     );
                   })}
@@ -1485,41 +1754,81 @@ export default function Additional() {
         <AiOutlineClose onClick={() => postfillialoyna1()} className="close1" />
 
         <div className="div20">
-          <div className="label">
-            <label>
-              <p>Nomi</p>
-              <input className="nom" type="text" />
-            </label>
+          <div>
+            <div className="label">
+              <label>
+                <p>Name uz</p>
+                <input id="branch_post_name_uz" className="nom" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Country uz</p>
+                <input id="branch_post_country_uz" className="mamlakat" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Region uz</p>
+                <input id="branch_post_region_uz" className="mintaqa" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>City uz</p>
+                <input  id="branch_post_city_uz" className="shahar" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>District uz</p>
+                <input id="branch_post_district_uz" className="tuman" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Street uz</p>
+                <input id="branch_post_street_uz" className="kocha" type="text" />
+              </label>
+            </div>
           </div>
-          <div className="label">
-            <label>
-              <p>Mamlakat</p>
-              <input className="mamlakat" type="text" />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Mintaqa</p>
-              <input className="mintaqa" type="text" />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Shahar</p>
-              <input className="shahar" type="text" />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Tuman</p>
-              <input className="tuman" type="text" />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Ko'cha</p>
-              <input className="kocha" type="text" />
-            </label>
+          <div>
+            <div className="label">
+              <label>
+                <p>Name ru</p>
+                <input id="branch_post_name_ru" className="nom" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Country ru</p>
+                <input id="branch_post_country_ru" className="mamlakat" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Region ru</p>
+                <input id="branch_post_region_ru" className="mintaqa" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>City ru</p>
+                <input  id="branch_post_city_ru" className="shahar" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>District ru</p>
+                <input id="branch_post_district_ru" className="tuman" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Street ru</p>
+                <input id="branch_post_street_ru" className="kocha" type="text" />
+              </label>
+            </div>
           </div>
         </div>
         <button
@@ -1534,53 +1843,81 @@ export default function Additional() {
         <AiOutlineClose onClick={() => putfillialoyna1()} className="close1" />
 
         <div className="div20">
-          <div className="label">
-            <label>
-              <p>Nomi</p>
-              <input className="nom1" placeholder={key5.name} type="text" />
-            </label>
+        <div>
+            <div className="label">
+              <label>
+                <p>Name uz</p>
+                <input id="branch_put_name_uz" className="nom" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Country uz</p>
+                <input id="branch_put_country_uz" className="mamlakat" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Region uz</p>
+                <input id="branch_put_region_uz" className="mintaqa" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>City uz</p>
+                <input  id="branch_put_city_uz" className="shahar" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>District uz</p>
+                <input id="branch_put_district_uz" className="tuman" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Street uz</p>
+                <input id="branch_put_street_uz" className="kocha" type="text" />
+              </label>
+            </div>
           </div>
-          <div className="label">
-            <label>
-              <p>Mamlakat</p>
-              <input
-                className="mamlakat1"
-                placeholder={key5.country}
-                type="text"
-              />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Mintaqa</p>
-              <input
-                className="mintaqa1"
-                placeholder={key5.region}
-                type="text"
-              />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Shahar</p>
-              <input className="shahar1" placeholder={key5.city} type="text" />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Tuman</p>
-              <input
-                className="tuman1"
-                placeholder={key5.district}
-                ype="text"
-              />
-            </label>
-          </div>
-          <div className="label">
-            <label>
-              <p>Ko'cha</p>
-              <input className="kocha1" placeholder={key5.street} type="text" />
-            </label>
+          <div>
+            <div className="label">
+              <label>
+                <p>Name ru</p>
+                <input id="branch_put_name_ru" className="nom" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Country ru</p>
+                <input id="branch_put_country_ru" className="mamlakat" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Region ru</p>
+                <input id="branch_put_region_ru" className="mintaqa" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>City ru</p>
+                <input  id="branch_put_city_ru" className="shahar" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>District ru</p>
+                <input id="branch_put_district_ru" className="tuman" type="text" />
+              </label>
+            </div>
+            <div className="label">
+              <label>
+                <p>Street ru</p>
+                <input id="branch_put_street_ru" className="kocha" type="text" />
+              </label>
+            </div>
           </div>
         </div>
         <button
@@ -1589,6 +1926,34 @@ export default function Additional() {
           onClick={() => putfillial(key5.id)}
         >
           O'zgartirish
+        </button>
+      </div>
+      <div className="house6">
+        <button className="post11" onClick={() => postfillialoyna()}>
+          Qo'shish
+        </button>
+        <h1>Blank</h1>
+        <Table
+          className="table"
+          style={{ width: "100%" }}
+          pagination={{ pageSize: 5 }}
+          columns={columns7}
+          dataSource={blank}
+        />
+      </div>
+      <div className="putBlank">
+        <AiOutlineClose onClick={() => putCloseBlank()} className="close1" />
+
+        <div className="div20">
+          <input id="put_blank_title" placeholder={keyBlank.title}/>
+          <input id="put_blank_text" placeholder={keyBlank.text}/>
+        </div>
+        <button
+          style={{ marginLeft: "81.5%", marginTop: "2%" }}
+          className="putbutton"
+          onClick={() => putBlank()}
+        >
+          Qo'shish
         </button>
       </div>
     </div>

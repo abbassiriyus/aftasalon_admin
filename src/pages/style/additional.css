@@ -290,6 +290,14 @@ select{
 .postfillialoyna{
     width: 40%;
   position: fixed;
+    right: -1000%;
+    top: 20%;
+    background-color: white;
+    color: black;
+}
+.putBlank{
+    width: 40%;
+  position: fixed;
     right: -100%;
     top: 20%;
     background-color: white;
@@ -306,6 +314,7 @@ select{
 
 .label{
     display: block;
+    flex-direction: row;
 }
 .div20{
         display: flex;

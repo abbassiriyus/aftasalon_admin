@@ -1,2 +1,2 @@
-var url='https://api.baracar.uz'
+var url='https://baracar.onrender.com'
 module.exports=url

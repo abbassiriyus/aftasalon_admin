@@ -30,7 +30,7 @@ const [login, setLogin]=useState(sessionStorage.getItem("token"))
         <Main> 
           <Redirect from="*" to="/" />
           <Route exact path="/dashboard" component={Home} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Profile} />
           <Route exact path="/cars" component={Tables} />
           <Route exact path="/additional" component={Additional} />
           <Route exact path="/users" component={Billing} />
