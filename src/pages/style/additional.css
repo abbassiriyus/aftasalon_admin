@@ -333,3 +333,68 @@ select{
 margin-left: 96%;
 margin-top: 1%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1024px) {
+    .katta10{
+        margin-bottom: 10%;
+        margin-top: 10%;
+    }
+    .house,.house1,.house2,.house3,.house4,.house5,.house6{
+        margin-top:15% ;
+        width: 100%;
+    }
+    .house5{
+        margin-top:45% ;
+        margin-bottom:15% ;
+        width: 100%;
+    }
+    .house1{
+        width: 100%;
+    }
+    .copyright{
+        position: static;
+    }
+    .footer-menu{
+        position: static;
+        text-align: center;
+    }
+    .table{
+        width: 100%;
+    }
+    .post10, .post11, .putbutton{
+        /* width: 80px;
+        height: 30px; */
+        font-size: 14px;
+    }
+    .postoyna10, .postoyna11, .putoyanfuel, .putoyanfuel1, .postgarantoyna, .putgarantoyna, .postmodeloyna, .putmodeloyna{
+        height: 250px;
+    }
+    .katta11{
+        margin-top: 50%;
+    }
+    .putbutton11{
+        width: 80px;
+        height: 30px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .putbutton11div{
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    /* .katta12{
+        margin-top: 50%;
+    } */
+}
