@@ -960,56 +960,71 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
-      dataIndex: "name_uz",
+      title: "Name",
+      // dataIndex: "name_uz",
+      render: (fueldata6) => {
+        return (
+          <div className="filial-div">
+<p >UZ:{fueldata6.name_uz}</p>
+<p>RU:{fueldata6.name_ru}</p>
+          </div>
+        );
+      },
     },
     {
-      title: "Country_uz",
-      dataIndex: "country_uz",
+      title: "Country",
+      render: (fueldata6) => {
+        return (
+          <div>
+<p>{fueldata6.country_uz}</p>
+<p>{fueldata6.country_ru}</p>
+          </div>
+        );
+      },
     },
     {
-      title: "Region_uz",
-      dataIndex: "region_uz",
+      title: "Region",
+      render: (fueldata6) => {
+        return (
+          <div>
+<p>{fueldata6.region_uz}</p>
+<p>{fueldata6.region_ru}</p>
+          </div>
+        );
+      },
     },
     {
-      title: "City_uz",
-      dataIndex: "city_uz",
+      title: "City",
+      render: (fueldata6) => {
+        return (
+          <div>
+<p>{fueldata6.city_uz}</p>
+<p>{fueldata6.city_ru}</p>
+          </div>
+        );
+      },
     },
     {
-      title: "District_uz",
-      dataIndex: "district_uz",
+      title: "District",
+      render: (fueldata6) => {
+        return (
+          <div>
+<p>{fueldata6.district_uz}</p>
+<p>{fueldata6.district_ru}</p>
+          </div>
+        );
+      },
     },
     {
-      title: "Street_uz",
-      dataIndex: "street_uz",
-    },
-    {
-      title: "|",
-      dataIndex: "|",
-    },
-    {
-      title: "Name_ru",
-      dataIndex: "name_ru",
-    },
-    {
-      title: "Country_ru",
-      dataIndex: "country_ru",
-    },
-    {
-      title: "Region_ru",
-      dataIndex: "region_ru",
-    },
-    {
-      title: "City_ru",
-      dataIndex: "city_ru",
-    },
-    {
-      title: "District_ru",
-      dataIndex: "district_ru",
-    },
-    {
-      title: "Street_ru",
-      dataIndex: "street_ru",
+      title: "Street",
+      render: (fueldata6) => {
+        return (
+          <div>
+<p>{fueldata6.street_uz}</p>
+<p>{fueldata6.street_ru}</p>
+          </div>
+        );
+      },
     },
     {
       title: "Edit",
@@ -1094,6 +1109,15 @@ export default function Additional() {
     document.querySelector(".putBlank").style =
       "position:fixed;right:-100%;    transition: 1s;";
    }
+   function postClickBlank (item) {
+    document.querySelector(".postBlank").style =
+      "position:fixed;right:0;    transition: 1s;";
+    setKeyBlank(item)
+   }
+   function postCloseBlank () {
+    document.querySelector(".postBlank").style =
+      "position:fixed;right:-100%;    transition: 1s;";
+   }
    function putBlank () {
     var blankform = new FormData();
     blankform.append("title", document.querySelector("#put_blank_title").value);
@@ -1104,6 +1128,24 @@ export default function Additional() {
     })
     .then((res) => {
       document.querySelector(".putBlank").style =
+        "position:fixed;right:-100%;    transition: 1s;";
+      axios.get(`${url}/api/blank/`,
+       {headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },}
+      ).then((res) => {
+        setBlank(res.data);
+      });
+    })
+   }
+   function postBlank () {
+    var blankform = new FormData();
+    blankform.append("title", document.querySelector("#post_blank_title").value);
+    blankform.append("text", document.querySelector("#post_blank_text").value);
+    axios
+    .post(`${url}/api/blank/`, blankform, {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+    })
+    .then((res) => {
+      document.querySelector(".postBlank").style =
         "position:fixed;right:-100%;    transition: 1s;";
       axios.get(`${url}/api/blank/`,
        {headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },}
@@ -1142,7 +1184,7 @@ export default function Additional() {
   function postfillial() {
     var Fillial = new FormData();
     Fillial.append("name_ru", document.querySelector("#branch_post_name_uz").value);
-    Fillial.append("country_uz", document.querySelector("#branch_post_country_uz").value);
+    Fillial.append("city_uz", document.querySelector("#branch_post_country_uz").value);
     Fillial.append("region_uz", document.querySelector("#branch_post_region_uz").value);
     Fillial.append("city_uz", document.querySelector("#branch_post_city_uz").value);
     Fillial.append("district_uz", document.querySelector("#branch_post_district_uz").value);
@@ -1929,7 +1971,7 @@ export default function Additional() {
         </button>
       </div>
       <div className="house6">
-        <button className="post11" onClick={() => postfillialoyna()}>
+        <button className="post11" onClick={() => postClickBlank()}>
           Qo'shish
         </button>
         <h1>Blank</h1>
@@ -1945,13 +1987,28 @@ export default function Additional() {
         <AiOutlineClose onClick={() => putCloseBlank()} className="close1" />
 
         <div className="div20">
-          <input id="put_blank_title" placeholder={keyBlank.title}/>
-          <input id="put_blank_text" placeholder={keyBlank.text}/>
+          <input id="put_blank_title"placeholder="title"/>
+          <input id="put_blank_text" placeholder="text" />
         </div>
         <button
           style={{ marginLeft: "81.5%", marginTop: "2%" }}
           className="putbutton"
           onClick={() => putBlank()}
+        >
+          Qo'shish
+        </button>
+      </div>
+      <div className="postBlank">
+        <AiOutlineClose onClick={() => postCloseBlank()} className="close1" />
+
+        <div className="div20">
+          <input id="post_blank_title"/>
+          <input id="post_blank_text" />
+        </div>
+        <button
+          style={{ marginLeft: "81.5%", marginTop: "2%" }}
+          className="putbutton"
+          onClick={() => postBlank()}
         >
           Qo'shish
         </button>

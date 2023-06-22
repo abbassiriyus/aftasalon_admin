@@ -36,8 +36,12 @@ const Tables = () => {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_uz",
+      dataIndex: "name_uz",
+    },
+    {
+      title: "Name_ru",
+      dataIndex: "name_ru",
     },
     {
       title: "Price",
@@ -82,7 +86,7 @@ const Tables = () => {
     },
     {
       title: "sotildi",
-      key: "delete",
+      key: "sell",
       width: "5%",
       render: (key) => {
         return (
@@ -151,7 +155,7 @@ const Tables = () => {
   };
 
   function getData(id) {
-    axios.get(`${url}/api/cars_get/`).then((res) => {
+    axios.get(`${url}/api/cars/`).then((res) => {
       setdata1(res.data);
 
       // setKeys(id);
@@ -210,7 +214,7 @@ const Tables = () => {
     getGar();
   }, []);
   function getPosit() {
-    axios.get(`${url}/api/position_get/`).then((res) => {
+    axios.get(`${url}/api/position/`).then((res) => {
       setdata6(res.data);
     });
   }
@@ -237,24 +241,27 @@ const Tables = () => {
         });
 
         var daalete = new FormData();
-        daalete.append("position", id.position.id);
-        daalete.append("position.series", id.position.series.name);
-        daalete.append("position.series.model", id.position.series.model.name);
-        daalete.append("fuel_sort", id.fuel_sort.id);
-        daalete.append("gearbox", id.gearbox.id);
-        daalete.append("garant", id.garant.id);
-        daalete.append("branch", id.branch.id);
+        daalete.append("position", id.position);
+        // daalete.append("position.series", id.position.series.name);
+        // daalete.append("position.series.model", id.position.series.model.name);
+        daalete.append("fuel_sort", id.fuel_sort);
+        daalete.append("gearbox", id.gearbox);
+        daalete.append("garant", id.garant);
+        daalete.append("branch", id.branch);
         daalete.append("year", id.year);
         daalete.append("distance", id.distance);
         daalete.append("engine", id.engine);
-        daalete.append("colour", id.colour);
-        daalete.append("name", id.name);
+        daalete.append("colour_uz", id.colour_uz);
+        daalete.append("colour_ru", id.colour_ru);
+        daalete.append("name_uz", id.name_uz);
+        daalete.append("name_ru", id.name_ru);
         daalete.append("initial_price", id.initial_price);
         daalete.append("price", id.price);
         daalete.append("sale", id.sale);
         daalete.append("depozit", id.depozit);
         daalete.append("fuel_consumption", id.fuel_consumption);
-        daalete.append("description", id.description);
+        daalete.append("description_uz", id.description_uz);
+        daalete.append("description_ru", id.description_ru);
         daalete.append("is_active", id.is_active);
         axios
           .post(`${url}/api/car_history/`, daalete, {
@@ -298,11 +305,13 @@ const Tables = () => {
     formdata.append("year", document.querySelector(".yil").value);
     formdata.append("distance", document.querySelector(".mas").value);
     formdata.append("engine", document.querySelector(".dvi").value);
-    formdata.append("colour", document.querySelector(".rang").value);
-    // formdata.append("views", document.querySelector(".kor").value);
-    formdata.append("description", document.querySelector(".tavsifi").value);
+    formdata.append("colour_uz", document.querySelector(".rang").value);
+    formdata.append("colour_ru", document.querySelector("#color_car_ru").value);
+    formdata.append("description_uz", document.querySelector(".tavsifi").value);
+    formdata.append("description_ru", document.querySelector("#description_car_ru").value);
     formdata.append("is_active", document.querySelector(".faol").checked);
-    formdata.append("name", document.querySelector(".ism").value);
+    formdata.append("name_uz", document.querySelector(".ism").value);
+    formdata.append("name_ru", document.querySelector("#name_ru_car").value);
     formdata.append("initial_price", document.querySelector(".bosh").value);
     formdata.append("price", document.querySelector(".narx").value);
     formdata.append("sale", document.querySelector(".sot").value);
@@ -321,17 +330,14 @@ const Tables = () => {
           formdata2.append("car", res.data.id);
           formdata2.append("image1", item.image1);
           formdata2.append("image2", item.image2);
-          formdata2.append("description", item.description);
+          formdata2.append("description_uz", item.description_uz);
+          formdata2.append("description_ru", item.description_ru);
           axios
           .post(`${url}/api/defect/`, formdata2, {
             headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
           })
           .then((res3)=>{
-          //   document.querySelector(".postoyna").style =
-          //   "position:fixed;right:-100%;  transition: 1s;";
-          // axios.get(`${url}/api/cars_get/`).then((res2) => {
-          //   setdata1(res2.data);
-          // });
+
           })
         })}
         var formdata3 = new FormData();
@@ -343,7 +349,11 @@ const Tables = () => {
           .post(`${url}/api/images/`, formdata3, {
             headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
           }).then((res33)=>{
-            window.location.reload()
+                        document.querySelector(".postoyna").style =
+            "position:fixed;right:-100%;  transition: 1s;";
+          axios.get(`${url}/api/cars/`).then((res2) => {
+            setdata1(res2.data);
+          });
           })
         })}
 
@@ -579,12 +589,14 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
   {   
       image1: document.querySelector("#rasm_1").files[0],
       image2: document.querySelector("#rasm_2").files[0],
-      description: document.querySelector("#text_defect").value
+      description_uz: document.querySelector("#text_defect_uz").value,
+      description_ru: document.querySelector("#text_defect_ru").value
   }
   setdatadefect([...datadefect,datafordefect])
   document.querySelector("#rasm_1").value=""
   document.querySelector("#rasm_2").value=""
-  document.querySelector("#text_defect").value=""
+  document.querySelector("#text_defect_uz").value=""
+  document.querySelector("#text_defect_ru").value=""
 }
   }
   function postDataforcarimg() {
@@ -602,13 +614,14 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
       const handleInputChange = (event) => {
         setSearch(event.target.value);
         const searchRegex = new RegExp(`^${event.target.value}`, 'i');
-        axios.get(`${url}/api/cars_get/`).then((res) => {
+        axios.get(`${url}/api/cars/`).then((res) => {
           const searchdata = res.data.filter((item) => {
             return (
-              searchRegex.test(item.name) ||
-              searchRegex.test(item.position.name)||
-              searchRegex.test(item.position.series.name)||
-              searchRegex.test(item.position.series.model.name)||
+              searchRegex.test(item.name_uz) ||
+              searchRegex.test(item.name_ru) ||
+              // searchRegex.test(item.position.name)||
+              // searchRegex.test(item.position.series.name)||
+              // searchRegex.test(item.position.series.model.name)||
               searchRegex.test(item.price)||
               searchRegex.test(item.id)||
               searchRegex.test(item.year)
@@ -662,7 +675,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <select className="slect slect1" id="slect1">
                       {data6.map((item) => (
                         <option id="inp1" value={item.id}>
-                          {item.name} {item.series.name} {item.series.model.name}
+                          {item.name}
                         </option>
                       ))}
                     </select>
@@ -687,7 +700,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <h1>Yoqilg'i turi</h1>
                     <select className="slect slect4">
                       {data2.map((item) => (
-                        <option value={item.id}>{item.name}</option>
+                        <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>
                       ))}
                     </select>
                   </div>
@@ -703,7 +716,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <h1>Garant</h1>
                     <select className="slect slect6">
                       {data4.map((item) => (
-                        <option value={item.id}>{item.name}</option>
+                        <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>
                       ))}
                     </select>
                   </div>
@@ -809,14 +822,15 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
               <div className="text1">
                 <div className="text5">
                   <h1>Ism</h1>
-                  <input className="ism" type="text" />
+                  <input placeholder="uz" className="ism" type="text" />
+                  <input placeholder="ru" id="name_ru_car" className="ism" type="text" />
                 </div>
 
                 <div className="text5">
                   <h1>Pozitsiya</h1>
                   <select className="select" id="poz">
                     {data6.map((item) => {
-                      return <option value={item.id}>{item.name} {item.series.name} {item.series.model.name}</option>;
+                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
                     })}
                   </select>
                 </div>
@@ -824,7 +838,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Yoqilg'i turi</h1>
                   <select className="select" id="yoq">
                     {data2.map((item) => {
-                      return <option value={item.id}>{item.name}</option>;
+                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
                     })}
                   </select>
                 </div>
@@ -832,7 +846,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Boshqaruv qutisi</h1>
                   <select className="select" id="vit">
                     {data3.map((item) => {
-                      return <option value={item.id}>{item.name}</option>;
+                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
                     })}
                   </select>
                 </div>
@@ -840,7 +854,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Garant</h1>
                   <select id="gar" className="select">
                     {data4.map((item) => {
-                      return <option value={item.id}>{item.name}</option>;
+                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
                     })}
                   </select>
                 </div>
@@ -854,7 +868,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Filial</h1>
                   <select id="fil" className="select">
                     {data5.map((item) => {
-                      return <option value={item.id}>{item.name}</option>;
+                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
                     })}
                   </select>
                 </div>
@@ -871,8 +885,12 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <input className="dvi" type="number" />
                 </div>
                 <div className="text5">
-                  <h1>Rang</h1>
+                  <h1>Rang_uz</h1>
                   <input className="rang" type="text" />
+                </div>
+                <div className="text5">
+                  <h1>Rang_ru</h1>
+                  <input id="color_car_ru" className="rang" type="text" />
                 </div>
               </div>
               <div className="text3">
@@ -904,8 +922,10 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
 
             </div>
             <div className="textsmal">
-              <h1>Tavsifi</h1>
-              <textarea className="tavsifi" rows="10" cols="100"></textarea>
+              <h1>Tavsifi_uz</h1>
+              <textarea className="tavsifi" rows="1" cols="1"></textarea>
+              <h1>Tavsifi_ru</h1>
+              <textarea id="description_car_ru" className="tavsifi" rows="1" cols="1"></textarea>
             </div>
             <div className="df">
               <div className="df1">
@@ -931,7 +951,8 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
         <div className="defect_div">
         <input className="input_defect" id="rasm_1" type="file"/>
         <input className="input_defect" id="rasm_2" type="file"/>
-        <textarea id="text_defect" className="defectdest" ></textarea><br />
+        <textarea id="text_defect_uz" className="defectdest" ></textarea><br />
+        <textarea id="text_defect_ru" className="defectdest" ></textarea><br />
         <button className="btn_defect" onClick={()=>postDataforcardefect()}>qoshish</button>
         </div>
 
@@ -944,7 +965,8 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
             <img className="img_defect" src={URL.createObjectURL(item.image1)} alt={item.image1.name} />
             <img className="img_defect" src={URL.createObjectURL(item.image2)} alt={item.image2.name} />
             </div>
-            <p className="p_defect">{item.description}</p>
+            <p className="p_defect">{item.description_uz}</p>
+            <p className="p_defect">{item.description_ru}</p>
             </div>
           }else{
             return<p>pustoy</p>

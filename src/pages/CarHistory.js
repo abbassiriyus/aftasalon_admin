@@ -25,8 +25,12 @@ const CarHistory = () => {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Name_uz",
+      dataIndex: "name_uz",
+    },
+    {
+      title: "Name_ru",
+      dataIndex: "name_ru",
     },
     {
       title: "Price",
@@ -113,7 +117,7 @@ const CarHistory = () => {
 const handleInputChange = (event) => {
   const searchRegex = new RegExp(`^${event.target.value}`, 'i');
   axios.get(`${url}/api/car_history/`).then((res) => {
-    axios.get(`${url}/api/position_get/`).then((res2) => {
+    axios.get(`${url}/api/uz/position_get/`).then((res2) => {
       const database=[]
       for (let i = 0; i < res.data.length; i++) {  
         for (let b = 0; b < res2.data.length; b++) {

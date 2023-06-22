@@ -24,15 +24,15 @@ const CarHistory = () => {
     },
     {
       title: "user",
-      render: (_,item)=> <div>{item.user.username}</div>
+      render: (_,item)=> <div>{item.user}</div>
     },
     {
       title: "car",
-      render: (_,item)=> <div>{item.car.name}</div>
+      render: (_,item)=> <div>{item.car}</div>
     },
     {
         title: "branch",
-        render: (_,item)=> <div>{item.branch.name}</div>
+        render: (_,item)=> <div>{item.branch}</div>
       },
       {
         title: "time_create",
@@ -177,7 +177,7 @@ function putOrder (order) {
       });
 }
   function getData() {
-    axios.get(`${url}/api/order_get/`,     {
+    axios.get(`${url}/api/order/`,     {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }).then((res) => {
       setdata1(res.data);
@@ -196,39 +196,39 @@ function putOrder (order) {
     const searchRegex = new RegExp(`^${event.target.value}`, 'i');
     if (select.length<1) {
       axios
-      .get(`${url}/api/order_get/`, {
+      .get(`${url}/api/order/`, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
         const searchdata = res.data.filter((item) => {
           return (
-            searchRegex.test(item.car.name) ||
-            searchRegex.test(item.car.position.name) ||
-            searchRegex.test(item.car.position.series.name) ||
-            searchRegex.test(item.car.position.series.model.name) ||
-            searchRegex.test(item.car.price) ||
-            searchRegex.test(item.id) ||
-            searchRegex.test(item.user.username)
+            // searchRegex.test(item.car.name) ||
+            // searchRegex.test(item.car.position.name) ||
+            // searchRegex.test(item.car.position.series.name) ||
+            // searchRegex.test(item.car.position.series.model.name) ||
+            // searchRegex.test(item.car.price) ||
+            searchRegex.test(item.id) 
+            // searchRegex.test(item.user.username)
           );
         });
         setdata1(searchdata);
       })
     }else{
       axios
-      .get(`${url}/api/order_get/`, {
+      .get(`${url}/api/order/`, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-          const filteredData = res.data.filter((item) => item.branch.id ===parseInt(select));
+          const filteredData = res.data.filter((item) => item.branch ===parseInt(select));
           const searchdata = filteredData.filter((item) => {
             return (
-              searchRegex.test(item.car.name) ||
-              searchRegex.test(item.car.position.name) ||
-              searchRegex.test(item.car.position.series.name) ||
-              searchRegex.test(item.car.position.series.model.name) ||
-              searchRegex.test(item.car.price) ||
-              searchRegex.test(item.id) ||
-              searchRegex.test(item.user.username)
+              // searchRegex.test(item.car.name) ||
+              // searchRegex.test(item.car.position.name) ||
+              // searchRegex.test(item.car.position.series.name) ||
+              // searchRegex.test(item.car.position.series.model.name) ||
+              // searchRegex.test(item.car.price) ||
+              searchRegex.test(item.id) 
+              // searchRegex.test(item.user.username)
             );
           });
           setdata1(searchdata);  
@@ -239,54 +239,16 @@ function putOrder (order) {
     setselect(event.target.value);
     const searchRegex = new RegExp(`^${event.target.value}`, 'i');
     axios
-      .get(`${url}/api/order_get/`, {
+      .get(`${url}/api/order/`, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
         const searchdata = res.data.filter((item) => {
-          return searchRegex.test(item.branch.id);
+          return searchRegex.test(item.branch);
         });
         setdata1(searchdata);
       });
   };
-  // const handleInputChange = (event) => {
-  //   const searchRegex = new RegExp(`^${event.target.value}, 'i'`);
-  //   axios.get(`${url}/api/order_get/`, {
-  //     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
-  //   }).then((res) => {
-  //     for (let o = 0; o < res.data.length; o++) {
-  //       if (res.data[o].branch.id===select) {
-  //         const searchdata = res.data[o].filter((item) => {
-  //           return (
-  //             searchRegex.test(item.car.name) ||
-  //             searchRegex.test(item.car.position.name) ||
-  //             searchRegex.test(item.car.position.series.name) ||
-  //             searchRegex.test(item.car.position.series.model.name) ||
-  //             searchRegex.test(item.car.price) ||
-  //             searchRegex.test(item.id) ||
-  //             searchRegex.test(item.user.username)
-  //           );
-  //         });
-  //         setdata1(searchdata);
-  //       }    
-  //     }
-  //   });
-  // }
-  // const handleInputChange2 = (event) => {
-  //   setselect(event.target.value)
-  //   const searchRegex = new RegExp(`^${event.target.value}`, 'i');
-  //   axios.get(`${url}/api/order_get/`,{
-  //     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
-  //   }).then((res) => {
-  //     const searchdata = res.data.filter((item) => {
-  //       return (
-  //         searchRegex.test(item.branch.id)
-  //       );
-  //     });
-
-  //     setdata1(searchdata);
-  //   })
-  // }
 
   return (
     <div>
@@ -294,7 +256,7 @@ function putOrder (order) {
             <select onChange={handleInputChange2} className="select_search">
               <option></option>
               {data2.map((item)=>{
-                return<option value={item.id}>{item.name}</option>
+                return<option value={item.id}>{item.name_uz}{item.name_ru}</option>
               })}
             </select>
           <Input

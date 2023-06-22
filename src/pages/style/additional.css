@@ -303,6 +303,14 @@ select{
     background-color: white;
     color: black;
 }
+.postBlank{
+    width: 40%;
+  position: fixed;
+    right: -100%;
+    top: 20%;
+    background-color: white;
+    color: black;
+}
 .putfillialoyna{
     width: 40%;
   position: fixed;
@@ -345,15 +353,17 @@ margin-top: 1%;
 
 
 
-
-@media only screen and (max-width: 1024px) {
-    .katta10{
-        margin-bottom: 10%;
-        margin-top: 10%;
-    }
+@media only screen and (max-width: 1440px) {
     .house,.house1,.house2,.house3,.house4,.house5,.house6{
         margin-top:15% ;
         width: 100%;
+    }
+    .ant-table-content{
+        width: 100%;
+    }
+    .house{
+        margin-top: 15%;
+        margin-bottom: 15%;
     }
     .house5{
         margin-top:45% ;
@@ -370,9 +380,9 @@ margin-top: 1%;
         position: static;
         text-align: center;
     }
-    .table{
+    /* .table{
         width: 100%;
-    }
+    } */
     .post10, .post11, .putbutton{
         /* width: 80px;
         height: 30px; */
@@ -382,7 +392,7 @@ margin-top: 1%;
         height: 250px;
     }
     .katta11{
-        margin-top: 50%;
+        margin-top: 20%;
     }
     .putbutton11{
         width: 80px;
@@ -393,6 +403,23 @@ margin-top: 1%;
     .putbutton11div{
         flex-direction: column;
         margin-top: 10px;
+    }
+    .postfillialoyna{
+        width: 50%;
+        z-index: 2000;
+        border:1px solid black;
+        margin-bottom: 30%;
+        padding-bottom: 15%;
+    }
+    .putfillialoyna{
+        width: 50%;
+        z-index: 2000;
+        border:1px solid black;
+        margin-bottom: 30%;
+        padding-bottom: 15%; 
+    }
+    .table{
+        width: 100%;
     }
     /* .katta12{
         margin-top: 50%;
