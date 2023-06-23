@@ -161,15 +161,15 @@ function putOrder (order) {
     formdata.append("time_create",order.time_create)
     formdata.append("visit_time",order.visit_time)
     formdata.append("is_active",true)
-    formdata.append("user",order.user.id)
-    formdata.append("car",order.car.id)
-    formdata.append("branch",order.branch.id)
+    formdata.append("user",order.user)
+    formdata.append("car",order.car)
+    formdata.append("branch",order.branch)
     axios.put(`${url}/api/order/${order.id}/`,formdata,
      {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }
       ).then((res2) => {
-        axios.get(`${url}/api/order_get/`,     {
+        axios.get(`${url}/api/order/`,     {
             headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
           }).then((res) => {
             setdata1(res.data);

@@ -132,24 +132,27 @@ const Tables = () => {
     });
 
     setTimeout(() => {
-      document.querySelector(".slect1").value = item.position.id;
-      document.querySelector(".slect2").value = item.position.series.id;
-      document.querySelector(".slect3").value = item.position.series.model.id;
-      document.querySelector(".slect4").value = item.fuel_sort.id;
-      document.querySelector(".slect5").value = item.gearbox.id;
-      document.querySelector(".slect6").value = item.garant.id;
-      document.querySelector(".slect7").value = item.branch.id;
+      document.querySelector(".slect1").value = item.position;
+      // document.querySelector(".slect2").value = item.position.series.id;
+      // document.querySelector(".slect3").value = item.position.series.model.id;
+      document.querySelector(".slect4").value = item.fuel_sort;
+      document.querySelector(".slect5").value = item.gearbox;
+      document.querySelector(".slect6").value = item.garant;
+      document.querySelector(".slect7").value = item.branch;
       document.querySelector(".slect8").value = item.year;
       document.querySelector(".slect9").value = item.distance;
       document.querySelector(".slect10").value = item.engine;
-      document.querySelector(".slect11").value = item.colour;
-      document.querySelector(".slect12").value = item.name;
+      document.querySelector(".slect11").value = item.colour_uz;
+      document.querySelector(".slect111").value = item.colour_ru;
+      document.querySelector(".slect12").value = item.name_uz;
+      document.querySelector(".slect122").value = item.name_ru;
       document.querySelector(".slect13").value = item.initial_price;
       document.querySelector(".slect14").value = item.price;
       document.querySelector(".slect15").value = item.sale;
       document.querySelector(".slect16").value = item.depozit;
       document.querySelector(".slect17").value = item.fuel_consumption;
-      document.querySelector(".slect18").value = item.description;
+      document.querySelector("#description_uz").value = item.description_uz;
+      document.querySelector("#description_ru").value = item.description_ru;
       document.querySelector(".slect20").checked = item.is_active;
     }, 1000);
   };
@@ -366,14 +369,14 @@ const Tables = () => {
   function malumotput() {
     var malumotput = new FormData();
     malumotput.append("position", document.querySelector("#slect1").value);
-    malumotput.append(
-      "position.series",
-      document.querySelector(".slect2").value
-    );
-    malumotput.append(
-      "position.series.model",
-      document.querySelector(".slect3").value
-    );
+    // malumotput.append(
+    //   "position.series",
+    //   document.querySelector(".slect2").value
+    // );
+    // malumotput.append(
+    //   "position.series.model",
+    //   document.querySelector(".slect3").value
+    // );
     malumotput.append("fuel_sort", document.querySelector(".slect4").value);
     malumotput.append("gearbox", document.querySelector(".slect5").value);
     malumotput.append("garant", document.querySelector(".slect6").value);
@@ -381,8 +384,10 @@ const Tables = () => {
     malumotput.append("year", document.querySelector(".slect8").value);
     malumotput.append("distance", document.querySelector(".slect9").value);
     malumotput.append("engine", document.querySelector(".slect10").value);
-    malumotput.append("colour", document.querySelector(".slect11").value);
-    malumotput.append("name", document.querySelector(".slect12").value);
+    malumotput.append("colour_uz", document.querySelector(".slect11").value);
+    malumotput.append("colour_ru", document.querySelector(".slect111").value);
+    malumotput.append("name_uz", document.querySelector(".slect12").value);
+    malumotput.append("name_ru", document.querySelector(".slect122").value);
     malumotput.append(
       "initial_price",
       document.querySelector(".slect13").value
@@ -394,7 +399,8 @@ const Tables = () => {
       "fuel_consumption",
       document.querySelector(".slect17").value
     );
-    malumotput.append("description", document.querySelector(".slect18").value);
+    malumotput.append("description_uz", document.querySelector("#description_uz").value);
+    malumotput.append("description_ru", document.querySelector("#description_ru").value);
     malumotput.append("is_active", document.querySelector(".slect20").checked);
 
     axios
@@ -402,9 +408,10 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        axios.get(`${url}/api/cars_get/`).then((res) => {
+        axios.get(`${url}/api/cars/`).then((res) => {
           setdata1(res.data);
         });
+        setPage(1);
       })
       .catch((err) => {
       });
@@ -412,7 +419,7 @@ const Tables = () => {
 
 function malumotDefectbtn () {
   axios
-  .get(`${url}/api/defect_get/`, {
+  .get(`${url}/api/defect/`, {
     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
   }).then((res)=>{
     const filter=res.data.filter(item=>item.car===data.id)
@@ -420,7 +427,7 @@ function malumotDefectbtn () {
     console.log(data.id,"id");
     setEditImages(filter)
   })
-  document.querySelector(".defectoyna_edit").style="position:fixed;top:35%;transition:1s;" 
+  document.querySelector(".defectoyna_edit").style="position:fixed;top:15%;transition:1s;" 
 }
 function malumotDefectbtn_close () {
   document.querySelector(".defectoyna_edit").style="position:fixed;top:-100%;transition:1s;" 
@@ -433,7 +440,7 @@ function deletEditImage (id) {
     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
   }).then((res)=>{
     axios
-    .get(`${url}/api/defect_get/`, {
+    .get(`${url}/api/defect/`, {
       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
     }).then((res)=>{
       const filter=res.data.filter(item=>item.car===data.id)
@@ -442,11 +449,13 @@ function deletEditImage (id) {
   })
 }
 function putEditImage (id) {
+  console.log(data.id,"sss");
   var formdata = new FormData();
   formdata.append("car",data.id)
   formdata.append("image1",document.querySelector("#rasm_1_edit").files[0],)
   formdata.append("image2",document.querySelector("#rasm_2_edit").files[0],)
-  formdata.append("description",document.querySelector("#text_defect_edit").value)
+  formdata.append("description_uz",document.querySelector("#text_defect_edit_uz").value)
+  formdata.append("description_ru",document.querySelector("#text_defect_edit_ru").value)
   axios
   .put(`${url}/api/defect/${id}/`,formdata, {
     headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -459,7 +468,8 @@ function putEditImage (id) {
       setEditImages(filter)
       document.querySelector("#rasm_1_edit").value=""
       document.querySelector("#rasm_2_edit").value=""
-      document.querySelector("#text_defect_edit").value=""
+      document.querySelector("#text_defect_edit_uz").value=""
+      document.querySelector("#text_defect_edit_ru").value=""
     })
   })
 }
@@ -471,7 +481,8 @@ function postDataforcardefect_edit() {
     formdata.append("car",data.id)
     formdata.append("image1",document.querySelector("#rasm_1_edit").files[0],)
     formdata.append("image2",document.querySelector("#rasm_2_edit").files[0],)
-    formdata.append("description",document.querySelector("#text_defect_edit").value)
+    formdata.append("description_uz",document.querySelector("#text_defect_edit_uz").value)
+    formdata.append("description_ru",document.querySelector("#text_defect_edit_ru").value)
     axios
     .post(`${url}/api/defect/`,formdata, {
       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -484,7 +495,8 @@ function postDataforcardefect_edit() {
         setEditImages(filter)
         document.querySelector("#rasm_1_edit").value=""
         document.querySelector("#rasm_2_edit").value=""
-        document.querySelector("#text_defect_edit").value=""
+        document.querySelector("#text_defect_edit_uz").value=""
+        document.querySelector("#text_defect_edit_ru").value=""
       })
     })
 
@@ -623,8 +635,8 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
               // searchRegex.test(item.position.series.name)||
               // searchRegex.test(item.position.series.model.name)||
               searchRegex.test(item.price)||
-              searchRegex.test(item.id)||
-              searchRegex.test(item.year)
+              searchRegex.test(item.id)
+              // searchRegex.test(item.year)
             );
           });
           
@@ -659,7 +671,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
               }}
             >
               <Button onClick={() => malumotput()} type="primary">
-                O'zgertirish
+                O'zgartirish
               </Button>
               <Button onClick={() => setPage(1)} type="danger">
                 Orqaga
@@ -675,12 +687,12 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <select className="slect slect1" id="slect1">
                       {data6.map((item) => (
                         <option id="inp1" value={item.id}>
-                          {item.name}
+                          {item.name_uz}({item.name_ru})
                         </option>
                       ))}
                     </select>
                   </div>
-                  <div className="text">
+                  {/* <div className="text">
                     <h1>Seriya</h1>
                     <select className="slect slect2">
                       {data7.map((item) => (
@@ -695,12 +707,12 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                         <option value={item.id}>{item.name}</option>
                       ))}
                     </select>
-                  </div>
+                  </div> */}
                   <div className="text">
                     <h1>Yoqilg'i turi</h1>
                     <select className="slect slect4">
                       {data2.map((item) => (
-                        <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>
+                        <option value={item.id}>{item.name_uz}({item.name_ru})</option>
                       ))}
                     </select>
                   </div>
@@ -708,7 +720,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <h1>Boshqaruv qutisi</h1>
                     <select className="slect slect5">
                       {data3.map((item) => (
-                        <option value={item.id}>{item.name}</option>
+                        <option value={item.id}>{item.name_uz}({item.name_ru})</option>
                       ))}
                     </select>
                   </div>
@@ -716,7 +728,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <h1>Garant</h1>
                     <select className="slect slect6">
                       {data4.map((item) => (
-                        <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>
+                        <option value={item.id}>{item.name_uz}({item.name_ru})</option>
                       ))}
                     </select>
                   </div>
@@ -730,7 +742,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <h1>Filial</h1>
                     <select className="slect slect7" >
                       {data5.map((item) => (
-                        <option value={item.id}>{item.name}</option>
+                        <option value={item.id}>{item.name_uz}({item.name_ru})</option>
                       ))}
                     </select>
                   </div>
@@ -747,13 +759,16 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                     <input className="slect10" type="number" />
                   </div>
                   <div className="text">
-                    <h1>Rang</h1>
-                    <input type="text" className="slect11" />
+                    <h1>Rang(Цвет)</h1>
+                    <input placeholder="uz" type="text" className="slect11" />
                   </div>
                   <div className="text">
+                    <input placeholder="ru" type="text" className="slect111" />
+                  </div>
+                  {/* <div className="text">
                     <h1>Ko'rishlar</h1>
                     <input type="number" value={data.views} />
-                  </div>
+                  </div> */}
                   <div className="text">
                     <h1>Yaratilgan vaqt</h1>
                     <input
@@ -765,8 +780,11 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                 </div>
                 <div className="text3">
                   <div className="text">
-                    <h1>Ism</h1>
-                    <input type="text" className="slect12" />
+                    <h1>Ism(имя)</h1>
+                    <input placeholder="uz" type="text" className="slect12" />
+                  </div>
+                  <div className="text">
+                    <input placeholder="ru" type="text" className="slect122" />
                   </div>
                   <div className="text">
                     <h1>Boshlang'ich narx</h1>
@@ -795,21 +813,42 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                 </div>
               </div>
               <div className="textsmall">
-                <h1>Tavsifi</h1>
-                <textarea
-                  id="w3review"
+                <div><div className="text_div"><h1>Tavsifi</h1> <h1>Описание</h1></div><div className="text_div">
+<textarea
+                  id="description_uz"
                   rows="1"
                   className="slect18"
-                  cols="101"
+                  cols="1"
                 ></textarea>
+                                <textarea
+                  id="description_ru"
+                  rows="1"
+                  className="slect18"
+                  cols="1"
+                ></textarea>
+</div> </div>
+{/* <div className="text_div">
+<textarea
+                  id="description_uz"
+                  rows="1"
+                  className="slect18"
+                  cols="1"
+                ></textarea>
+                                <textarea
+                  id="description_ru"
+                  rows="1"
+                  className="slect18"
+                  cols="1"
+                ></textarea>
+</div> */}
               </div>
             </div>
           </div>
           <div className="zb">
           <h1 className="defect">Mashinaning nuqsonlari </h1>
-          <button className="malumotbutton" onClick={()=>malumotDefectbtn()} type="primary">Qo'shiddsh</button>
+          <button className="malumotbutton" onClick={()=>malumotDefectbtn()} type="primary">Boshqarish</button>
           <h1 className="defect">Mashinaning rasmlari </h1>
-          <button className="malumotbutton" onClick={()=>malumotImagebtn()} type="primary">Qo'shiddsh</button>
+          <button className="malumotbutton" onClick={()=>malumotImagebtn()} type="primary">Boshqarish</button>
           </div>
 
         </div>
@@ -830,7 +869,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Pozitsiya</h1>
                   <select className="select" id="poz">
                     {data6.map((item) => {
-                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
+                      return <option value={item.id}>{item.name_uz}({item.name_ru})</option>;
                     })}
                   </select>
                 </div>
@@ -838,7 +877,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Yoqilg'i turi</h1>
                   <select className="select" id="yoq">
                     {data2.map((item) => {
-                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
+                      return <option value={item.id}>{item.name_uz}({item.name_ru})</option>;
                     })}
                   </select>
                 </div>
@@ -846,7 +885,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Boshqaruv qutisi</h1>
                   <select className="select" id="vit">
                     {data3.map((item) => {
-                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
+                      return <option value={item.id}>{item.name_uz}({item.name_ru})</option>;
                     })}
                   </select>
                 </div>
@@ -854,7 +893,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Garant</h1>
                   <select id="gar" className="select">
                     {data4.map((item) => {
-                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
+                      return <option value={item.id}>{item.name_uz}({item.name_ru})</option>;
                     })}
                   </select>
                 </div>
@@ -868,7 +907,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                   <h1>Filial</h1>
                   <select id="fil" className="select">
                     {data5.map((item) => {
-                      return <option value={item.id}>(uz){item.name_uz}(ru){item.name_ru}</option>;
+                      return <option value={item.id}>{item.name_uz}({item.name_ru})</option>;
                     })}
                   </select>
                 </div>
@@ -912,11 +951,11 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                 </div>
                 <div className="text5">
                   <h6>Mashinaning nuqsonlari </h6>
-          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Qo'shish</button>
+          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Create</button>
                 </div>
                 <div className="text5">
                   <h6>Mashinaning rasmlari </h6>
-          <button className="malumotbutton" onClick={()=>imgpost()} type="primary">Qo'shish</button>
+          <button className="malumotbutton" onClick={()=>imgpost()} type="primary">Create</button>
                 </div>
               </div>
 
@@ -1012,7 +1051,8 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
         <div className="defect_div">
         <input className="input_defect" id="rasm_1_edit" type="file"/>
         <input className="input_defect" id="rasm_2_edit" type="file"/>
-        <textarea id="text_defect_edit" className="defectdest_edit" ></textarea><br />
+        <textarea id="text_defect_edit_uz" className="defectdest_edit" ></textarea><br />
+        <textarea id="text_defect_edit_ru" className="defectdest_edit" ></textarea><br />
         <button className="btn_defect" onClick={()=>postDataforcardefect_edit()}>qoshish</button>
         </div>
 
@@ -1025,7 +1065,8 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
             <img className="img_defect" src={item.image1} alt={item.image1} />
             <img className="img_defect" src={item.image2} alt={item.image2} />
             </div>
-            <p className="p_defect">{item.description}</p>
+            <p className="p_defect">{item.description_uz}</p>
+            <p className="p_defect">{item.description_ru}</p>
             <div className="edit_window"><AiOutlineEdit onClick={()=>putEditImage(item.id)}  className="editicon"/><AiFillDelete onClick={()=>deletEditImage(item.id)} className="editicon"/></div>
             </div>
           }else{
