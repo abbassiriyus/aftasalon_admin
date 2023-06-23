@@ -657,7 +657,7 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
             onChange={handleInputChange}
           />
           </div>
-          <Table className="table1" columns={columns} dataSource={data1} />
+          <Table className="table1" columns={columns} dataSource={data1}             pagination={{ pageSize: 5 }} />
         </div>
       ) : (
         <div>
