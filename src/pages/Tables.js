@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import url from "../components/host";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import "./style/style.css";
-import Form from "antd/lib/form/Form";
+// import Form from "antd/lib/form/Form";
 import { AiOutlineEdit,AiFillDelete } from "react-icons/ai";
-
 const Tables = () => {
   const [setSelectedRowKeys] = useState([]);
   const [setLoading] = useState(false);
@@ -36,19 +35,19 @@ const Tables = () => {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
     {
-      title: "Name_ru",
+      title: "Ruscha nomi",
       dataIndex: "name_ru",
     },
     {
-      title: "Price",
+      title: "Narx",
       dataIndex: "price",
     },
     {
-      title: "Status",
+      title: "Holat",
       dataIndex: "is_active",
       render: (el) => (
         <div className="status">
@@ -951,11 +950,11 @@ if (document.querySelector("#rasm_1").value<1&&document.querySelector("#rasm_2")
                 </div>
                 <div className="text5">
                   <h6>Mashinaning nuqsonlari </h6>
-          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">Create</button>
+          <button className="malumotbutton" onClick={()=>defectpost()} type="primary">yaratish</button>
                 </div>
                 <div className="text5">
                   <h6>Mashinaning rasmlari </h6>
-          <button className="malumotbutton" onClick={()=>imgpost()} type="primary">Create</button>
+          <button className="malumotbutton" onClick={()=>imgpost()} type="primary">yaratish</button>
                 </div>
               </div>
 

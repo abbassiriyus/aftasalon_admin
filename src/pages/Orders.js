@@ -144,12 +144,12 @@ const CarHistory = () => {
   };
 function deleteOrder (order) {
     console.log(order);
-    axios.delete(`${url}/api/order_get/${order.id}/`,
+    axios.delete(`${url}/api/order/${order.id}/`,
      {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }
       ).then((res2) => {
-        axios.get(`${url}/api/order_get/`,     {
+        axios.get(`${url}/api/order/`,     {
             headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
           }).then((res) => {
             setdata1(res.data);

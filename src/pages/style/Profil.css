@@ -66,6 +66,10 @@
 .putAdmin div{
     width: 45%;
 }
+.profile_img{
+    width: 15%;
+    height: 20%;
+}
 
 @media(max-width: 1343px){
     .putAdmin{

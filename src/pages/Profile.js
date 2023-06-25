@@ -1,14 +1,3 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 import { useEffect, useState } from "react";
 
 import {
@@ -45,10 +34,6 @@ import project3 from "../assets/images/home-decor-3.jpeg";
 import axios from "axios";
 import url from "../components/host";
 import './style/Profil.css'
-// import { BiSolidEditAlt } from 'react-icons/bi'
-// import { BiSolidEditAlt } from "react-icons/bi";
-
-
 function Profile() {
   const [imageURL, setImageURL] = useState(false);
   const [, setLoading] = useState(false);
@@ -268,7 +253,14 @@ function Profile() {
           <Row justify="space-between" align="middle" gutter={[24, 0]}>
             <Col span={24} md={12} className="col-info">
               <Avatar.Group>
-                <Avatar size={74} shape="square" src={profilavatar} />
+                {/* <Avatar size={74} shape="square" src={profilavatar} /> */}
+                {
+                    [data3].map((item) => {
+                      return (
+                       <img className="profile_img" src={item.image}alt={item.image}/>
+                      )
+                    })
+                  }
 
                 <div className="avatar-info">
                   {

@@ -12,9 +12,9 @@ export default function Billing() {
   const [data2, setData2] = useState([])
   const [data3, setData3] = useState([])
   const [data4, setData4] = useState([])
+  const [superadmin, setSuperadmin] = useState(false);
   const [ description, setDescription] = useState({})
 
-  //  { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }
   useEffect(() => {
     axios.get(`${url}/auth/users/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       var tt = []
@@ -41,14 +41,13 @@ export default function Billing() {
       })
     })
   }, [])
-
-
-  // function putData() {
-  //   var data2 = new FormData()
-  //   data2.append('username', docu)
-  // }
-
-
+  useEffect(() => {
+    if (sessionStorage.getItem("superadmin") === "true") {
+      setSuperadmin(true);
+    } else {
+      setSuperadmin(false);
+    }
+  }, []);
   const columns = [
     {
 
@@ -170,26 +169,20 @@ export default function Billing() {
     }).catch(err => {
     })
   }
-
-
-
-  // <Button onClick={() => postoyna11(fueldata)} style={{ background: 'orange', color: 'white' }} type="button">O'zgartirish</Button>
-
-
   const onChange = (key) => {
     console.log(key);
   };
   const items = [
     {
       key: '1',
-      label: 'Admins',
+      label: 'Adminlar',
       children:
         <Table columns={columns} pagination={{ pageSize: 10 }} dataSource={data} />
       ,
     },
     {
       key: '2',
-      label: 'Users',
+      label: 'Foydalanuvchilar',
       children:
         <Table columns={columns2} pagination={{ pageSize: 10 }} dataSource={data2} />
       ,
@@ -215,7 +208,7 @@ export default function Billing() {
     // datte.append('branch', 'branch')
     datte.append('user', localStorage.getItem('username'))
     datte.append('description', document.querySelector('.description').value)
-    datte.append('branch', document.querySelector('.branch').value)
+    datte.append('branch', 2)
     axios.post(`${url}/api/comment/`, datte, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
       window.location.reload()
     }).catch(err => {
@@ -231,15 +224,6 @@ export default function Billing() {
       <div className='PrewComents'>
         <span onClick={() => commentPrewievClose()}>X</span>
         <p>{description.description}</p>
-        {/* {
-          description.map(item => {
-            return (
-              <div>
-                <p>{item.description}</p>
-              </div>
-            )
-          })
-        } */}
       </div>
       <div className='ModalComment'>
         <span onClick={() => commentClose()}>X</span>
@@ -264,16 +248,7 @@ export default function Billing() {
         <input type='password' className='password' />
         <button className='Btn2' onClick={() => PostUser()}>Admin Qo'shish</button>
       </div>
-      <button className='Btn1' style={{ transition: '.4s' }} onClick={() => ModalPost()} >Admin Qo'shish</button>
-      {/* {
-        data.map(item => {
-          if (item.is_staff) {
-            return <h1>truee</h1>
-          } else {
-            return <h1>falsee</h1>
-          }
-        })
-      } */}
+    {superadmin&&(<button className='Btn1' style={{ transition: '.4s' }} onClick={() => ModalPost()} >Admin Qo'shish</button>)}
       <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
     </div>
   )

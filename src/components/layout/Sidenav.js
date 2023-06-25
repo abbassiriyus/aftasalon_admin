@@ -138,7 +138,7 @@ function Sidenav({ color }) {
     <>
       <div className="brand">
         <img src={logo} alt="" />
-        <span> Dashboard</span>
+        <span> Boshqaruv paneli</span>
       </div>
       <hr />
       <Menu  theme="light" mode="inline">
@@ -148,7 +148,7 @@ function Sidenav({ color }) {
       <span className="icon" style={{ background: page === "dashboard" ? color : "" }}>
         {dashboard}
       </span>
-      <span className="label">Dashboard</span>
+      <span className="label">Statistika</span>
     </NavLink>
   </Menu.Item>
 )}
@@ -163,7 +163,7 @@ function Sidenav({ color }) {
             >
               {tables}
             </span>
-            <span className="label">Cars</span>
+            <span className="label">Avtomobillar</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="3">
@@ -176,7 +176,7 @@ function Sidenav({ color }) {
             >
               {billing}
             </span>
-            <span className="label">Created</span>
+            <span className="label">Yaratilgan narsalar</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="4">
@@ -189,7 +189,7 @@ function Sidenav({ color }) {
             >
               {billing}
             </span>
-            <span className="label">Admins</span>
+            <span className="label">Adminlar</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="7">
@@ -202,7 +202,7 @@ function Sidenav({ color }) {
             >
               {tables}
             </span>
-            <span className="label">Car history</span>
+            <span className="label">Avtomobillar tarixi</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="8">
@@ -215,11 +215,11 @@ function Sidenav({ color }) {
             >
               {tables}
             </span>
-            <span className="label">Orders</span>
+            <span className="label">Arizalar</span>
           </NavLink>
         </Menu.Item>
          <Menu.Item className="menu-item-header" key="5">
-          Account Pages
+         Hisob sahifalari
         </Menu.Item>
         <Menu.Item key="5">
           <NavLink to="/profile">
@@ -231,7 +231,7 @@ function Sidenav({ color }) {
             >
               {profile}
             </span>
-            <span className="label">Profile</span>
+            <span className="label">Profil</span>
           </NavLink>
         </Menu.Item>
         {/* <Menu.Item key="6">

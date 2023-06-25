@@ -45,7 +45,7 @@ export default function Additional() {
     },
 
     {
-      title: "Edit",
+      title: "O'zgartirish",
       witdh: "5%",
       render: (fueldata) => {
         return (
@@ -62,7 +62,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -201,7 +201,7 @@ export default function Additional() {
     },
 
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (fueldata1) => {
         return (
           <div>
@@ -217,7 +217,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -353,7 +353,7 @@ export default function Additional() {
     },
 
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (fueldata2) => {
         return (
           <div>
@@ -369,7 +369,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -505,7 +505,7 @@ export default function Additional() {
     },
 
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (fueldata3) => {
         return (
           <div>
@@ -521,7 +521,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -644,7 +644,7 @@ export default function Additional() {
     },
 
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (fueldata4) => {
         return (
           <div>
@@ -660,7 +660,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -804,7 +804,7 @@ export default function Additional() {
       dataIndex: "name_ru",
     },
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (fueldata5) => {
         return (
           <div>
@@ -820,7 +820,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -1027,7 +1027,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (fueldata6) => {
         return (
           <div>
@@ -1043,7 +1043,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -1071,7 +1071,7 @@ export default function Additional() {
   dataIndex: "text",
 },
     {
-      title: "Edit",
+      title: "O'zgartirish",
       render: (blank) => {
         return (
           <div>
@@ -1087,7 +1087,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Delet",
+      title: "o'chirish",
       witdh: "5%",
       render: (key) => {
         return (
@@ -1133,6 +1133,7 @@ export default function Additional() {
        {headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },}
       ).then((res) => {
         setBlank(res.data);
+        console.log(res.data,'BLANK');
       });
     })
    }
