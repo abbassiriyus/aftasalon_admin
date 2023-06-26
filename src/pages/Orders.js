@@ -23,23 +23,23 @@ const CarHistory = () => {
       dataIndex: "id",
     },
     {
-      title: "user",
-      render: (_,item)=> <div>{item.user}</div>
+      title: "foydalanuvchi",
+      render: (_,item)=> <div>{item.user.username}</div>
     },
     {
-      title: "car",
-      render: (_,item)=> <div>{item.car}</div>
+      title: "avtomobil",
+      render: (_,item)=> <div>{item.car.name_uz}</div>
     },
     {
-        title: "branch",
-        render: (_,item)=> <div>{item.branch}</div>
+        title: "Filial",
+        render: (_,item)=> <div>{item.branch.name_uz}</div>
       },
       {
-        title: "time_create",
+        title: "yaratilgan vaqt",
         render: (_,item)=> <div>{item.time_create.slice(0,10)}</div>
       },
       {
-        title: "visit_time",
+        title: "tashrif vaqti",
         dataIndex: "visit_time",
       },
     {
@@ -206,9 +206,12 @@ function putOrder (order) {
             // searchRegex.test(item.car.position.name) ||
             // searchRegex.test(item.car.position.series.name) ||
             // searchRegex.test(item.car.position.series.model.name) ||
-            // searchRegex.test(item.car.price) ||
-            searchRegex.test(item.id) 
-            // searchRegex.test(item.user.username)
+            searchRegex.test(item.car.name_uz) ||
+            searchRegex.test(item.car.name_ru) ||
+            searchRegex.test(item.branch.name_uz) ||
+            searchRegex.test(item.branch.name_ru) ||
+            searchRegex.test(item.id) ||
+            searchRegex.test(item.user.username)
           );
         });
         setdata1(searchdata);
@@ -244,7 +247,7 @@ function putOrder (order) {
       })
       .then((res) => {
         const searchdata = res.data.filter((item) => {
-          return searchRegex.test(item.branch);
+          return searchRegex.test(item.branch.id);
         });
         setdata1(searchdata);
       });
@@ -253,13 +256,15 @@ function putOrder (order) {
   return (
     <div>
           <div className="search_div">
+           
             <select onChange={handleInputChange2} className="select_search">
-              <option></option>
+              <option>Filial</option>
               {data2.map((item)=>{
-                return<option value={item.id}>{item.name_uz}{item.name_ru}</option>
+                return<option value={item.id}>{item.name_uz}</option>
               })}
             </select>
           <Input
+          placeholder="qidirish"
             className="header-search_orders"
             prefix={<SearchOutlined />}
             onChange={handleInputChange}

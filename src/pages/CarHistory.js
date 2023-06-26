@@ -25,15 +25,15 @@ const CarHistory = () => {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
     {
-      title: "Name_ru",
+      title: "Ruscha nomi",
       dataIndex: "name_ru",
     },
     {
-      title: "Price",
+      title: "Narx",
       dataIndex: "price",
     },
     {

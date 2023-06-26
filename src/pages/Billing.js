@@ -55,15 +55,15 @@ export default function Billing() {
       dataIndex: 'id',
     },
     {
-      title: 'Name',
+      title: 'Ism',
       dataIndex: 'username',
     },
     {
-      title: 'Phone',
+      title: 'Telefon raqami',
       dataIndex: 'phone',
     },
     {
-      title: 'Delete',
+      title: 'ochirish',
       render: (data) => (
         <Button onClick={() => deleteData(data.id)} type="danger" className='delte'>Delete</Button>
       ),
@@ -89,15 +89,15 @@ export default function Billing() {
       dataIndex: 'id',
     },
     {
-      title: 'Name',
+      title: 'Ism',
       dataIndex: 'username',
     },
     {
-      title: 'Phone',
+      title: 'Telefon raqami',
       dataIndex: 'phone',
     },
     {
-      title: 'Delete',
+      title: 'ochirish',
       render: (data2) => (
         <Button onClick={() => deleteData(data2.id)} type="danger" className='delte'>Delete</Button>
       ),

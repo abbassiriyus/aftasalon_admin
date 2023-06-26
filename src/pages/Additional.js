@@ -34,12 +34,12 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       witdh: "5%",
       dataIndex: "name_uz",
     },
     {
-      title: "Name_ru",
+      title: "Ruscha nomi",
       witdh: "5%",
       dataIndex: "name_ru",
     },
@@ -192,11 +192,11 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
     {
-      title: "Name_ru",
+      title: "Ruscha nomi",
       dataIndex: "name_ru",
     },
 
@@ -340,11 +340,11 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
     {
-      title: "Name_ru",
+      title: "Ruscha nomi",
       dataIndex: "name_ru",
     },
     {
@@ -496,14 +496,13 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name_ru",
-      dataIndex: "name_ru",
-    },
-    {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
-
+    {
+      title: "Ruscha nomi",
+      dataIndex: "name_ru",
+    },
     {
       title: "O'zgartirish",
       render: (fueldata3) => {
@@ -635,14 +634,13 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name ru",
-      dataIndex: "name_ru",
-    },
-    {
-      title: "Name uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
-
+    {
+      title: "Ruscha nomi",
+      dataIndex: "name_ru",
+    },
     {
       title: "O'zgartirish",
       render: (fueldata4) => {
@@ -796,11 +794,11 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name_uz",
+      title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
     {
-      title: "Name_ru",
+      title: "Ruscha nomi",
       dataIndex: "name_ru",
     },
     {
@@ -960,7 +958,7 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
-      title: "Name",
+      title: "Ism",
       // dataIndex: "name_uz",
       render: (fueldata6) => {
         return (
@@ -972,7 +970,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Country",
+      title: "Davlat",
       render: (fueldata6) => {
         return (
           <div>
@@ -994,7 +992,7 @@ export default function Additional() {
       },
     },
     {
-      title: "City",
+      title: "Shahar",
       render: (fueldata6) => {
         return (
           <div>
@@ -1005,7 +1003,7 @@ export default function Additional() {
       },
     },
     {
-      title: "District",
+      title: "Tuman",
       render: (fueldata6) => {
         return (
           <div>
@@ -1016,7 +1014,7 @@ export default function Additional() {
       },
     },
     {
-      title: "Street",
+      title: "Koʻcha",
       render: (fueldata6) => {
         return (
           <div>
@@ -1184,8 +1182,8 @@ export default function Additional() {
 
   function postfillial() {
     var Fillial = new FormData();
-    Fillial.append("name_ru", document.querySelector("#branch_post_name_uz").value);
-    Fillial.append("city_uz", document.querySelector("#branch_post_country_uz").value);
+    Fillial.append("name_uz", document.querySelector("#branch_post_name_uz").value);
+    Fillial.append("country_uz", document.querySelector("#branch_post_country_uz").value);
     Fillial.append("region_uz", document.querySelector("#branch_post_region_uz").value);
     Fillial.append("city_uz", document.querySelector("#branch_post_city_uz").value);
     Fillial.append("district_uz", document.querySelector("#branch_post_district_uz").value);
