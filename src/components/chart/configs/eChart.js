@@ -1,7 +1,7 @@
 const eChart = {
   series: [
     {
-      name: "Sales",
+      name: "Foyda",
       data: [450, 200, 100, 220, 500, 100, 400, 230, 500,300,300,300],
       color: "#010121",
     },

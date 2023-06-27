@@ -1,7 +1,7 @@
 const lineChart = {
   series: [
     {
-      name: "Mobile apps",
+      name: "sotilgan avtomobilar",
       data: [10, 20, 30, 40, 40, 20, 34, 330, 440,440,440,530],
     },
   ],

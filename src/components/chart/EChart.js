@@ -169,6 +169,7 @@ color: "#155998"
       
       setChart({
         series: [{
+          name: "Foyda",
           data: [
             profit,
             profit2,
@@ -240,7 +241,7 @@ color: "#155998"
   const items = [
     {
       Title: data3,
-      user: "Users",
+      user: "foydalanuvchilar",
     },
     {
       Title: `${data2}$`,
@@ -248,11 +249,11 @@ color: "#155998"
     },
     {
       Title: `${data}$`,
-      user: "profit",
+      user: "foyda",
     },
     {
       Title: data4,
-      user: "sotilgan moshina",
+      user: "sotilgan avtomobilar",
     },
     {
       Title: data5,
@@ -448,14 +449,7 @@ color: "#155998"
         />
       </div>
       <div className="chart-vistior">
-        <Title level={5}>Static for month</Title>
-        {/* <Paragraph className="lastweek">
-          than last month
-        </Paragraph> */}
-        {/* <Paragraph className="lastweek">
-          We have created multiple options for you to put together and customise
-          into pixel perfect pages.
-        </Paragraph> */}
+        <Title level={5}>Bir oy davomida statistika</Title>
         <Row gutter>
           {items.map((v, index) => (
             <Col xs={6} xl={6} sm={6} md={6} key={index}>

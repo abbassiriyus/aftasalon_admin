@@ -202,10 +202,6 @@ function putOrder (order) {
       .then((res) => {
         const searchdata = res.data.filter((item) => {
           return (
-            // searchRegex.test(item.car.name) ||
-            // searchRegex.test(item.car.position.name) ||
-            // searchRegex.test(item.car.position.series.name) ||
-            // searchRegex.test(item.car.position.series.model.name) ||
             searchRegex.test(item.car.name_uz) ||
             searchRegex.test(item.car.name_ru) ||
             searchRegex.test(item.branch.name_uz) ||

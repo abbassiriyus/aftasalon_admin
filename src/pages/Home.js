@@ -172,28 +172,28 @@ function Home() {
   ];
   const count = [
     {
-      today: "today-profit",
+      today: "Bir kunlik foyda",
       title: `${data}$`,
       // persent: "+30%",
       icon: dollor,
       bnb: "bnb2",
     },
     {
-      today: "Today’s Users",
+      today: "Bugungi foydalanuvchilar",
       title: data3,
       persent: "ta odam",
       icon: profile,
       bnb: "bnb2",
     },
     {
-      today: "today-New Clients",
+      today: "Bugun qoshilgan foydalanuvchilar",
       title: data4,
       persent: "ta odam",
       icon: heart,
       bnb: "redtext",
     },
     {
-      today: "toady-oborot",
+      today: "Kunlik oborot",
       title: `${data2}$`,
       // persent: "10%",
       icon: dollor,
