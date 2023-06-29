@@ -2,7 +2,7 @@ const lineChart = {
   series: [
     {
       name: "sotilgan avtomobilar",
-      data: [10, 20, 30, 40, 40, 20, 34, 330, 440,440,440,530],
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0],
     },
   ],
 

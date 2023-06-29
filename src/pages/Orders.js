@@ -181,14 +181,12 @@ function putOrder (order) {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }).then((res) => {
       setdata1(res.data);
-      console.log(res.data,'DATA');
     });
   }
   useEffect(() => {
     getData();
     axios.get(`${url}/api/branch/`,     ).then((res) => {
     setdata2(res.data);
-    console.log(res.data,'DATA2');
   })
   }, []);
 
@@ -218,19 +216,18 @@ function putOrder (order) {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-          const filteredData = res.data.filter((item) => item.branch ===parseInt(select));
-          const searchdata = filteredData.filter((item) => {
+          const filteredData = res.data.filter((item) => item.branch.id ===parseInt(select));
+          const searchdata2 = filteredData.filter((item) => {
             return (
-              // searchRegex.test(item.car.name) ||
-              // searchRegex.test(item.car.position.name) ||
-              // searchRegex.test(item.car.position.series.name) ||
-              // searchRegex.test(item.car.position.series.model.name) ||
-              // searchRegex.test(item.car.price) ||
-              searchRegex.test(item.id) 
-              // searchRegex.test(item.user.username)
+              searchRegex.test(item.car.name_uz) ||
+              searchRegex.test(item.car.name_ru) ||
+              searchRegex.test(item.branch.name_uz) ||
+              searchRegex.test(item.branch.name_ru) ||
+              searchRegex.test(item.id) ||
+              searchRegex.test(item.user.username)
             );
           });
-          setdata1(searchdata);  
+          setdata1(searchdata2);  
       }); 
     }
   };
@@ -247,6 +244,13 @@ function putOrder (order) {
         });
         setdata1(searchdata);
       });
+      if (event.target.value==56565656) {
+        axios.get(`${url}/api/order/`,     {
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+        }).then((res) => {
+        setdata1(res.data);
+      })
+      }
   };
 
   return (
@@ -254,7 +258,7 @@ function putOrder (order) {
           <div className="search_div">
            
             <select onChange={handleInputChange2} className="select_search">
-              <option>Filial</option>
+              <option value={56565656}>Filial</option>
               {data2.map((item)=>{
                 return<option value={item.id}>{item.name_uz}</option>
               })}

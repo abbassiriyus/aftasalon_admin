@@ -96,18 +96,18 @@ const CarHistory = () => {
     setDistance(item.distance)
     setEngine(item.engine)
     setPage(2);
-        axios.get(`${url}/api/position_get/${item.position}/`).then((res) => {
+        axios.get(`${url}/api/uz/position_get/${item.position}/`).then((res) => {
             setPosition(res.data.name)
             setSeries(res.data.series.name)
             setModel(res.data.series.model.name)
             axios.get(`${url}/api/fuel_sort/${item.fuel_sort}/`).then((res2) => {   
-                setFuelSort(res2.data.name)
+                setFuelSort(res2.data.name_uz)
                 axios.get(`${url}/api/gear_box/${item.gearbox}/`).then((res3) => {   
-                    setGearbox(res3.data.name)
+                    setGearbox(res3.data.name_uz)
                     axios.get(`${url}/api/garant/${item.garant}/`).then((res4) => {   
                         setGarant(res4.data.time)
                         axios.get(`${url}/api/branch/${item.branch}/`).then((res5) => {   
-                            setBranch(res5.data.name)
+                            setBranch(res5.data.name_uz)
                           });
                       });
                   });
@@ -129,7 +129,8 @@ const handleInputChange = (event) => {
           }
           const searchdata = database.filter((item) => {
             return (
-              searchRegex.test(item.name) ||
+              searchRegex.test(item.name_uz) ||
+              searchRegex.test(item.name_ru) ||
               searchRegex.test(item.positionName)||
               searchRegex.test(item.seriesName)||
               searchRegex.test(item.modelName)||
@@ -246,7 +247,7 @@ const handleInputChange = (event) => {
                 <div className="text3">
                   <div className="text">
                     <h1>Ism</h1>
-                    <input value={data.name} type="text" className="slect" />
+                    <input value={data.name_uz} type="text" className="slect" />
                   </div>
                   <div className="text">
                     <h1>olingan narx</h1>
@@ -273,7 +274,7 @@ const handleInputChange = (event) => {
               <div className="textsmall">
                 <h1>Tavsifi</h1>
                 <textarea
-                value={data.description}
+                value={data.description_uz}
                   id="w3review"
                   rows="1"
                   className="slect18"
