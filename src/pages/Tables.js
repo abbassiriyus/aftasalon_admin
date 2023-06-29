@@ -918,12 +918,14 @@ clearData()
                   <div className="text_div">
                     <textarea
                       id="description_uz"
+                      placeholder="uz"
                       rows="1"
                       className="slect18"
                       cols="1"
                     ></textarea>
                     <textarea
                       id="description_ru"
+                      placeholder="ru"
                       rows="1"
                       className="slect18"
                       cols="1"
@@ -1156,9 +1158,9 @@ clearData()
                 <input className="input_defect" id="rasm_1" type="file" />
                 <input className="input_defect" id="rasm_2" type="file" />
                 </div>
-                <textarea id="text_defect_uz" className="defectdest"></textarea>
+                <textarea placeholder="uz" id="text_defect_uz" className="defectdest"></textarea>
                 <br />
-                <textarea id="text_defect_ru" className="defectdest"></textarea>
+                <textarea placeholder="ru" id="text_defect_ru" className="defectdest"></textarea>
                 <br />
                 <button
                   className="btn_defect"
@@ -1249,11 +1251,13 @@ clearData()
               <input className="input_defect" id="rasm_1_edit" type="file" />
               <input className="input_defect" id="rasm_2_edit" type="file" />
               <textarea
+              placeholder="uz"
                 id="text_defect_edit_uz"
                 className="defectdest_edit"
               ></textarea>
               <br />
               <textarea
+              placeholder="ru"
                 id="text_defect_edit_ru"
                 className="defectdest_edit"
               ></textarea>
