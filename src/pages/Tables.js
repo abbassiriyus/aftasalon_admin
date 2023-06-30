@@ -171,7 +171,7 @@ const Tables = () => {
 
   useEffect(() => {
     axios
-      .get(`${url}/api/series_get/`)
+      .get(`${url}/api/series/`)
       .then((res) => {
         setdata7(res.data);
       })
@@ -976,11 +976,25 @@ clearData()
                   <h1>Pozitsiya</h1>
                   <select className="select" id="poz">
                     {data6.map((item) => {
-                      return (
+                      return<>{data7.map((item2)=>{
+                        if (item.series===item2.model) {
+                          return<>{data8.map((item3)=>{
+                            if (item2.model===item3.id) {
+                                                   return (
                         <option value={item.id}>
-                          {item.name_uz}({item.name_ru})
+                          {item.name_uz}({item.name_ru}) {item3.name_uz}({item3.name_ru}) {item2.name_uz}({item2.name_ru}) 
                         </option>
                       );
+                            }
+                            
+                          })}</>
+                        }
+                      })}</>
+                      // return (
+                      //   <option value={item.id}>
+                      //     {item.name_uz}({item.name_ru}) 
+                      //   </option>
+                      // );
                     })}
                   </select>
                 </div>
@@ -1158,10 +1172,12 @@ clearData()
                 <input className="input_defect" id="rasm_1" type="file" />
                 <input className="input_defect" id="rasm_2" type="file" />
                 </div>
-                <textarea placeholder="uz" id="text_defect_uz" className="defectdest"></textarea>
+<div>
+<textarea placeholder="uz" id="text_defect_uz" className="defectdest"></textarea>
                 <br />
                 <textarea placeholder="ru" id="text_defect_ru" className="defectdest"></textarea>
                 <br />
+</div>
                 <button
                   className="btn_defect"
                   onClick={() => postDataforcardefect()}

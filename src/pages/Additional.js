@@ -808,7 +808,7 @@ export default function Additional() {
           <div>
             <Button
               onClick={() => putpozitsiyaoyna(fueldata5)}
-              style={{ background: "orange", color: "white" }}
+              style={{ background: "orange", color: "white",  }}
               type="button"
             >
               O'zgartirish
@@ -819,7 +819,6 @@ export default function Additional() {
     },
     {
       title: "o'chirish",
-      witdh: "5%",
       render: (key) => {
         return (
           <div>
@@ -1683,7 +1682,7 @@ export default function Additional() {
           <h1>Pozitsiyalari </h1>
           <Table
             className="table"
-            style={{ width: "800px" }}
+            style={{ width: "100%" }}
             pagination={{ pageSize: 4 }}
             columns={columns5}
             dataSource={fueldata5}

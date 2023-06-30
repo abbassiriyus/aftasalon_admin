@@ -342,8 +342,9 @@ margin-left: 96%;
 margin-top: 1%;
 }
 
-
-
+.ant-table-tbody > tr > td, .ant-table-thead > tr > th{
+    white-space: wrap !important;
+}
 
 
 
@@ -357,6 +358,17 @@ margin-top: 1%;
     .house,.house1,.house2,.house3,.house4,.house5,.house6{
         margin-top:15% ;
         width: 100%;
+
+    }
+    .ant-table-tbody tr td{
+        padding: 1px;
+    }
+    .ant-table-tbody > tr > td,
+.ant-table-thead > tr > th {
+  white-space: wrap;
+}
+    .ant-table-thead tr{
+        padding: 0%;
     }
     .ant-table-content{
         width: 100%;
@@ -426,6 +438,7 @@ margin-top: 1%;
     } */
 }
 @media only screen and (max-width: 1640px) {
+
     .house,.house1,.house2,.house3,.house4,.house5,.house6{
         margin-top:15% ;
         width: 100%;
@@ -452,12 +465,9 @@ margin-top: 1%;
         position: static;
         text-align: center;
     }
-    /* .table{
-        width: 100%;
-    } */
+
     .post10, .post11, .putbutton{
-        /* width: 80px;
-        height: 30px; */
+
         font-size: 14px;
     }
     .postoyna10, .postoyna11, .putoyanfuel, .putoyanfuel1, .postgarantoyna, .putgarantoyna, .postmodeloyna, .putmodeloyna{
@@ -493,7 +503,4 @@ margin-top: 1%;
     .table{
         width: 100%;
     }
-    /* .katta12{
-        margin-top: 50%;
-    } */
 }
