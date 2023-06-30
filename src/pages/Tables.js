@@ -218,7 +218,7 @@ const Tables = () => {
     getGar();
   }, []);
   function getPosit() {
-    axios.get(`${url}/api/position/`).then((res) => {
+    axios.get(`${url}/api/uz/position_get/`).then((res) => {
       setdata6(res.data);
     });
   }
@@ -797,7 +797,7 @@ clearData()
                     <select className="slect slect1" id="slect1">
                       {data6.map((item) => (
                         <option id="inp1" value={item.id}>
-                          {item.name_uz}({item.name_ru})
+                          {item.name}
                         </option>
                       ))}
                     </select>
@@ -976,25 +976,11 @@ clearData()
                   <h1>Pozitsiya</h1>
                   <select className="select" id="poz">
                     {data6.map((item) => {
-                      return<>{data7.map((item2)=>{
-                        if (item.series===item2.model) {
-                          return<>{data8.map((item3)=>{
-                            if (item2.model===item3.id) {
-                                                   return (
+                      return (
                         <option value={item.id}>
-                          {item.name_uz}({item.name_ru}) {item3.name_uz}({item3.name_ru}) {item2.name_uz}({item2.name_ru}) 
+                         {item.name} {item.series.name} {item.series.model.name}
                         </option>
                       );
-                            }
-                            
-                          })}</>
-                        }
-                      })}</>
-                      // return (
-                      //   <option value={item.id}>
-                      //     {item.name_uz}({item.name_ru}) 
-                      //   </option>
-                      // );
                     })}
                   </select>
                 </div>
