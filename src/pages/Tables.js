@@ -132,7 +132,7 @@ const Tables = () => {
     });
 
     setTimeout(() => {
-      document.querySelector(".slect1").value = item.position;
+      document.querySelector("#slect1").value = item.position;
       // document.querySelector(".slect2").value = item.position.series.id;
       // document.querySelector(".slect3").value = item.position.series.model.id;
       document.querySelector(".slect4").value = item.fuel_sort;
@@ -797,7 +797,7 @@ clearData()
                     <select className="slect slect1" id="slect1">
                       {data6.map((item) => (
                         <option id="inp1" value={item.id}>
-                          {item.name}
+                          {item.name} {item.series.model.name} {item.series.name}
                         </option>
                       ))}
                     </select>

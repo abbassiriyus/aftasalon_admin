@@ -135,9 +135,9 @@ const CarHistory = () => {
   const getOneProduct = (item) => {
     console.log(item,"choose");
     setId(item.id)
-    setCar(item.car.name)
+    setCar(item.car.name_uz)
     setUser(item.user.username)
-    setBranch(item.branch.name)
+    setBranch(item.branch.name_uz)
     setTimeCreate(item.time_create.slice(0,10))
     setVisitTime(item.visit_time)
     setPage(2);
@@ -161,9 +161,9 @@ function putOrder (order) {
     formdata.append("time_create",order.time_create)
     formdata.append("visit_time",order.visit_time)
     formdata.append("is_active",true)
-    formdata.append("user",order.user)
-    formdata.append("car",order.car)
-    formdata.append("branch",order.branch)
+    formdata.append("user",order.user.id)
+    formdata.append("car",order.car.id)
+    formdata.append("branch",order.branch.id)
     axios.put(`${url}/api/order/${order.id}/`,formdata,
      {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -181,6 +181,7 @@ function putOrder (order) {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }).then((res) => {
       setdata1(res.data);
+      console.log(res.data,"aaaaaaa");
     });
   }
   useEffect(() => {

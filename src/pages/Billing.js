@@ -136,6 +136,7 @@ export default function Billing() {
       res.data.map(item => {
         if (item.user == key) {
           setDescription(item)
+          console.log(item);
         }
       })
     })
@@ -207,10 +208,10 @@ export default function Billing() {
     // datte.append('description', 'description')
     // datte.append('branch', 'branch')
     datte.append('user', localStorage.getItem('username'))
-    datte.append('description', document.querySelector('.description').value)
-    datte.append('branch', 2)
+    datte.append('description_uz', document.querySelector('.description_uz').value)
+    datte.append('branch', document.querySelector(".branch").value)
     axios.post(`${url}/api/comment/`, datte, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      window.location.reload()
+      document.querySelector('.ModalComment').style = 'top: -100%'
     }).catch(err => {
     })
   }
@@ -223,7 +224,8 @@ export default function Billing() {
     <div>
       <div className='PrewComents'>
         <span onClick={() => commentPrewievClose()}>X</span>
-        <p>{description.description}</p>
+        <p>{description.description_uz}</p>
+        <p>{description.description_ru}</p>
       </div>
       <div className='ModalComment'>
         <span onClick={() => commentClose()}>X</span>
@@ -231,11 +233,11 @@ export default function Billing() {
         <select className='branch'>
           {
             data3.map(item => {
-              return <option value={item.id}>{item.name}</option>
+              return <option value={item.id}>{item.name_uz}({item.name_ru})</option>
             })
           }
         </select>
-        <textarea className='description'></textarea><br />
+        <textarea className='description_uz'></textarea><br />
         <button onClick={() => commentPost()}>Izoh qoldirish</button>
       </div>
       <div className='ModalPost'>

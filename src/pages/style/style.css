@@ -443,6 +443,17 @@ justify-content: space-around;
     width: 38%;
       
 }
+.created{
+    box-shadow: -4px 10px 23px 7px rgba(0,0,0,0.55);
+    -webkit-box-shadow: -4px 10px 23px 7px rgba(0,0,0,0.55);
+    -moz-box-shadow: -4px 10px 23px 7px rgba(0,0,0,0.55);
+}
+.putbutton11div{
+    background-color: white;
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+}
 .img_img{
     width: 88%;
     height: 340px;

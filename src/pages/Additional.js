@@ -1596,7 +1596,7 @@ export default function Additional() {
                   className="selectFuels"
                   onClick={() => renderSelect()}
                 >
-                  <option></option>
+                  <option>Model</option>
                   {fueldata3.map((item) => {
                     return (
                       <option value={item.id}>
@@ -1651,7 +1651,7 @@ export default function Additional() {
                   className="selectFuels"
                   onClick={() => renderSelect()}
                 >
-                  <option></option>
+                  <option>Model</option>
                   {fueldata3.map((item) => {
                     return (
                       <option value={item.id}>
@@ -1701,7 +1701,7 @@ export default function Additional() {
                   onClick={() => testSseries()}
                   className="testSeri"
                 >
-                  <option></option>
+                  <option>Seriya</option>
                   {seria.map((item) => {
                     return (
                       <option value={item.model}>
@@ -1753,6 +1753,7 @@ export default function Additional() {
                 />
                 <p>Seriyalari almashtiring</p>
                 <select>
+                  <option>Seriya</option>
                   {fueldata4.map((item) => {
                     return (
                       <option value={item.id} className="putozition1">
@@ -1887,37 +1888,37 @@ export default function Additional() {
             <div className="label">
               <label>
                 <p>Name uz</p>
-                <input id="branch_put_name_uz" className="nom" type="text" />
+                <input placeholder={key5.name_uz} id="branch_put_name_uz" className="nom" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>Country uz</p>
-                <input id="branch_put_country_uz" className="mamlakat" type="text" />
+                <input placeholder={key5.country_uz} id="branch_put_country_uz" className="mamlakat" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>Region uz</p>
-                <input id="branch_put_region_uz" className="mintaqa" type="text" />
+                <input placeholder={key5.region_uz} id="branch_put_region_uz" className="mintaqa" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>City uz</p>
-                <input  id="branch_put_city_uz" className="shahar" type="text" />
+                <input placeholder={key5.city_uz}  id="branch_put_city_uz" className="shahar" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>District uz</p>
-                <input id="branch_put_district_uz" className="tuman" type="text" />
+                <input placeholder={key5.district_uz} id="branch_put_district_uz" className="tuman" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>Street uz</p>
-                <input id="branch_put_street_uz" className="kocha" type="text" />
+                <input placeholder={key5.street_uz} id="branch_put_street_uz" className="kocha" type="text" />
               </label>
             </div>
           </div>
@@ -1925,37 +1926,37 @@ export default function Additional() {
             <div className="label">
               <label>
                 <p>Name ru</p>
-                <input id="branch_put_name_ru" className="nom" type="text" />
+                <input placeholder={key5.name_ru} id="branch_put_name_ru" className="nom" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>Country ru</p>
-                <input id="branch_put_country_ru" className="mamlakat" type="text" />
+                <input placeholder={key5.country_ru} id="branch_put_country_ru" className="mamlakat" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>Region ru</p>
-                <input id="branch_put_region_ru" className="mintaqa" type="text" />
+                <input placeholder={key5.region_ru} id="branch_put_region_ru" className="mintaqa" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>City ru</p>
-                <input  id="branch_put_city_ru" className="shahar" type="text" />
+                <input placeholder={key5.city_ru}  id="branch_put_city_ru" className="shahar" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>District ru</p>
-                <input id="branch_put_district_ru" className="tuman" type="text" />
+                <input placeholder={key5.district_ru} id="branch_put_district_ru" className="tuman" type="text" />
               </label>
             </div>
             <div className="label">
               <label>
                 <p>Street ru</p>
-                <input id="branch_put_street_ru" className="kocha" type="text" />
+                <input placeholder={key5.street_ru} id="branch_put_street_ru" className="kocha" type="text" />
               </label>
             </div>
           </div>
@@ -1985,16 +1986,18 @@ export default function Additional() {
         <AiOutlineClose onClick={() => putCloseBlank()} className="close1" />
 
         <div className="div20">
-          <input id="put_blank_title"placeholder="title"/>
-          <input id="put_blank_text" placeholder="text" />
+          <input id="put_blank_title"placeholder={keyBlank.title}/>
+          <input id="put_blank_text" placeholder={keyBlank.text} />
         </div>
+        <div className="putbutton11div">
         <button
-          style={{ marginLeft: "81.5%", marginTop: "2%" }}
           className="putbutton"
           onClick={() => putBlank()}
         >
           Qo'shish
         </button>
+        </div>
+ 
       </div>
       <div className="postBlank">
         <AiOutlineClose onClick={() => postCloseBlank()} className="close1" />
