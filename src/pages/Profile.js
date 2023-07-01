@@ -83,7 +83,6 @@ function Profile() {
     document.querySelector('.putAdmin').style = 'right: 10px;'
     localStorage.setItem('idUser', key)
     setKey(key)
-    alert(key.id)
   }
 
   function modalClose() {
@@ -91,7 +90,6 @@ function Profile() {
   }
 
   function postModal() {
-    alert(keydata.id)
     var key = keydata.id
     var local = JSON.parse(localStorage.getItem("data2"))
     var data = new FormData();
