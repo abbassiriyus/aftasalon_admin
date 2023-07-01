@@ -75,6 +75,7 @@ textarea{
 }
 .slect18{
     width: 45%;
+    height: 10vw;
 }
 .rasmlar{
     width: 100%;
@@ -385,9 +386,9 @@ top:-100%;
     position: fixed;
     top: -1000%;
 }
-.defectdest{
+.defectdest,.defectdest_edit{
     width: 15vw;
-    height: 20px; 
+    height: 4vw; 
 }
 .main_div_defect{
     width: 100%;

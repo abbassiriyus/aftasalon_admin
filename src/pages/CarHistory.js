@@ -19,6 +19,7 @@ const CarHistory = () => {
   const [year, setYear] = useState('');
   const [distance, setDistance] = useState('');
   const [engine, setEngine] = useState('');
+  const [superadmin, setSuperadmin] = useState(false);
   const columns = [
     {
       title: "Id",
@@ -73,23 +74,39 @@ const CarHistory = () => {
         );
       },
     },
-    // {
-    //   title: "O'chirish",
-    //   key: "O'chirish",
-    //   width: "5%",
-    //   render: (__, item) => {
-    //     return (
-    //       <div>
-    //         <Button               onClick={() => {
-    //             deletecar(item);
-    //           }} type="danger">
-    //         O'chirish
-    //         </Button>
-    //       </div>
-    //     );
-    //   },
-    // },
+    
+    {
+      title: "O'chirish",
+      key: "O'chirish",
+      width: "5%",
+      render: (__, item) => {
+        return(superadmin&&(
+        
+          <div>
+            <Button               onClick={() => {
+                deletecar(item);
+              }} type="danger">
+            O'chirish
+            </Button>
+          </div>
+        ))
+      },
+    },
   ];
+  useEffect(() => {
+    if (sessionStorage.getItem("superadmin") === "true") {
+      setSuperadmin(true);
+    } else {
+      setSuperadmin(false);
+    }
+  }, []);
+  function deletecar (ietm) {
+    axios.delete(`${url}/api/car_history/${ietm.id}/`,{ headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then((res) => {
+      axios.get(`${url}/api/car_history/`).then((res) => {
+        setdata1(res.data);
+      });
+    });
+  }
   const getOneProduct = (item) => {
     setdata(item);
     setYear(item.year)
