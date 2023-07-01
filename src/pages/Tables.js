@@ -336,7 +336,11 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res.data, "danniy");
+        document.querySelector(".postoyna").style =
+        "position:fixed;right:-100%;  transition: 1s;";
+      axios.get(`${url}/api/cars/`).then((res2) => {
+        setdata1(res2.data);
+      });
         var formdata2 = new FormData();
         // eslint-disable-next-line no-lone-blocks
         {
