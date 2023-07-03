@@ -634,6 +634,20 @@ export default function Additional() {
       dataIndex: "id",
     },
     {
+      title: "Model",
+      render: (fueldata4) => {
+        return (
+          <div>
+            {fueldata3.map((item=>{
+              if (item.id===fueldata4.model) {
+                return<>{item.name_uz}</>
+              }
+            }))}
+          </div>
+        );
+      },
+    },
+    {
       title: "O'zbekcha nomi",
       dataIndex: "name_uz",
     },
@@ -792,6 +806,40 @@ export default function Additional() {
     {
       title: "Id",
       dataIndex: "id",
+    },
+    {
+      title: "Model",
+      render: (fueldata5) => {
+        return (
+          <div>
+            {fueldata4.map((item)=>{
+              if (fueldata5.series===item.id) {
+                return<>{fueldata3.map((item2)=>{
+                  if (item.model===item2.id) {
+                    return<>{item2.name_uz}</>
+                  }
+                })}</>
+              }
+            })}
+
+          </div>
+        );
+      },
+    },
+    {
+      title: "Seria",
+      render: (fueldata5) => {
+        return (
+          <div>
+            {fueldata4.map((item)=>{
+              if (fueldata5.series===item.id) {
+                return<>{item.name_uz}</>
+              }
+            })}
+
+          </div>
+        );
+      },
     },
     {
       title: "O'zbekcha nomi",

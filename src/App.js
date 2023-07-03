@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Main from "./components/layout/Main";
+import CallTouser from "./pages/CallToUser"
 import "antd/dist/antd.css";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
@@ -36,6 +37,7 @@ const [login, setLogin]=useState(sessionStorage.getItem("token"))
           <Route exact path="/users" component={Billing} />
           <Route exact path="/carHistory" component={CarHistory} />
           <Route exact path="/orders" component={Orders} />
+          <Route exact path="/calltouser" component={CallTouser} />
           <Route exact path="/rtl" component={Rtl} />
           <Route exact path="/profile" component={Profile} /> 
         </Main>

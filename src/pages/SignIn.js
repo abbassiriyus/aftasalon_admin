@@ -93,6 +93,7 @@ export default class SignIn extends Component {
                       },
                     ]}
                   >
+                    <p>Misol: 998XXXXXXXXXX</p>
                     <Input placeholder="Username" className="username1" />
                   </Form.Item>
 

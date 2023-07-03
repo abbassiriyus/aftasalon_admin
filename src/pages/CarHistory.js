@@ -37,23 +37,7 @@ const CarHistory = () => {
       title: "Narx",
       dataIndex: "price",
     },
-    {
-      title: "Status",
-      dataIndex: "is_active",
-      render: (el) => (
-        <div className="status">
-          {el ? (
-            <h1 style={{ color: "green" }}>
-              <AiOutlineCheck />
-            </h1>
-          ) : (
-            <h1 style={{ color: "red" }}>
-              <AiOutlineClose className="AiOutlineClose" />
-            </h1>
-          )}
-        </div>
-      ),
-    },
+
     {
       title: "Ma'lumot",
       key: "edit",

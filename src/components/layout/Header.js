@@ -14,7 +14,7 @@ function Header({
   }
   return (
     <>
-      <Row gutter={[24, 0]}>
+      {/* <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
           <Breadcrumb>
             <Breadcrumb.Item>
@@ -25,7 +25,7 @@ function Header({
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 }

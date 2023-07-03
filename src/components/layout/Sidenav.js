@@ -218,6 +218,19 @@ function Sidenav({ color }) {
             <span className="label">Arizalar</span>
           </NavLink>
         </Menu.Item>
+        <Menu.Item key="9">
+          <NavLink to="/calltouser">
+          <span
+              className="icon"
+              style={{
+                background: page === "tables" ? color : "",
+              }}
+            >
+              {tables}
+            </span>
+            <span className="label">qo'ng'iroq qiluvchilar</span>
+          </NavLink>
+        </Menu.Item>
          <Menu.Item className="menu-item-header" key="5">
          Hisob sahifalari
         </Menu.Item>

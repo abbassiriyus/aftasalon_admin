@@ -409,7 +409,7 @@ clearData()
         }
       })
       .catch((err) => {
-        console.log(err);
+        alert("nimadir to'ldirilmagan")
       });
   }
   function malumotput() {
@@ -545,9 +545,10 @@ clearData()
     if (
       document.querySelector("#rasm_1_edit").value < 1 &&
       document.querySelector("#rasm_2_edit").value < 1 &&
-      document.querySelector("#text_defect_edit").value < 1
+      document.querySelector("#text_defect_edit_uz").value < 1&&
+      document.querySelector("#text_defect_edit_ru").value < 1
     ) {
-      alert("not enough infa");
+      alert("Malumot etarli mas");
     } else {
       var formdata = new FormData();
       formdata.append("car", data.id);
@@ -653,7 +654,7 @@ clearData()
   }
   function postimageeDdit() {
     if (document.querySelector("#rasm_imgd").value < 1) {
-      alert("not enough infa");
+      alert("Malumot etarli mas");
     } else {
       var formdata = new FormData();
       formdata.append("car", data.id);
@@ -702,7 +703,7 @@ clearData()
       document.querySelector("#rasm_2").value < 1 &&
       document.querySelector("#text_defect").value < 1
     ) {
-      alert("not enough infa");
+      alert("Malumot etarli mas");
     } else {
       var datafordefect = {
         image1: document.querySelector("#rasm_1").files[0],
@@ -719,7 +720,7 @@ clearData()
   }
   function postDataforcarimg() {
     if (document.querySelector("#rasm_img").value < 1) {
-      alert("not enough infa");
+      alert("Malumot etarli mas");
     } else {
       var dataforimg = {
         image: document.querySelector("#rasm_img").files[0],
@@ -861,7 +862,7 @@ clearData()
                     <input className="slect9" type="number" />
                   </div>
                   <div className="text">
-                    <h1>Dvigatel</h1>
+                    <h1> Dvigatel hajmi</h1>
                     <input className="slect10" type="number" />
                   </div>
                   <div className="text">
@@ -1051,7 +1052,7 @@ clearData()
                   <input className="mas" type="number" />
                 </div>
                 <div className="text5">
-                  <h1>Dvigatel</h1>
+                  <h1> Dvigatel hajmi</h1>
                   <input className="dvi" type="number" />
                 </div>
                 <div className="text5">
@@ -1066,7 +1067,7 @@ clearData()
                 </div>
                 <div className="text5">
                   <h1>dvigatel quvvati</h1>
-                  <input id="enginepower_car" type="number" />
+                  <input  required id="enginepower_car" type="number" />
                 </div>
               </div>
               <div className="text3">
@@ -1159,7 +1160,9 @@ clearData()
               <h4>Mashinaning nuqsonlarini qo'shish</h4>
               <div className="defect_div">
                 <div>
+                  <p>yaqindan turgan rasm</p>
                 <input className="input_defect" id="rasm_1" type="file" />
+                <p> uzoqdan turgan rasm</p>
                 <input className="input_defect" id="rasm_2" type="file" />
                 </div>
 <div>
@@ -1254,7 +1257,9 @@ clearData()
           <center>
             <h4>Mashinaning nuqsonlarini qo'shish</h4>
             <div className="defect_div">
+            <p>yaqindan turgan rasm</p>
               <input className="input_defect" id="rasm_1_edit" type="file" />
+              <p> uzoqdan turgan rasm</p>
               <input className="input_defect" id="rasm_2_edit" type="file" />
               <textarea
               placeholder="uz"

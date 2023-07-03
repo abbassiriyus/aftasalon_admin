@@ -5,7 +5,7 @@ import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import {SearchOutlined,} from "@ant-design/icons";
 import { Button, Table,Input } from "antd";
 import "./style/style.css";
-const CarHistory = () => {
+const Order = () => {
   const [data, setdata] = useState([]);
   const [data1, setdata1] = useState([]);
   const [data2, setdata2] = useState([]);
@@ -329,4 +329,4 @@ function putOrder (order) {
     </div>
   );
 };
-export default CarHistory;
+export default Order;
