@@ -39,8 +39,12 @@ const Order = () => {
         render: (_,item)=> <div>{item.time_create.slice(0,10)}</div>
       },
       {
+        title: "tashrif sanasi",
+        render: (_,item)=> <div>{item.visit_time.slice(0,10)}</div>
+      },
+      {
         title: "tashrif vaqti",
-        dataIndex: "visit_time",
+        render: (_,item)=> <div>{item.visit_time.slice(11,19)}</div>
       },
     {
       title: "Status",

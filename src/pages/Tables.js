@@ -866,10 +866,11 @@ clearData()
                     <input className="slect10" type="number" />
                   </div>
                   <div className="text">
-                    <h1>Rang(Цвет)</h1>
+                    <h1>Rang</h1>
                     <input placeholder="uz" type="text" className="slect11" />
                   </div>
                   <div className="text">
+                  <h1>Цвет</h1>
                     <input placeholder="ru" type="text" className="slect111" />
                   </div>
                   <div className="text">
@@ -883,10 +884,11 @@ clearData()
                 </div>
                 <div className="text3">
                   <div className="text">
-                    <h1>Ism(имя)</h1>
+                    <h1>Ism</h1>
                     <input placeholder="uz" type="text" className="slect12" />
                   </div>
                   <div className="text">
+                  <h1>имя</h1>
                     <input placeholder="ru" type="text" className="slect122" />
                   </div>
                   <div className="text">
@@ -1175,7 +1177,7 @@ clearData()
                   className="btn_defect"
                   onClick={() => postDataforcardefect()}
                 >
-                  qoshish
+                  Qo'shish
                 </button>
               </div>
             </center>
@@ -1220,7 +1222,7 @@ clearData()
                   className="btn_defect"
                   onClick={() => postDataforcarimg()}
                 >
-                  qoshish
+                  Qo'shish
                 </button>
               </div>
             </center>
@@ -1277,7 +1279,7 @@ clearData()
                 className="btn_defect"
                 onClick={() => postDataforcardefect_edit()}
               >
-                qoshish
+                Qo'shish
               </button>
             </div>
           </center>
@@ -1329,7 +1331,7 @@ clearData()
             <div className="defect_div">
               <input className="input_defect_edit" id="rasm_imgd" type="file" />
               <button className="btn_defect" onClick={() => postimageeDdit()}>
-                qoshish
+              Qo'shish
               </button>
             </div>
           </center>

@@ -83,6 +83,7 @@
     bottom: 0px;
     background-color: white;
     display: none;
+    top: 0px;
 }
 .postoyna11{
     width: 100%;
@@ -433,6 +434,14 @@ margin-top: 1%;
     .table{
         width: 100%;
     }
+    .house6 {
+        margin-top: 28%;
+        margin-bottom: 30%;
+    }
+    .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
+        /* padding: 16px 25px; */
+        padding: 1px;
+    }
     /* .katta12{
         margin-top: 50%;
     } */
@@ -447,7 +456,7 @@ margin-top: 1%;
         width: 100%;
     }
     .house{
-        margin-top: 15%;
+        margin-top: 1%;
         margin-bottom: 15%;
     }
     .house5{
@@ -503,4 +512,7 @@ margin-top: 1%;
     .table{
         width: 100%;
     }
+}
+.ant-table-tbody > tr > td, .ant-table-thead > tr > th {
+    padding: 15px 10px !important;
 }

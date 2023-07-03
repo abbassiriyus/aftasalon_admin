@@ -13,7 +13,7 @@ export default function Billing() {
   const [data3, setData3] = useState([])
   const [data4, setData4] = useState([])
   const [superadmin, setSuperadmin] = useState(false);
-  const [ description, setDescription] = useState({})
+  const [ description, setDescription] = useState([])
 
   useEffect(() => {
     axios.get(`${url}/auth/users/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
@@ -62,21 +62,23 @@ export default function Billing() {
       title: 'Telefon raqami',
       dataIndex: 'phone',
     },
-    {
-      title: 'ochirish',
-      render: (data) => (
-        <Button onClick={() => deleteData(data.id)} type="danger" className='delte'>Delete</Button>
-      ),
-    },
+
     {
       title: 'Izoh qoldirish',
       render: (data2) => (
         <Button type="arrow" className='Izoh' onClick={() => comment(data2.id)}>Izoh qoldirish</Button>
       ),
-    }, {
+    },
+     {
       title: 'Izoh qoldirish',
       render: (data2) => (
-        <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)}>Izoh lar</Button>
+        <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)}>Izohlar</Button>
+      ),
+    },
+    {
+      title: 'ochirish',
+      render: (data) => (
+        <Button onClick={() => deleteData(data.id)} type="danger" className='delte'>O'chirish</Button>
       ),
     },
   ];
@@ -96,21 +98,23 @@ export default function Billing() {
       title: 'Telefon raqami',
       dataIndex: 'phone',
     },
-    {
-      title: 'ochirish',
-      render: (data2) => (
-        <Button onClick={() => deleteData(data2.id)} type="danger" className='delte'>Delete</Button>
-      ),
-    },
+
     {
       title: 'Izoh qoldirish',
       render: (data2) => (
         <Button type="arrow" className='Izoh' onClick={() => comment(data2.id)} >Izoh qoldirish</Button>
       ),
-    }, {
+    },
+     {
       title: 'Izoh qoldirish',
       render: (data2) => (
         <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)} >Izohlar</Button>
+      ),
+    },
+    {
+      title: 'ochirish',
+      render: (data2) => (
+        <Button onClick={() => deleteData(data2.id)} type="danger" className='delte'>O'chirish</Button>
       ),
     },
   ];
@@ -133,12 +137,14 @@ export default function Billing() {
     //   })
     // })
     axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+    var  data24=[]
       res.data.map(item => {
-        if (item.user == key) {
-          setDescription(item)
+        if (item.user === key) {
+          data24.push(item)
           console.log(item);
         }
       })
+      setDescription(data24)
     })
     console.log(key);
     document.querySelector('.PrewComents').style = 'top: 250px'
@@ -224,8 +230,12 @@ export default function Billing() {
     <div>
       <div className='PrewComents'>
         <span onClick={() => commentPrewievClose()}>X</span>
-        <p>{description.description_uz}</p>
-        <p>{description.description_ru}</p>
+        {description.map((item)=>{
+          return<div>
+        <p>{item.description_uz}</p>
+
+          </div>
+        })}
       </div>
       <div className='ModalComment'>
         <span onClick={() => commentClose()}>X</span>

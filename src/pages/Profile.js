@@ -74,6 +74,7 @@ function Profile() {
       setUsers(res.data)
       console.log(res.data, 'dfyuiutyrttu7rytsryyuui');
     })
+    
   }, [])
 
 
@@ -199,7 +200,7 @@ function Profile() {
         }
       ></Card>
 
-      <Row gutter={[24, 0]}>
+      {/* <Row gutter={[24, 0]}>
         <Col span={24} md={8} className="mb-24">
           <Card
             bordered={false}
@@ -231,7 +232,7 @@ function Profile() {
           </Card>
 
         </Col>
-      </Row>
+      </Row> */}
 
     </>
   );
