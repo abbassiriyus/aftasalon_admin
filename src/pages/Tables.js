@@ -405,7 +405,7 @@ clearData()
         }
       })
       .catch((err) => {
-        alert("nimadir to'ldirilmagan")
+
       });
   }
   function malumotput() {

@@ -965,7 +965,7 @@ export default function Additional() {
       "name_ru",
       document.querySelector("#positon_put_ru").value
     );
-    putpozition.append("series", document.querySelector(".putozition1").value);
+    putpozition.append("series", document.querySelector("#put_position_seria_id").value);
     axios
       .put(`${url}/api/position/${id}/`, putpozition, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
@@ -1750,9 +1750,9 @@ export default function Additional() {
                   className="testSeri"
                 >
                   <option>Seriya</option>
-                  {seria.map((item) => {
+                  {fueldata4.map((item) => {
                     return (
-                      <option value={item.model}>
+                      <option value={item.id}>
                         (uz){item.name_uz} (ru){item.name_ru}
                       </option>
                     );
@@ -1800,7 +1800,7 @@ export default function Additional() {
                   id="positon_put_ru"
                 />
                 <p>Seriyalari almashtiring</p>
-                <select>
+                <select id="put_position_seria_id">
                   <option>Seriya</option>
                   {fueldata4.map((item) => {
                     return (
