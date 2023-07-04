@@ -4,11 +4,14 @@ import { MinusOutlined } from "@ant-design/icons";
 import lineChart from "./configs/lineChart";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner.js"
 import url from "../host";
 function LineChart() {
   const { Title, Paragraph } = Typography;
+  const [isLoading, setIsLoading] = useState(false);
   var [chart,setChart]=useState(lineChart)
   useEffect(() => {
+    setIsLoading(true)
     axios
     .get(`${url}/api/car_history/`)
     .then((resmonth) => {
@@ -97,10 +100,11 @@ function LineChart() {
         lineChart.series[0].data[11] = profit12
         ));
       }, 10);
+      setIsLoading(false)
     });
   }, []);
   return (
-    <>
+<>{isLoading ? <LoadingSpinner /> :<>
       <div className="linechart">
         <div>
           <Title level={5}>sotilgan avtomobilar</Title>
@@ -121,7 +125,8 @@ function LineChart() {
         height={350}
         width={"100%"}
       />
-    </>
+    </>}
+</>
   );
 }
 

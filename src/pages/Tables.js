@@ -162,6 +162,7 @@ const Tables = () => {
     });
   }
   useEffect(() => {
+    console.log("p");
     getData();
   }, []);
 
@@ -236,6 +237,7 @@ const Tables = () => {
     });
   }
   useEffect(() => {
+    console.log("a");
     getBranch();
   }, []);
   function daleteAxiox(id) {

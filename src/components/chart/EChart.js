@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import { Row, Col, Typography,DatePicker } from "antd";
 import eChart from "./configs/eChart";
+import LoadingSpinner from "./LoadingSpinner"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import url from "../host";
@@ -11,6 +12,7 @@ function EChart() {
   const [data3, setData3] = useState('');
   const [data4, setData4] = useState('');
   const [data5, setData5] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const[search,setSearch]=useState(new Date().getFullYear().toString());
   const [chart, setChart] = useState({
     series: [{
@@ -20,7 +22,7 @@ color: "#155998"
     }]
   });
   useEffect(() => {
-    console.log(search,"zzzz");
+    setIsLoading(true);
     axios
     .get(`${url}/api/car_history/`)
     .then((resmonth) => {
@@ -230,6 +232,7 @@ color: "#155998"
       .get(`${url}/api/cars/`)
       .then((res3) => {
         setData5(res3.data.length);
+        setIsLoading(false);
       })
       })
 
@@ -261,6 +264,7 @@ color: "#155998"
     },
   ];
   const handleInputChange = (date,dateString) => {
+    setIsLoading(true);
     setSearch(dateString);
     axios
     .get(`${url}/api/car_history/`)
@@ -426,22 +430,13 @@ color: "#155998"
           ]
         }]
       });
+      setIsLoading(false);
     });
   }
-  const onChange = (dateString) => {
-    alert( dateString);
-  };
   return (
-    <>
+
+    <>{isLoading ? <LoadingSpinner /> :<>
         <DatePicker onChange={handleInputChange} picker="year" />
-    {/* <select onChange={handleInputChange}>
-      <option>2023</option>
-      <option>2024</option>
-      <option>2025</option>
-      <option>2026</option>
-      <option>2027</option>
-      <option>2028</option>
-    </select> */}
       <div id="chart">
         <ReactApexChart
           className="bar-chart"
@@ -464,7 +459,7 @@ color: "#155998"
           ))}
         </Row>
       </div>
-    </>
+    </>}</>
   );
 }
 

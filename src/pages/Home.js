@@ -9,14 +9,16 @@ import Echart from "../components/chart/EChart";
 import LineChart from "../components/chart/LineChart";
 import axios from "axios";
 import url from "../components/host";
-
+import LoadingSpinner from "./LoadingSpinner.js"
 function Home() {
   const { Title, Text } = Typography;
   const [data, setData] = useState('');
   const [data2, setData2] = useState('');
   const [data3, setData3] = useState('');
   const [data4, setData4] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
     .get(`${url}/api/car_history/`)
     .then((res) => {
@@ -48,6 +50,7 @@ function Home() {
 
       setData3(totalUsers)
       setData4(todayUsers.length)
+      setIsLoading(false)
       })
     })
       .catch((err) => {
@@ -155,51 +158,51 @@ function Home() {
   ];
 
   return (
-    <>
-      <div className="layout-content">
-        <Row className="rowgap-vbox" gutter={[24, 0]}>
-          {count.map((c, index) => (
-            <Col
-              key={index}
-              xs={20}
-              sm={24}
-              md={12}
-              lg={6}
-              xl={6}
-              className="mb-24"
-            >
-              <Card bordered={false} className="criclebox ">
-                <div className="number">
-                  <Row align="middle" gutter={[24, 0]}>
-                    <Col xs={18}>
-                      <span>{c.today}</span>
-                      <Title level={3}>
-                        {c.title} <small className={c.bnb}>{c.persent}</small>
-                      </Title>
-                    </Col>
-                    <Col xs={6}>
-                      <div className="icon-box">{c.icon}</div>
-                    </Col>
-                  </Row>
-                </div>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+    <>{isLoading ? <LoadingSpinner /> :<div className="layout-content">
+    <Row className="rowgap-vbox" gutter={[24, 0]}>
+      {count.map((c, index) => (
+        <Col
+          key={index}
+          xs={20}
+          sm={24}
+          md={12}
+          lg={6}
+          xl={6}
+          className="mb-24"
+        >
+          <Card bordered={false} className="criclebox ">
+            <div className="number">
+              <Row align="middle" gutter={[24, 0]}>
+                <Col xs={18}>
+                  <span>{c.today}</span>
+                  <Title level={3}>
+                    {c.title} <small className={c.bnb}>{c.persent}</small>
+                  </Title>
+                </Col>
+                <Col xs={6}>
+                  <div className="icon-box">{c.icon}</div>
+                </Col>
+              </Row>
+            </div>
+          </Card>
+        </Col>
+      ))}
+    </Row>
 
-        <Row gutter={[24, 0]}>
-          <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
-            <Card bordered={false} className="criclebox h-full">
-              <Echart />
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
-            <Card bordered={false} className="criclebox h-full">
-              <LineChart />
-            </Card>
-          </Col>
-        </Row>
-      </div>
+    <Row gutter={[24, 0]}>
+      <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
+        <Card bordered={false} className="criclebox h-full">
+          <Echart />
+        </Card>
+      </Col>
+      <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
+        <Card bordered={false} className="criclebox h-full">
+          <LineChart />
+        </Card>
+      </Col>
+    </Row>
+  </div> }
+
     </>
   );
 }
