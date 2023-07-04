@@ -6,7 +6,7 @@ import {SearchOutlined,} from "@ant-design/icons";
 import { Button, Table,Input } from "antd";
 import "./style/style.css";
 const Order = () => {
-  const [data, setdata] = useState([]);
+
   const [data1, setdata1] = useState([]);
   const [data2, setdata2] = useState([]);
   const [page, setPage] = useState(1);
@@ -249,7 +249,7 @@ function putOrder (order) {
         });
         setdata1(searchdata);
       });
-      if (event.target.value==56565656) {
+      if (event.target.value===56565656) {
         axios.get(`${url}/api/order/`,     {
           headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
         }).then((res) => {
@@ -282,7 +282,7 @@ function putOrder (order) {
       ) : (
         <div>
           <div className="nomi1">
-            <h1 className="nomi">{data.name}</h1>
+            
             <div
               style={{
                 width: "200px",

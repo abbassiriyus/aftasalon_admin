@@ -3,7 +3,6 @@ import {SearchOutlined,} from "@ant-design/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import url from "../components/host";
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import "./style/style.css";
 const CarHistory = () => {
   const [data, setdata] = useState([]);
@@ -157,7 +156,7 @@ const handleInputChange = (event) => {
   }, []);
   return (
     <div>
-      {page == 1 ? (
+      {page === 1 ? (
         <div>
                    <Input
             className="header-search"

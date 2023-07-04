@@ -88,7 +88,7 @@ export default class SignIn extends Component {
                     name="username"
                     rules={[
                       {
-                        required: true,
+                       
                         message: "Please input your username!",
                       },
                     ]}

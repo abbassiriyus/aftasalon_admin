@@ -5,11 +5,8 @@ import { useEffect, useState } from "react";
 import url from "../components/host";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import "./style/style.css";
-// import Form from "antd/lib/form/Form";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 const Tables = () => {
-  const [setSelectedRowKeys] = useState([]);
-  const [setLoading] = useState(false);
   const [data, setdata] = useState([]);
   const [data1, setdata1] = useState([]);
   const [data2, setdata2] = useState([]);
@@ -22,7 +19,6 @@ const Tables = () => {
   const [data9, setdata9] = useState([]);
   const [page, setPage] = useState(1);
   const [enginePlace, setEnginePlace] = useState([]);
-  const [keys, setKeys] = useState([]);
   const [keys1, setKeys1] = useState([]);
   const [keys2, setKeys2] = useState([]);
   const [datadefect, setdatadefect] = useState([]);

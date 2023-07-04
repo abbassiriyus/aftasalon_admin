@@ -4,24 +4,22 @@ import {
   Row,
   Col,
   Card,
-  Button,
-  List,
   Avatar,
   Radio,
 } from "antd";
 
 import BgProfile from "../assets/images/bg-profile.jpg";
-import convesionImg from "../assets/images/face-3.jpg";
-import convesionImg2 from "../assets/images/face-4.jpg";
-import convesionImg3 from "../assets/images/face-5.jpeg";
-import convesionImg4 from "../assets/images/face-6.jpeg";
-import convesionImg5 from "../assets/images/face-2.jpg";
+// import convesionImg from "../assets/images/face-3.jpg";
+// import convesionImg2 from "../assets/images/face-4.jpg";
+// import convesionImg3 from "../assets/images/face-5.jpeg";
+// import convesionImg4 from "../assets/images/face-6.jpeg";
+// import convesionImg5 from "../assets/images/face-2.jpg";
 import axios from "axios";
 import url from "../components/host";
 import './style/Profil.css'
 function Profile() {
   const [data3, setData3] = useState([]);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
  const [keydata, setKey] = useState([]);
 
 
@@ -30,33 +28,33 @@ function Profile() {
 
 
 
-  const data = [
-    {
-      title: "Sophie B.",
-      avatar: convesionImg,
-      description: "Hi! I need more information…",
-    },
-    {
-      title: "Anne Marie",
-      avatar: convesionImg2,
-      description: "Awesome work, can you…",
-    },
-    {
-      title: "Ivan",
-      avatar: convesionImg3,
-      description: "About files I can…",
-    },
-    {
-      title: "Peterson",
-      avatar: convesionImg4,
-      description: "Have a great afternoon…",
-    },
-    {
-      title: "Nick Daniel",
-      avatar: convesionImg5,
-      description: "Hi! I need more information…",
-    },
-  ];
+  // const data = [
+  //   {
+  //     title: "Sophie B.",
+  //     avatar: convesionImg,
+  //     description: "Hi! I need more information…",
+  //   },
+  //   {
+  //     title: "Anne Marie",
+  //     avatar: convesionImg2,
+  //     description: "Awesome work, can you…",
+  //   },
+  //   {
+  //     title: "Ivan",
+  //     avatar: convesionImg3,
+  //     description: "About files I can…",
+  //   },
+  //   {
+  //     title: "Peterson",
+  //     avatar: convesionImg4,
+  //     description: "Have a great afternoon…",
+  //   },
+  //   {
+  //     title: "Nick Daniel",
+  //     avatar: convesionImg5,
+  //     description: "Hi! I need more information…",
+  //   },
+  // ];
 
 
 
@@ -70,10 +68,10 @@ function Profile() {
       }
     })
 
-    axios.get(`${url}/auth/users/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      setUsers(res.data)
-      console.log(res.data, 'dfyuiutyrttu7rytsryyuui');
-    })
+    // axios.get(`${url}/auth/users/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+    //   setUsers(res.data)
+    //   console.log(res.data, 'dfyuiutyrttu7rytsryyuui');
+    // })
     
   }, [])
 

@@ -4,14 +4,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import url from '../components/host';
 import './style/Billing.css'
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import { Tabs } from 'antd';
+import {AiOutlineClose} from "react-icons/ai";
+import { Tabs,Input } from 'antd';
 
 export default function Billing() {
   const [data, setData] = useState([])
   const [data2, setData2] = useState([])
   const [data3, setData3] = useState([])
-  const [data4, setData4] = useState([])
   const [superadmin, setSuperadmin] = useState(false);
   const [ description, setDescription] = useState([])
 
@@ -70,7 +69,7 @@ export default function Billing() {
       ),
     },
      {
-      title: 'Izoh qoldirish',
+      title: 'Izohlar',
       render: (data2) => (
         <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)}>Izohlar</Button>
       ),
@@ -106,7 +105,7 @@ export default function Billing() {
       ),
     },
      {
-      title: 'Izoh qoldirish',
+      title: 'Izohlar',
       render: (data2) => (
         <Button type="arrow" className='Izoh' onClick={() => commentPrewiev(data2.id)} >Izohlar</Button>
       ),
@@ -147,7 +146,7 @@ export default function Billing() {
       setDescription(data24)
     })
     console.log(key);
-    document.querySelector('.PrewComents').style = 'top: 250px'
+    document.querySelector('.PrewComents').style = '    top: auto;'
 
   }
 
@@ -157,7 +156,7 @@ export default function Billing() {
   }
 
   function ModalPost() {
-    document.querySelector('.ModalPost').style = 'top: 200px'
+    document.querySelector('.ModalPost').style = '    top: auto;'
   }
 
 
@@ -229,7 +228,7 @@ export default function Billing() {
   return (
     <div>
       <div className='PrewComents'>
-        <span onClick={() => commentPrewievClose()}>X</span>
+        <AiOutlineClose className='close' onClick={() => commentPrewievClose()}/>
         {description.map((item)=>{
           return<div>
         <p>{item.description_uz}</p>
@@ -247,7 +246,7 @@ export default function Billing() {
             })
           }
         </select>
-        <textarea className='description_uz'></textarea><br />
+        <Input  maxLength={20} className='description_uz'></Input><br />
         <button onClick={() => commentPost()}>Izoh qoldirish</button>
       </div>
       <div className='ModalPost'>
