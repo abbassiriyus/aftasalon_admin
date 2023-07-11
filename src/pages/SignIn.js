@@ -33,26 +33,6 @@ export default class SignIn extends Component {
   state = {
 
   }
-  componentDidMount() {
-    var data=JSON.parse(localStorage.getItem("data2"))
-    var date={
-      phone:data.phone,
-      password:data.password
-    }
-    axios.post(`${url}/auth/login/`, date).then(res => {
-      console.log(res.data)
-      if (res.data.is_staff===true) {
-        window.location.reload()
-        localStorage.setItem("data2", JSON.stringify(data));
-        sessionStorage.setItem("token", res.data.access)
-        sessionStorage.setItem("superadmin", res.data.is_superuser)
-      }else{
-        alert("this admin not exist")
-      }
-    }).catch(err => {
-      console.log(err);
-    })
-  }
   login = () => {
 
     var data = {
@@ -72,7 +52,6 @@ export default class SignIn extends Component {
       }
     }).catch(err => {
       console.log(err);
-      alert("xatto")
     })
   } 
   render() {
@@ -109,7 +88,7 @@ export default class SignIn extends Component {
                     name="username"
                     rules={[
                       {
-                        required: true,
+                       
                         message: "Please input your username!",
                       },
                     ]}
