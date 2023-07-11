@@ -168,7 +168,9 @@ export default function Additional() {
   function postoyna11(id) {
     setId(id);
     document.querySelector(".postoyna11").style =
-      "position: absolute;display:block;    transition: 1s;";
+      "position: absolute;display:block;    transition: 1s; top:20px;";
+      document.querySelector("#fuel_sort_put_uz").value =id.name_uz
+      document.querySelector("#fuel_sort_put_ru").value =id.name_ru
   }
   function postoynaclose11() {
     document.querySelector(".postoyna11").style =
@@ -254,6 +256,8 @@ export default function Additional() {
   function putoyanfuel2(id) {
     document.querySelector(".putoyanfuel1").style =
       "position: absolute;display:block;  transition: 1s;";
+      document.querySelector("#gearbox_put_uz").value =id.name_uz
+      document.querySelector("#gearbox_put_ru").value = id.name_ru 
     setkey(id);
   }
 
@@ -481,6 +485,9 @@ export default function Additional() {
     document.querySelector(".putgarantoyna").style =
       "position: absolute;display:block;  transition: 1s;";
     setkey1(id);
+    document.querySelector("#garant_put_uz").value =id.name_uz
+    document.querySelector("#garant_put_ru").value = id.name_ru 
+    document.querySelector("#garant_put_time").value = id.time
   }
 
   function putgarantoyna1() {
@@ -558,6 +565,8 @@ export default function Additional() {
     document.querySelector(".putmodeloyna").style =
       "position: absolute;display:block;  transition: 1s;";
     setkey2(id);
+    document.querySelector("#model_put_uz").value =id.name_uz
+    document.querySelector("#model_put_ru").value = id.name_ru 
   }
 
   function putmodeloyna1() {
@@ -711,7 +720,13 @@ export default function Additional() {
     document.querySelector(".putserisoyna1").style =
       "position: absolute;display:block;";
     setkey3(id);
+    document.querySelector("#put_series_uz").value = id.name_uz
+    document.querySelector("#put_series_ru").value = id.name_ru
+    document.querySelector("#select_model").value = id.model
+    setSelectSerias(id.model)
+    alert(id.model)
   }
+  
 
   function putseriesoyna1() {
     document.querySelector(".putserisoyna1").style =
@@ -907,6 +922,9 @@ export default function Additional() {
   function putpozitsiyaoyna(id) {
     document.querySelector(".putpozitsiyaoyna").style =
       "position: absolute;display:block;";
+      document.querySelector("#positon_put_uz").value =id.name_uz
+      document.querySelector("#positon_put_ru").value =id.name_ru
+      document.querySelector("#put_position_seria_id").value =id.series
     setkey4(id);
   }
 
@@ -1148,6 +1166,8 @@ export default function Additional() {
   function putClickBlank (item) {
     document.querySelector(".putBlank").style =
       "position:fixed;right:0;    transition: 1s;";
+      document.querySelector("#put_blank_title").value=item.title
+      document.querySelector("#put_blank_text").value=item.text
     setKeyBlank(item)
    }
    function putCloseBlank () {
@@ -1261,6 +1281,16 @@ export default function Additional() {
     document.querySelector(".putfillialoyna").style =
       "position:fixed;right:0;    transition: 1s;";
     setkey5(id);
+    document.querySelector("#branch_put_name_uz").value=id.name_uz
+    document.querySelector("#branch_put_country_uz").value=id.country_uz
+    document.querySelector("#branch_put_region_uz").value=id.region_uz
+    document.querySelector("#branch_put_city_uz").value=id.city_uz
+    document.querySelector("#branch_put_street_uz").value=id.street_uz
+    document.querySelector("#branch_put_name_ru").value=id.name_ru
+    document.querySelector("#branch_put_country_ru").value=id.country_ru
+    document.querySelector("#branch_put_region_ru").value=id.region_ru
+    document.querySelector("#branch_put_city_ru").value=id.city_ru
+    document.querySelector("#branch_put_street_ru").value=id.street_ru
   }
   function putfillialoyna1() {
     document.querySelector(".putfillialoyna").style =
@@ -1698,8 +1728,8 @@ export default function Additional() {
                   onChange={(e) => setSelectSerias(e.target.value)}
                   className="selectFuels"
                   onClick={() => renderSelect()}
+                  id="select_model"
                 >
-                  <option>Model</option>
                   {fueldata3.map((item) => {
                     return (
                       <option value={item.id}>
@@ -1801,7 +1831,6 @@ export default function Additional() {
                 />
                 <p>Seriyalari almashtiring</p>
                 <select id="put_position_seria_id">
-                  <option>Seriya</option>
                   {fueldata4.map((item) => {
                     return (
                       <option value={item.id} className="putozition1">

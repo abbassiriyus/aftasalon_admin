@@ -82,10 +82,16 @@ function Profile() {
     document.querySelector('.putAdmin').style = 'right: 10px;'
     localStorage.setItem('idUser', key)
     setKey(key)
+   document.querySelector('.birthday').value=key.birthday
+  document.querySelector('.email').value=key.email
+ document.querySelector('.passport_number').value=key.passport_number
+ document.querySelector('.passport_series').value=key.passport_series
+ document.querySelector('.username').value=key.username
   }
 
   function modalClose() {
     document.querySelector('.putAdmin').style = 'right: -100%;'
+
   }
 
   function postModal() {

@@ -17,6 +17,7 @@ const Tables = () => {
   const [data7, setdata7] = useState([]);
   const [data8, setdata8] = useState([]);
   const [data9, setdata9] = useState([]);
+  const [data99, setdata99] = useState([]);
   const [page, setPage] = useState(1);
   const [enginePlace, setEnginePlace] = useState([]);
   const [keys1, setKeys1] = useState([]);
@@ -143,6 +144,11 @@ const Tables = () => {
       document.querySelector(".slect12").value = item.name_uz;
       document.querySelector(".slect122").value = item.name_ru;
       document.querySelector("#engine_power_put").value = item.engine_power;
+     enginePlace.map((item3)=>{
+      if (item3.id===item.engine_place) {
+   document.querySelector("#engine_place").value = item3.name_uz
+      }
+     })
       document.querySelector(".slect13").value = item.initial_price;
       document.querySelector(".slect14").value = item.price;
       document.querySelector(".slect15").value = item.sale;
@@ -442,6 +448,7 @@ clearData()
     malumotput.append("sale", document.querySelector(".slect15").value);
     malumotput.append("depozit", document.querySelector(".slect16").value);
     malumotput.append("engine_power", document.querySelector("#engine_power_put").value);
+    malumotput.append("engine_power", document.querySelector("#engine_place").value);
     malumotput.append(
       "fuel_consumption",
       document.querySelector(".slect17").value
@@ -844,6 +851,11 @@ clearData()
                   <div className="text">
                     <h1>dvigatel quvvati</h1>
                    <input type="number" id="engine_power_put" />
+                  </div>
+                  <div className="text">
+                    <h1>dvigatel joylashgan joyi</h1>
+                    
+                   <input type="text" id="engine_place" />
                   </div>
                 </div>
                 <div className="text2">

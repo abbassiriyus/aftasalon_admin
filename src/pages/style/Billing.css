@@ -136,8 +136,8 @@
 .PrewComents{
     position: absolute;
     top: -1000%;
-    left: 500px;
-    width: 500px;
+    left: 300px;
+    width: 700px;
     min-height: 400px;
     z-index: 99999999999;
     background: white;

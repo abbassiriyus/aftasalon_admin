@@ -81,8 +81,43 @@ export default function Billing() {
       ),
     },
   ];
+  const comments = [
+    {
 
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
+      title: 'description_uz',
+      dataIndex: 'description_uz',
+    },
+    {
+      title: 'branch',
+      dataIndex: 'branch',
+    },
+    {
+      title: 'ochirish',
+      render: (data) => (
+        <Button onClick={() => deleteComments(data)} type="danger" className='delte'>O'chirish</Button>
+      ),
+    },
+  ];
+function deleteComments (id) {
+  axios.delete(`${url}/api/comment/${id.id}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+alert("O'chirildi")
+axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res2 => {
+  var  data24=[]
+  res2.data.map(item => {
+    if (item.user === id.user) {
+      data24.push(item)
+      console.log(item);
+    }
+  })
+  setDescription(data24)
+})
 
+    })
+}
 
   const columns2 = [
     {
@@ -119,22 +154,6 @@ export default function Billing() {
   ];
 
   function commentPrewiev(key) {
-    // console.log(key);
-    // axios.get(`${url}/auth/users/${key}/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-    //   axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res2 => {
-    //     for (let i = 0; i < res.data.length; i++) {
-    //       for (let j = 0; j < res2.data.length; j++) {
-    //         if (res.data[i].id == res2.data[j].user) {
-    //           res.data[i].description = res2.data[j].description
-    //           console.log(res2.data,"ishladi");
-    //         }
-    //       }
-    //     }
-    //     setData5(res2.data)
-    //     console.log(res.data,"salom");
-    //     console.log(res2.data,"salom1");
-    //   })
-    // })
     axios.get(`${url}/api/comment/`, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
     var  data24=[]
       res.data.map(item => {
@@ -166,14 +185,16 @@ export default function Billing() {
 
   function PostUser() {
     var dataPost = new FormData()
-    dataPost.append('username', document.querySelector('.username').value)
-    dataPost.append('phone', document.querySelector('.phone').value)
-    dataPost.append('password', document.querySelector('.password').value)
-    dataPost.append('is_staff', true)
-    axios.post(`${url}/auth/register/`, dataPost, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
-      window.location.reload()
-    }).catch(err => {
-    })
+      dataPost.append('username', document.querySelector('.username').value)
+      dataPost.append('phone', document.querySelector('.phone').value)
+      dataPost.append('password', document.querySelector('.password').value)
+      dataPost.append('is_staff', true)
+      axios.post(`${url}/auth/register/`, dataPost, { headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem("token") } }).then(res => {
+        window.location.reload()
+      }).catch(err => {
+      })
+    
+
   }
   const onChange = (key) => {
     console.log(key);
@@ -229,12 +250,7 @@ export default function Billing() {
     <div>
       <div className='PrewComents'>
         <AiOutlineClose className='close' onClick={() => commentPrewievClose()}/>
-        {description.map((item)=>{
-          return<div>
-        <p>{item.description_uz}</p>
-
-          </div>
-        })}
+        <Table columns={comments} pagination={{ pageSize: 10 }} dataSource={description} />
       </div>
       <div className='ModalComment'>
         <span onClick={() => commentClose()}>X</span>
@@ -257,6 +273,7 @@ export default function Billing() {
         <input type='number' className='phone' />
         <h3>Parol</h3>
         <input type='password' className='password' />
+        <span>8tadan ko'p bolish kerak va raqam/xarif bolish kerak</span>
         <button className='Btn2' onClick={() => PostUser()}>Admin Qo'shish</button>
       </div>
     {superadmin&&(<button className='Btn1' style={{ transition: '.4s' }} onClick={() => ModalPost()} >Admin Qo'shish</button>)}
