@@ -108,7 +108,7 @@ export default class SignIn extends Component {
                       },
                     ]}
                   >
-                    <Input placeholder="Password" className="password1" />
+                    <Input type="password" placeholder="Password" className="password1" />
                   </Form.Item>
 
                   <Form.Item
