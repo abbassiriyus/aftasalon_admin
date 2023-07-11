@@ -253,8 +253,6 @@ const Tables = () => {
 
         var daalete = new FormData();
         daalete.append("position", id.position);
-        // daalete.append("position.series", id.position.series.name);
-        // daalete.append("position.series.model", id.position.series.model.name);
         daalete.append("fuel_sort", id.fuel_sort);
         daalete.append("gearbox", id.gearbox);
         daalete.append("garant", id.garant);
@@ -280,7 +278,9 @@ const Tables = () => {
               Authorization: "Bearer " + sessionStorage.getItem("token"),
             },
           })
-          .then((res) => {});
+          .then((res) => {
+            alert("Sotildi")
+          });
       })
       .catch((err) => {});
   }
@@ -290,6 +290,7 @@ const Tables = () => {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        alert("O'chirildi")
         axios.get(`${url}/api/cars/`).then((res) => {
           setdata1(res.data);
         });
@@ -405,6 +406,7 @@ clearData()
               });
           });
         }
+        alert("Qoshildi")
       })
       .catch((err) => {
 
@@ -459,6 +461,7 @@ clearData()
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        alert("Ozgartidildi")
         axios.get(`${url}/api/cars/`).then((res) => {
           setdata1(res.data);
         });
@@ -474,8 +477,6 @@ clearData()
       })
       .then((res) => {
         const filter = res.data.filter((item) => item.car === data.id);
-        console.log(filter);
-        console.log(data.id, "id");
         setEditImages(filter);
       });
     document.querySelector(".defectoyna_edit").style =
@@ -492,6 +493,7 @@ clearData()
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        alert("O'chirildi")
         axios
           .get(`${url}/api/defect/`, {
             headers: {
@@ -523,6 +525,7 @@ clearData()
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        alert("Ozgatirildi")
         axios
           .get(`${url}/api/defect/`, {
             headers: {
@@ -616,6 +619,7 @@ clearData()
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        alert("O'chirildi")
         axios
           .get(`${url}/api/images/`, {
             headers: {
@@ -637,6 +641,7 @@ clearData()
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => {
+        alert("Ozgartirildi")
         axios
           .get(`${url}/api/images/`, {
             headers: {
@@ -664,6 +669,7 @@ clearData()
           },
         })
         .then((res) => {
+          alert("Qoshildi")
           axios
             .get(`${url}/api/images/`, {
               headers: {
