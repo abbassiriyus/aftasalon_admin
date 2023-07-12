@@ -57,7 +57,7 @@ const CarHistory = () => {
         );
       },
     },
-    
+
     {
       title: "O'chirish",
       key: "O'chirish",
@@ -163,7 +163,7 @@ const handleInputChange = (event) => {
             prefix={<SearchOutlined />}
             onChange={handleInputChange}
           />
-          <Table className="table1" columns={columns} dataSource={data1} />
+          <Table className="table1" columns={columns} dataSource={data1} pagination={{ pageSize: 10 }} />
         </div>
       ) : (
         <div>

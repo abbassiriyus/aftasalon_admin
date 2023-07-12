@@ -415,7 +415,24 @@ clearData()
         alert("Qoshildi")
       })
       .catch((err) => {
-
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }
   function malumotput() {
@@ -710,9 +727,10 @@ clearData()
   }
   function postDataforcardefect() {
     if (
-      document.querySelector("#rasm_1").value < 1 &&
-      document.querySelector("#rasm_2").value < 1 &&
-      document.querySelector("#text_defect").value < 1
+      document.querySelector("#rasm_1").value < 1 ||
+      document.querySelector("#rasm_2").value < 1 ||
+      document.querySelector("#text_defect_uz").value < 1||
+      document.querySelector("#text_defect_ru").value < 1
     ) {
       alert("Malumot etarli mas");
     } else {

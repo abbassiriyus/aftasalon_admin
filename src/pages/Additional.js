@@ -83,7 +83,24 @@ export default function Additional() {
         setfueldata(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }, []);
 
@@ -99,11 +116,46 @@ export default function Additional() {
             setfueldata(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            if (err.message.includes("Request failed with status code 400")) {
+              var obj =err.response.data
+              var zb =Object.keys(obj);
+                      alert(
+                      zb.map((item)=>{
+                  return "\n"+item +"  da  malumot mavjud emas"
+              
+                      }))   
+            }
+            if (err.message.includes("Network Error")) {
+              alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+            }
+            if (err.message.includes("Request failed with status code 404")) {
+              alert("API bilan aloqa yok")
+            }
+            if (err.message.includes("Request failed with status code 500")) {
+              alert("host bilan aloqa yok")
+            }
           });
       })
       .catch((err) => {
         console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }
 
@@ -130,10 +182,47 @@ export default function Additional() {
             setfueldata(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            if (err.message.includes("Request failed with status code 400")) {
+              var obj =err.response.data
+              var zb =Object.keys(obj);
+                      alert(
+                      zb.map((item)=>{
+                  return "\n"+item +"  da  malumot mavjud emas"
+              
+                      }))   
+            }
+            if (err.message.includes("Network Error")) {
+              alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+            }
+            if (err.message.includes("Request failed with status code 404")) {
+              alert("API bilan aloqa yok")
+            }
+            if (err.message.includes("Request failed with status code 500")) {
+              alert("host bilan aloqa yok")
+            }
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function getPut1(id) {
@@ -162,7 +251,26 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function postoyna11(id) {
@@ -240,7 +348,24 @@ export default function Additional() {
         setfueldata1(res.data);
       })
       .catch((err) => {
-        console.log(err, "salom");
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }, []);
 
@@ -292,7 +417,26 @@ export default function Additional() {
             console.log(err, "salom");
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
   function getPut2(id) {
     var formdata4 = new FormData();
@@ -320,7 +464,26 @@ export default function Additional() {
             console.log(err, "salom");
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function deletegear(id) {
@@ -333,7 +496,26 @@ export default function Additional() {
           setfueldata1(res.data);
         });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   // 3- page
@@ -395,6 +577,24 @@ export default function Additional() {
       })
       .catch((err) => {
         console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }, []);
 
@@ -434,9 +634,46 @@ export default function Additional() {
           })
           .catch((err) => {
             console.log(err);
+            if (err.message.includes("Request failed with status code 400")) {
+              var obj =err.response.data
+              var zb =Object.keys(obj);
+                      alert(
+                      zb.map((item)=>{
+                  return "\n"+item +"  da  malumot mavjud emas"
+              
+                      }))   
+            }
+            if (err.message.includes("Network Error")) {
+              alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+            }
+            if (err.message.includes("Request failed with status code 404")) {
+              alert("API bilan aloqa yok")
+            }
+            if (err.message.includes("Request failed with status code 500")) {
+              alert("host bilan aloqa yok")
+            }
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
   function getPut3(id) {
     var formdata6 = new FormData();
@@ -458,9 +695,46 @@ export default function Additional() {
           })
           .catch((err) => {
             console.log(err);
+            if (err.message.includes("Request failed with status code 400")) {
+              var obj =err.response.data
+              var zb =Object.keys(obj);
+                      alert(
+                      zb.map((item)=>{
+                  return "\n"+item +"  da  malumot mavjud emas"
+              
+                      }))   
+            }
+            if (err.message.includes("Network Error")) {
+              alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+            }
+            if (err.message.includes("Request failed with status code 404")) {
+              alert("API bilan aloqa yok")
+            }
+            if (err.message.includes("Request failed with status code 500")) {
+              alert("host bilan aloqa yok")
+            }
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function deletegarant(id) {
@@ -478,7 +752,26 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function putgarantoyna(id) {
@@ -593,7 +886,26 @@ export default function Additional() {
           })
           .catch((err) => {});
       })
-      .catch((err1) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function getPutmodel(id) {
@@ -616,7 +928,26 @@ export default function Additional() {
             console.log(err, "ishlamadi");
           });
       })
-      .catch((err1) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function getdeletemodel(id) {
@@ -632,7 +963,26 @@ export default function Additional() {
           })
           .catch((err) => {});
       })
-      .catch((err1) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   // 5 -pages
@@ -771,7 +1121,26 @@ export default function Additional() {
           setSeria(res.data);
         });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
   function getputseries(id) {
     var series1 = new FormData();
@@ -794,7 +1163,26 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function getDeleteseries(id) {
@@ -812,7 +1200,26 @@ export default function Additional() {
             console.log(err);
           });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   // 6-page
@@ -844,16 +1251,8 @@ export default function Additional() {
     {
       title: "Seria",
       render: (fueldata5) => {
-        return (
-          <div>
-            {fueldata4.map((item)=>{
-              if (fueldata5.series===item.id) {
-                return<>{item.name_uz}</>
-              }
-            })}
-
-          </div>
-        );
+        const firstMatch = fueldata4.find((item) => fueldata5.series === item.id);
+        return <div>{firstMatch && firstMatch.name_uz}</div>;
       },
     },
     {
@@ -957,6 +1356,24 @@ export default function Additional() {
       })
       .catch((err) => {
         console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }
 
@@ -997,6 +1414,24 @@ export default function Additional() {
       })
       .catch((err) => {
         console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }
 
@@ -1012,6 +1447,24 @@ export default function Additional() {
       })
       .catch((err) => {
         console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }
 
@@ -1274,7 +1727,26 @@ export default function Additional() {
           setfueldata6(res.data);
         });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function putfillialoyna(id) {
@@ -1323,7 +1795,26 @@ export default function Additional() {
           setfueldata6(res.data);
         });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function deletefilial(id) {
@@ -1338,6 +1829,24 @@ export default function Additional() {
       })
       .catch((err) => {
         console.log(err);
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return "\n"+item +"  da  malumot mavjud emas"
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
       });
   }
 
@@ -1674,7 +2183,7 @@ export default function Additional() {
                   className="selectFuels"
                   onClick={() => renderSelect()}
                 >
-                  <option>Model</option>
+                  <option>Model tanlang</option>
                   {fueldata3.map((item) => {
                     return (
                       <option value={item.id}>
@@ -1779,7 +2288,7 @@ export default function Additional() {
                   onClick={() => testSseries()}
                   className="testSeri"
                 >
-                  <option>Seriya</option>
+                  <option>Seriya tanlang</option>
                   {fueldata4.map((item) => {
                     return (
                       <option value={item.id}>

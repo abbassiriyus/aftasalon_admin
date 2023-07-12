@@ -29,12 +29,15 @@ function Home() {
       const totalPrice = filteredData.reduce((acc, cur) => {
         return acc + cur.price;
       }, 0);
+      const totalSale = filteredData.reduce((acc, cur) => {
+        return totalPrice-totalPrice/100*cur.sale;
+      }, 0);
       const totalinitialprice = filteredData.reduce((acc, cur) => {
         return acc + cur.initial_price;
       }, 0);
-      const profit=totalPrice-totalinitialprice
+      const profit=totalSale-totalinitialprice
       setData(profit);
-      setData2(totalPrice)
+      setData2(totalSale)
 
       axios
       .get(`${url}/auth/users/`,{
