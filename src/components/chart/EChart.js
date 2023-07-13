@@ -464,7 +464,6 @@ color: "#155998"
     });
   }
   return (
-
     <>{isLoading ? <LoadingSpinner /> :<>
         <DatePicker placeholder={search} onChange={handleInputChange} picker="year" />
       <div id="chart">

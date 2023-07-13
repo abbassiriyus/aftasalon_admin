@@ -1232,20 +1232,11 @@ export default function Additional() {
     {
       title: "Model",
       render: (fueldata5) => {
-        return (
-          <div>
-            {fueldata4.map((item)=>{
-              if (fueldata5.series===item.id) {
-                return<>{fueldata3.map((item2)=>{
-                  if (item.model===item2.id) {
-                    return<>{item2.name_uz}</>
-                  }
-                })}</>
-              }
-            })}
-
-          </div>
-        );
+        setTimeout(() => {
+          const firstMatch = fueldata4.find((item) => fueldata5.series === item.id);
+          const secondMatch = fueldata3.find((item2) => firstMatch.model === item2.id);
+          return <div>{secondMatch && secondMatch.name_uz}</div>;   
+        }, 2000);
       },
     },
     {
