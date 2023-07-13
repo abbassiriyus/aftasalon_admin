@@ -10,14 +10,14 @@ const CallTouser = () => {
       title: "Id",
       dataIndex: "id",
     },
-    {
-      title: "foydalanuvchi",
-      render: (_,item)=> <div>{item.fullname}</div>
-    },
-    {
-      title: "Email",
-      render: (_,item)=> <div>{item.email}</div>
-    },
+    // {
+    //   title: "foydalanuvchi",
+    //   render: (_,item)=> <div>{item.fullname}</div>
+    // },
+    // {
+    //   title: "Email",
+    //   render: (_,item)=> <div>{item.email}</div>
+    // },
     {
         title: "Telefon raqami",
         render: (_,item)=> <div>{item.phone_number}</div>
