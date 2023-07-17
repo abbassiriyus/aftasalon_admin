@@ -422,7 +422,8 @@ clearData()
           var zb =Object.keys(obj);
                   alert(
                   zb.map((item)=>{
-              return "\n"+item +"  da  malumot mavjud emas"
+              return( "\n"+item +"    malumot mavjud emas"
+              )
           
                   }))   
         }
