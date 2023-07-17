@@ -27,7 +27,10 @@ const Tables = () => {
   const [images, setImages] = useState([]);
   const [editimages, setEditImages] = useState([]);
   const [search, setSearch] = useState("");
-  const [putEnginePlaceId, setPutEnginePlaceId] = useState("");  
+  const [putEnginePlaceId, setPutEnginePlaceId] = useState(""); 
+  const [fileName, setFileName] = useState("Rasm tanlang!");
+  const [fileName2, setFileName2] = useState("Rasm tanlang!"); 
+  const [fileName3, setFileName3] = useState("Rasm tanlang!"); 
   const columns = [
     {
       title: "Id",
@@ -161,7 +164,15 @@ const Tables = () => {
       document.querySelector(".slect20").checked = item.is_active;
     }, 1000);
   };
-
+  function handleChange2(event) {
+    setFileName("Rasm tanlandi");
+  }
+  function handleChange3(event) {
+    setFileName2("Rasm tanlandi");
+  }
+  function handleChange4(event) {
+    setFileName3("Rasm tanlandi");
+  }
   function getData(id) {
     axios.get(`${url}/api/cars/`).then((res) => {
       setdata1(res.data);
@@ -238,6 +249,8 @@ const Tables = () => {
           .then((res) => {
             setEnginePlace(res.data)
           });
+
+          
   }, []);
   function getBranch() {
     axios.get(`${url}/api/branch/`).then((res) => {
@@ -494,7 +507,27 @@ clearData()
         });
         setPage(1);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+          var obj =err.response.data
+          var zb =Object.keys(obj);
+                  alert(
+                  zb.map((item)=>{
+              return( "\n"+item +"    malumot mavjud emas"
+              )
+          
+                  }))   
+        }
+        if (err.message.includes("Network Error")) {
+          alert("intenet bilan bog'lanish mavjud emas yoki host ishlamayapti")
+        }
+        if (err.message.includes("Request failed with status code 404")) {
+          alert("API bilan aloqa yok")
+        }
+        if (err.message.includes("Request failed with status code 500")) {
+          alert("host bilan aloqa yok")
+        }
+      });
   }
 
   function malumotDefectbtn() {
@@ -633,7 +666,7 @@ clearData()
         setImages(filter);
       });
     document.querySelector(".defecto_edit_img").style =
-      "position:fixed;top:35%;transition:1s;";
+      "position:fixed;top:15%;transition:1s;";
   }
   function malumotImagebtn_close() {
     document.querySelector(".defecto_edit_img").style =
@@ -714,7 +747,7 @@ clearData()
 
   function defectpost() {
     document.querySelector(".defectoyna").style =
-      "position:fixed;top:35%;transition:1s;";
+      "position:fixed;top:5%;transition:1s;";
   }
   function defectpost1() {
     document.querySelector(".defectoyna").style =
@@ -722,7 +755,7 @@ clearData()
   }
   function imgpost() {
     document.querySelector(".postimagesoyna").style =
-      "position:fixed;top:34%;transition:1s;";
+      "position:fixed;top:10%;transition:1s;";
   }
   function imgpost1() {
     document.querySelector(".postimagesoyna").style =
@@ -748,6 +781,8 @@ clearData()
       document.querySelector("#rasm_2").value = "";
       document.querySelector("#text_defect_uz").value = "";
       document.querySelector("#text_defect_ru").value = "";
+      setFileName("Rasm tanlang!")
+      setFileName2("Rasm tanlang!")
     }
   }
   function postDataforcarimg() {
@@ -759,6 +794,7 @@ clearData()
       };
       setdataimg([...datadeimg, dataforimg]);
       document.querySelector("#rasm_img").value = "";
+      setFileName3("Rasm tanlang!")
     }
   }
   const handleInputChange = (event) => {
@@ -1196,9 +1232,18 @@ clearData()
               <div className="defect_div">
                 <div>
                   <p>yaqindan turgan rasm</p>
-                <input className="input_defect" id="rasm_1" type="file" />
+                  <div style={
+                    {display:"flex",
+                    marginRight:"10px"
+                    }}>
+                  <input onChange={handleChange2} className="input_defect" id="rasm_1" type="file" />
+                <p>{fileName}</p>
+                  </div>
                 <p> uzoqdan turgan rasm</p>
-                <input className="input_defect" id="rasm_2" type="file" />
+                <div style={{display:"flex"}}>
+                <input onChange={handleChange3} className="input_defect" id="rasm_2" type="file" />
+                <p>{fileName2}</p>
+                </div>
                 </div>
 <div>
 <textarea placeholder="uz" id="text_defect_uz" className="defectdest"></textarea>
@@ -1250,7 +1295,8 @@ clearData()
             <center>
               <h4>Mashinaning rasmlari qo'shish</h4>
               <div className="defect_div">
-                <input className="input_defect" id="rasm_img" type="file" />
+                <input onChange={handleChange4} className="input_defect" id="rasm_img" type="file" />
+                <p>{fileName3}</p>
                 <button
                   className="btn_defect"
                   onClick={() => postDataforcarimg()}
@@ -1264,13 +1310,16 @@ clearData()
                 if (datadeimg.length >= 1) {
                   return (
                     <div className="tablediv_defect">
-                      <div className="div_img_defect">
+
                         <img
-                          className="img_defect"
                           src={URL.createObjectURL(item.image)}
                           alt={item.image.name}
+                          style={{width:'100%',
+                          backgroundPosition: "center",
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat'}}
                         />
-                      </div>
+   
                     </div>
                   );
                 } else {

@@ -1236,7 +1236,7 @@ export default function Additional() {
           const firstMatch = fueldata4.find((item) => fueldata5.series === item.id);
           const secondMatch = fueldata3.find((item2) => firstMatch.model === item2.id);
           return <div>{secondMatch && secondMatch.name_uz}</div>;   
-        }, 2000);
+        }, 200000);
       },
     },
     {
